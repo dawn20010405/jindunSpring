@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="oa">
+        <class>com.demo.pojo.Contracts</class>
+        <class>com.demo.pojo.Dimission</class>
+        <class>com.demo.pojo.Emp</class>
+        <class>com.demo.pojo.Just</class>
+        <class>com.demo.pojo.Transfer</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:mysql://116.62.25.111:3306/test"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>
