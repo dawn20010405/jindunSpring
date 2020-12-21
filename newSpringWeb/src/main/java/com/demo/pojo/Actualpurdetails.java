@@ -110,7 +110,6 @@ public class Actualpurdetails {
 
         if (actualpurdetailsid != null ? !actualpurdetailsid.equals(that.actualpurdetailsid) : that.actualpurdetailsid != null)
             return false;
-
         if (acputdename != null ? !acputdename.equals(that.acputdename) : that.acputdename != null) return false;
         if (acputdecname != null ? !acputdecname.equals(that.acputdecname) : that.acputdecname != null) return false;
         if (acputdequantity != null ? !acputdequantity.equals(that.acputdequantity) : that.acputdequantity != null)
@@ -122,7 +121,6 @@ public class Actualpurdetails {
             return false;
         if (acputdefollow != null ? !acputdefollow.equals(that.acputdefollow) : that.acputdefollow != null)
             return false;
-
         return true;
     }
 
