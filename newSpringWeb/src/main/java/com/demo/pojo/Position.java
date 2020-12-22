@@ -5,11 +5,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Description: <br/>
- * date: 2020/12/21 22:56<br/>
- *
- * @author Administrator<br />
- * @since JDK 1.8
+ * Description: 岗位类
+ * date: 2020/12/21 22:56、
+ * @author diga
  */
 @Entity
 public class Position {

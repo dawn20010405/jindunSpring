@@ -6,11 +6,9 @@ import java.sql.Date;
 import java.util.Objects;
 
 /**
- * Description: <br/>
- * date: 2020/12/21 23:31<br/>
- *
- * @author Administrator<br />
- * @since JDK 1.8
+ * Description: 入职类
+ * date: 2020/12/21 23:31
+ * @author diga
  */
 @Entity
 public class Entry {
