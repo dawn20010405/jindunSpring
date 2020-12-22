@@ -14,12 +14,12 @@ public class Exchangeassets {
     private String exasnum;
     private String exastype;
     private Integer exasquantity;
-    private Integer exasempid;
     private Timestamp exasstart;
     private String exasreason;
     private String exasfollow;
     private Timestamp exasback;
     private List<Consumingdetails> codes;
+    private Emp emp;
 
     @Id
     @Column(name = "exchangeassetsid", nullable = false)
@@ -71,15 +71,7 @@ public class Exchangeassets {
         this.exasquantity = exasquantity;
     }
 
-    @Basic
-    @Column(name = "exasempid", nullable = true)
-    public Integer getExasempid() {
-        return exasempid;
-    }
 
-    public void setExasempid(Integer exasempid) {
-        this.exasempid = exasempid;
-    }
 
     @Basic
     @Column(name = "exasstart", nullable = true)
@@ -127,7 +119,6 @@ public class Exchangeassets {
         if (o == null || getClass() != o.getClass()) return false;
 
         Exchangeassets that = (Exchangeassets) o;
-
         if (exchangeassetsid != null ? !exchangeassetsid.equals(that.exchangeassetsid) : that.exchangeassetsid != null)
             return false;
         if (exchassetsname != null ? !exchassetsname.equals(that.exchassetsname) : that.exchassetsname != null)
@@ -135,7 +126,6 @@ public class Exchangeassets {
         if (exasnum != null ? !exasnum.equals(that.exasnum) : that.exasnum != null) return false;
         if (exastype != null ? !exastype.equals(that.exastype) : that.exastype != null) return false;
         if (exasquantity != null ? !exasquantity.equals(that.exasquantity) : that.exasquantity != null) return false;
-        if (exasempid != null ? !exasempid.equals(that.exasempid) : that.exasempid != null) return false;
         if (exasstart != null ? !exasstart.equals(that.exasstart) : that.exasstart != null) return false;
         if (exasreason != null ? !exasreason.equals(that.exasreason) : that.exasreason != null) return false;
         if (exasfollow != null ? !exasfollow.equals(that.exasfollow) : that.exasfollow != null) return false;
@@ -151,7 +141,6 @@ public class Exchangeassets {
         result = 31 * result + (exasnum != null ? exasnum.hashCode() : 0);
         result = 31 * result + (exastype != null ? exastype.hashCode() : 0);
         result = 31 * result + (exasquantity != null ? exasquantity.hashCode() : 0);
-        result = 31 * result + (exasempid != null ? exasempid.hashCode() : 0);
         result = 31 * result + (exasstart != null ? exasstart.hashCode() : 0);
         result = 31 * result + (exasreason != null ? exasreason.hashCode() : 0);
         result = 31 * result + (exasfollow != null ? exasfollow.hashCode() : 0);
@@ -166,5 +155,15 @@ public class Exchangeassets {
 
     public void setCodes(List<Consumingdetails> codes) {
         this.codes = codes;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "exasempid", referencedColumnName = "eid")
+    public Emp getEmp() {
+        return emp;
+    }
+
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 }

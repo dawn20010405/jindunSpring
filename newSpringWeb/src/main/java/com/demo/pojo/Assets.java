@@ -22,6 +22,21 @@ public class Assets {
     private String assetsstatus;
     private List<Consumingdetails> conde;
 
+    public Assets() {
+    }
+
+    public Assets(Integer assetsid, String assetsnum, String assetsname, String assetstype, Integer assetsquantity, Timestamp assetsretime, String assetsgstatus, BigDecimal assetsorivalue, String assetsstatus) {
+        this.assetsid = assetsid;
+        this.assetsnum = assetsnum;
+        this.assetsname = assetsname;
+        this.assetstype = assetstype;
+        this.assetsquantity = assetsquantity;
+        this.assetsretime = assetsretime;
+        this.assetsgstatus = assetsgstatus;
+        this.assetsorivalue = assetsorivalue;
+        this.assetsstatus = assetsstatus;
+    }
+
     @Id
     @Column(name = "assetsid", nullable = false)
     public Integer getAssetsid() {

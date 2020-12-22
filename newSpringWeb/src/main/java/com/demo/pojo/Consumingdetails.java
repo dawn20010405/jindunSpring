@@ -9,16 +9,14 @@ import java.sql.Timestamp;
 @Entity
 public class Consumingdetails {
     private Integer consumingdetailsid;
-
     private String codename;
-    private Integer codeempid;
     private String codedept;
     private String codetype;
-
     private String codestatus;
     private Timestamp codestart;
     private Assets assets;
     private Exchangeassets exassets;
+    private Emp emp;
 
     @Id
     @Column(name = "consumingdetailsid", nullable = false)
@@ -30,8 +28,6 @@ public class Consumingdetails {
         this.consumingdetailsid = consumingdetailsid;
     }
 
-
-
     @Basic
     @Column(name = "codename", nullable = true, length = 60)
     public String getCodename() {
@@ -42,15 +38,7 @@ public class Consumingdetails {
         this.codename = codename;
     }
 
-    @Basic
-    @Column(name = "codeempid", nullable = true)
-    public Integer getCodeempid() {
-        return codeempid;
-    }
 
-    public void setCodeempid(Integer codeempid) {
-        this.codeempid = codeempid;
-    }
 
     @Basic
     @Column(name = "codedept", nullable = true, length = 60)
@@ -96,32 +84,23 @@ public class Consumingdetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Consumingdetails that = (Consumingdetails) o;
-
         if (consumingdetailsid != null ? !consumingdetailsid.equals(that.consumingdetailsid) : that.consumingdetailsid != null)
             return false;
-
         if (codename != null ? !codename.equals(that.codename) : that.codename != null) return false;
-        if (codeempid != null ? !codeempid.equals(that.codeempid) : that.codeempid != null) return false;
         if (codedept != null ? !codedept.equals(that.codedept) : that.codedept != null) return false;
         if (codetype != null ? !codetype.equals(that.codetype) : that.codetype != null) return false;
-
         if (codestatus != null ? !codestatus.equals(that.codestatus) : that.codestatus != null) return false;
         if (codestart != null ? !codestart.equals(that.codestart) : that.codestart != null) return false;
-
         return true;
     }
 
     @Override
     public int hashCode() {
         int result = consumingdetailsid != null ? consumingdetailsid.hashCode() : 0;
-
         result = 31 * result + (codename != null ? codename.hashCode() : 0);
-        result = 31 * result + (codeempid != null ? codeempid.hashCode() : 0);
         result = 31 * result + (codedept != null ? codedept.hashCode() : 0);
         result = 31 * result + (codetype != null ? codetype.hashCode() : 0);
-
         result = 31 * result + (codestatus != null ? codestatus.hashCode() : 0);
         result = 31 * result + (codestart != null ? codestart.hashCode() : 0);
         return result;
@@ -145,5 +124,15 @@ public class Consumingdetails {
 
     public void setExassets(Exchangeassets exassets) {
         this.exassets = exassets;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "codeempid", referencedColumnName = "eid")
+    public Emp getEmp() {
+        return emp;
+    }
+
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 }

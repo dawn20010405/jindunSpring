@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IQqcAssetsMapper">
+    <resultMap id="QqcsetMap" type="com.demo.pojo.Assets">
+        <id column="assetsid" property="assetsid"/>
+        <result column="assetsgstatus" property="assetsgstatus"/>
+        <result column="assetsname" property="assetsname"/>
+        <result column="assetsnum" property="assetsnum"/>
+        <result column="assetsorivalue" property="assetsorivalue"/>
+        <result column="assetsquantity" property="assetsquantity"/>
+        <result column="assetsretime" property="assetsretime"/>
+        <result column="assetsstatus" property="assetsstatus"/>
+        <result column="assetstype" property="assetstype"/>
+    </resultMap>
+    <select id="listSelectAll" resultMap="QqcsetMap">
+        select  * from
+        assets
+        <where>
+            <if test="assetsname != null and assetsname != ''">
+                and assetsname like concat('%',#{assetsname,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="assetstype != null and assetstype != ''">
+                and assetstype = #{assetstype}
+            </if>
+
+        </where>
+        order by assetsretime desc
+    </select>
+    <insert id="insert" parameterType="com.demo.pojo.Assets">
+        insert into assets(assetsnum, assetsname, assetstype, assetsquantity, assetsretime, assetsgstatus, assetsorivalue, assetsstatus)
+        values (#{assetsnum}, #{assetsname}, #{assetstype}, #{assetsquantity}, #{assetsretime}, #{assetsgstatus}, #{assetsorivalue}, #{assetsstatus})
+    </insert>
+    <update id="updateone" parameterType="com.demo.pojo.Assets">
+        update assets
+        set
+            assetsnum=#{assetsnum},
+            assetsname=#{assetsname},
+            assetstype=#{assetstype},
+            assetsquantity=#{assetsquantity},
+            assetsretime=#{assetsretime},
+            assetsgstatus=#{assetsgstatus},
+            assetsorivalue=#{assetsorivalue},
+            assetsstatus=#{assetsstatus}
+        where assetsid = #{assetsid}
+
+    </update>
+</mapper>

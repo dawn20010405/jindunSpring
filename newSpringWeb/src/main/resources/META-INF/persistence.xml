@@ -7,6 +7,8 @@
         <class>com.demo.pojo.Exchangeassets</class>
         <class>com.demo.pojo.Purchase</class>
         <class>com.demo.pojo.Purdetaisl</class>
+        <class>com.demo.pojo.Emp</class>
+        <class>com.demo.pojo.Numset</class>
 
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://116.62.25.111:3306/test"/>

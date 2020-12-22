@@ -12,7 +12,7 @@ import java.util.List;
 public class Purchase {
     private Integer purchaseid;
     private String purchasename;
-    private Integer purchaseempid;
+
     private String purchasedept;
     private BigDecimal purchasemoney;
     private String purchasereson;
@@ -20,6 +20,7 @@ public class Purchase {
     private Timestamp purchasestart;
     private List<Actualpurdetails> acpurchase;
     private List<Purdetaisl> depurchase;
+    private Emp emp;
 
     @Id
     @Column(name = "purchaseid", nullable = false)
@@ -41,15 +42,7 @@ public class Purchase {
         this.purchasename = purchasename;
     }
 
-    @Basic
-    @Column(name = "purchaseempid", nullable = true)
-    public Integer getPurchaseempid() {
-        return purchaseempid;
-    }
 
-    public void setPurchaseempid(Integer purchaseempid) {
-        this.purchaseempid = purchaseempid;
-    }
 
     @Basic
     @Column(name = "purchasedept", nullable = true, length = 30)
@@ -111,8 +104,6 @@ public class Purchase {
         if (purchaseid != null ? !purchaseid.equals(purchase.purchaseid) : purchase.purchaseid != null) return false;
         if (purchasename != null ? !purchasename.equals(purchase.purchasename) : purchase.purchasename != null)
             return false;
-        if (purchaseempid != null ? !purchaseempid.equals(purchase.purchaseempid) : purchase.purchaseempid != null)
-            return false;
         if (purchasedept != null ? !purchasedept.equals(purchase.purchasedept) : purchase.purchasedept != null)
             return false;
         if (purchasemoney != null ? !purchasemoney.equals(purchase.purchasemoney) : purchase.purchasemoney != null)
@@ -131,7 +122,6 @@ public class Purchase {
     public int hashCode() {
         int result = purchaseid != null ? purchaseid.hashCode() : 0;
         result = 31 * result + (purchasename != null ? purchasename.hashCode() : 0);
-        result = 31 * result + (purchaseempid != null ? purchaseempid.hashCode() : 0);
         result = 31 * result + (purchasedept != null ? purchasedept.hashCode() : 0);
         result = 31 * result + (purchasemoney != null ? purchasemoney.hashCode() : 0);
         result = 31 * result + (purchasereson != null ? purchasereson.hashCode() : 0);
@@ -156,5 +146,15 @@ public class Purchase {
 
     public void setDepurchase(List<Purdetaisl> depurchase) {
         this.depurchase = depurchase;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "purchaseempid", referencedColumnName = "eid")
+    public Emp getEmp() {
+        return emp;
+    }
+
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 }

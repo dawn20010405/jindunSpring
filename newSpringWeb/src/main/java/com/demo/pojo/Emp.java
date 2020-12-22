@@ -23,6 +23,9 @@ public class Emp {
     private List<Mycanyu> mycanyu;
     private Mydynamic bdynamic;
     private Myrisk wrisk;
+    private List<Exchangeassets> exassets;
+    private List<Consumingdetails> condetails;
+    private List<Purchase> purchase;
 
     @Id
     @Column(name = "eid", nullable = false)
@@ -125,5 +128,32 @@ public class Emp {
 
     public void setWrisk(Myrisk wrisk) {
         this.wrisk = wrisk;
+    }
+
+    @OneToMany(mappedBy = "emp")
+    public List<Exchangeassets> getExassets() {
+        return exassets;
+    }
+
+    public void setExassets(List<Exchangeassets> exassets) {
+        this.exassets = exassets;
+    }
+
+    @OneToMany(mappedBy = "emp")
+    public List<Consumingdetails> getCondetails() {
+        return condetails;
+    }
+
+    public void setCondetails(List<Consumingdetails> condetails) {
+        this.condetails = condetails;
+    }
+
+    @OneToMany(mappedBy = "emp")
+    public List<Purchase> getPurchase() {
+        return purchase;
+    }
+
+    public void setPurchase(List<Purchase> purchase) {
+        this.purchase = purchase;
     }
 }
