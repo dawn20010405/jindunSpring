@@ -30,6 +30,13 @@ public class Emp {
     private Achievementslc jixiaoone;
     private AssessmentTeamLc atlctow;
 
+
+
+//    12 22 左增源 公司公告
+    private List<Notification> notifications;
+    private List<Examine> examines;
+    private List<Examine> examinelist;
+
     @Id
     @Column(name = "eid", nullable = false)
     public Integer getEid() {
@@ -133,45 +140,7 @@ public class Emp {
         this.wrisk = wrisk;
     }
 
-    @Basic
-    @Column(name = "pid")
-    public Integer getPid() {
-        return pid;
-    }
 
-    public void setPid(Integer pid) {
-        this.pid = pid;
-    }
-
-    @Basic
-    @Column(name = "jid")
-    public Integer getJid() {
-        return jid;
-    }
-
-    public void setJid(Integer jid) {
-        this.jid = jid;
-    }
-
-    @Basic
-    @Column(name = "tid")
-    public Integer getTid() {
-        return tid;
-    }
-
-    public void setTid(Integer tid) {
-        this.tid = tid;
-    }
-
-    @Basic
-    @Column(name = "did")
-    public Integer getDid() {
-        return did;
-    }
-
-    public void setDid(Integer did) {
-        this.did = did;
-    }
 
     @OneToOne
     @JoinColumn(name = "eid", referencedColumnName = "eid", nullable = false)
@@ -191,5 +160,34 @@ public class Emp {
 
     public void setAtlctow(AssessmentTeamLc atlctow) {
         this.atlctow = atlctow;
+    }
+
+
+
+    @OneToMany(mappedBy = "mynoemp")
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    @OneToMany(mappedBy = "myexemp")
+    public List<Examine> getExamines() {
+        return examines;
+    }
+
+    public void setExamines(List<Examine> examines) {
+        this.examines = examines;
+    }
+
+    @OneToMany(mappedBy = "myemp")
+    public List<Examine> getExaminelist() {
+        return examinelist;
+    }
+
+    public void setExaminelist(List<Examine> examinelist) {
+        this.examinelist = examinelist;
     }
 }
