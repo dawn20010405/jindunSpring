@@ -16,6 +16,7 @@ public class Position {
     private Integer ptype;
     private Dept dept;
     private List<Resume> rsid;
+    private Emp myemp;
 
     @Id
     @Column(name = "pid", nullable = false)
@@ -79,5 +80,14 @@ public class Position {
 
     public void setRsid(List<Resume> rsid) {
         this.rsid = rsid;
+    }
+
+    @OneToOne(mappedBy = "myposition")
+    public Emp getMyemp() {
+        return myemp;
+    }
+
+    public void setMyemp(Emp myemp) {
+        this.myemp = myemp;
     }
 }

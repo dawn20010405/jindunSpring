@@ -9,6 +9,7 @@
         <result property="erutime" column="erutime"/>
         <result property="eiphone" column="eiphone"/>
         <result property="epass" column="epass"/>
+        <result property="ezt" column="ezt"/>
         <!--岗位表-->
         <association property="myposition" javaType="com.demo.pojo.Position">
             <id property="pid" column="pid"/>
@@ -26,6 +27,17 @@
         </association>
     </resultMap>
     <select id="listselectemp" resultMap="resultemp">
-        select * from emp e inner join position p where p.pid=e.pid
+        select * from emp e inner join position p on p.pid=e.pid
+        <where>
+            <if test="eid!=null and eid!=''">
+                and e.eid=#{eid}
+            </if>
+            <if test="ename!=null and ename!=''">
+                and e.ename like concat('%',#{ename},'%')
+            </if>
+            <if test="eiphone!=null and eiphone!=''">
+                and e.eiphone=#{eiphone}
+            </if>
+        </where>
     </select>
 </mapper>

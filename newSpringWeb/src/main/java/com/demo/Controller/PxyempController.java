@@ -28,18 +28,21 @@ public class PxyempController {
     @Autowired
     PxyempServices es;
     /*
-      * @Author Administrator
-      * @Description //TODO 员工表查询全部
-      * @Date 20:46 2020-12-21
-      * @Param []
-      * @return ResultVO
-      **/
+     * @Author Administrator
+     * @Description //TODO 员工表查询全部
+     * @Date 20:46 2020-12-21
+     * @Param []
+     * @return ResultVO
+     **/
     @RequestMapping("/listselectemp")
     public PageInfo<Emp> listselectemp(@RequestParam("no") Integer pageNo,
-                                       @RequestParam(value = "size",required = false) Integer pageSize){
-     /*   List<Emp> plist=es.listselectemp();*/
-        PageInfo<Emp> info = es.listselectemp(pageNo,pageSize);
+                                       @RequestParam(value = "size",required = false) Integer pageSize,
+                                       Integer eid,String ename,String eiphone){
+        System.out.println("我是listselectemp 员工表查询全部");
+        PageInfo<Emp> info = es.listselectemp(pageNo,pageSize,eid,ename,eiphone);
         System.out.println("info:"+info);
         return info;
     }
+    /*@RestController("/listempselectByeid")
+    public */
 }

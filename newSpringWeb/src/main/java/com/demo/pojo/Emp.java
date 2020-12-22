@@ -39,6 +39,9 @@ public class Emp {
     private List<Notification> notifications;
     private List<Examine> examines;
     private List<Examine> examinelist;
+    private Position myposition;
+    private Just myjust;
+    private Dimission mydimission;
 
     @Id
     @Column(name = "eid", nullable = false)
@@ -170,8 +173,6 @@ public class Emp {
         this.purchase = purchase;
     }
 
-
-
     @OneToOne
     @JoinColumn(name = "eid", referencedColumnName = "eid", nullable = false)
     public Achievementslc getJixiaoone() {
@@ -191,8 +192,6 @@ public class Emp {
     public void setAtlctow(AssessmentTeamLc atlctow) {
         this.atlctow = atlctow;
     }
-
-
 
     @OneToMany(mappedBy = "mynoemp")
     public List<Notification> getNotifications() {
@@ -220,6 +219,7 @@ public class Emp {
     public void setExaminelist(List<Examine> examinelist) {
         this.examinelist = examinelist;
     }
+
     @Basic
     @Column(name = "pid", nullable = true)
     public Integer getPid() {
@@ -260,4 +260,33 @@ public class Emp {
         this.did = did;
     }
 
+    @OneToOne
+    @JoinColumn(name = "pid", referencedColumnName = "pid")
+    public Position getMyposition() {
+        return myposition;
+    }
+
+    public void setMyposition(Position myposition) {
+        this.myposition = myposition;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "jid", referencedColumnName = "jid")
+    public Just getMyjust() {
+        return myjust;
+    }
+
+    public void setMyjust(Just myjust) {
+        this.myjust = myjust;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "did", referencedColumnName = "dimid")
+    public Dimission getMydimission() {
+        return mydimission;
+    }
+
+    public void setMydimission(Dimission mydimission) {
+        this.mydimission = mydimission;
+    }
 }
