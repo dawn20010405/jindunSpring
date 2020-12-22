@@ -5,11 +5,9 @@ import java.sql.Date;
 import java.util.Objects;
 
 /**
- * Description: <br/>
- * date: 2020/12/21 23:01<br/>
- *
- * @author Administrator<br />
- * @since JDK 1.8
+ * Description: 简历类
+ * date: 2020/12/21 23:01
+ * @author diga
  */
 @Entity
 public class Resume {

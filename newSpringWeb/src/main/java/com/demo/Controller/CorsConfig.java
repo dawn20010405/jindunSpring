@@ -6,24 +6,28 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-/**配置全局跨域
- * @author SMILE
- */
+/**
+ * @program: te
+ * @description: 跨域配置
+ * @author: zzl
+ * @create: 2020-05-13 14:30
+ **/
 @Configuration
 public class CorsConfig {
     private CorsConfiguration buildConfig() {
-        CorsConfiguration corsConfiguration = new  CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("*"); // 1允许任何域名使用
-        corsConfiguration.addAllowedHeader("*"); // 2允许任何头
-        corsConfiguration.addAllowedMethod("*"); // 3允许任何方法（post、get等）
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedOrigin("*"); //允许任何域名
+        corsConfiguration.addAllowedHeader("*"); //允许任何头
+        corsConfiguration.addAllowedMethod("*"); //允许任何方法
         return corsConfiguration;
     }
 
     @Bean
     public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new  UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", buildConfig());  // 4
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", buildConfig()); //注册
         return new CorsFilter(source);
     }
-}
 
+
+}
