@@ -18,4 +18,6 @@ import java.util.List;
 public interface IZzlxiangmuMapper {
 
     List<Myproject> listxiangmu();
+
+    Integer addxiangmu();
 }

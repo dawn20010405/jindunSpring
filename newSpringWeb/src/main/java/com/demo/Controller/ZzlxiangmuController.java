@@ -39,4 +39,9 @@ public class ZzlxiangmuController {
         return MyResult.returnObj(pager);
     }
 
+    @RequestMapping("/add")
+    public MyResult addxiangmu(){
+        return MyResult.returnObj(x.addxiangmu());
+    }
+
 }

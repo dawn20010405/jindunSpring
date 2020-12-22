@@ -30,4 +30,8 @@ public class ZzlxiangmuService {
         return info;
     }
 
+    public Integer addxiangmu(){
+        return z.addxiangmu();
+    }
+
 }
