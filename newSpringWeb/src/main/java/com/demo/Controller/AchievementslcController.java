@@ -63,8 +63,8 @@ public class AchievementslcController {
      * @return
             **/
     @RequestMapping("/likename")
-    public List<Achievementslc> likename(String acname){
+    public PageInfo<Achievementslc> likename(Integer no,String acname){
         String a="%"+acname+"%";
-        return as.likename(a);
+        return as.likename(no,a);
     }
 }

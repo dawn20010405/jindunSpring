@@ -35,7 +35,7 @@ public class AchievementslcService {
      * @return 
             **/
     public PageInfo<Achievementslc> selectAc(Integer no){
-        PageHelper.startPage(no,7);
+        PageHelper.startPage(no,3);
         List<Achievementslc> list=am.selectAc();
         PageInfo<Achievementslc> info=new PageInfo<>(list);
         return info;
@@ -82,7 +82,11 @@ public class AchievementslcService {
      * @Param
      * @return
             **/
-    public List<Achievementslc> likename(String acname){
-        return am.likeAc(acname);
+    public PageInfo<Achievementslc> likename(Integer no,String acname){
+        PageHelper.startPage(no,3);
+        List<Achievementslc> list=am.likeAc(acname);
+        PageInfo<Achievementslc> info=new PageInfo<>(list);
+        return info;
+
     }
 }
