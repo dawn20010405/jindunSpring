@@ -23,6 +23,12 @@ public class Emp {
     private List<Mycanyu> mycanyu;
     private Mydynamic bdynamic;
     private Myrisk wrisk;
+    private Integer pid;
+    private Integer jid;
+    private Integer tid;
+    private Integer did;
+    private Achievementslc jixiaoone;
+    private AssessmentTeamLc atlctow;
 
     @Id
     @Column(name = "eid", nullable = false)
@@ -125,5 +131,65 @@ public class Emp {
 
     public void setWrisk(Myrisk wrisk) {
         this.wrisk = wrisk;
+    }
+
+    @Basic
+    @Column(name = "pid")
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
+    }
+
+    @Basic
+    @Column(name = "jid")
+    public Integer getJid() {
+        return jid;
+    }
+
+    public void setJid(Integer jid) {
+        this.jid = jid;
+    }
+
+    @Basic
+    @Column(name = "tid")
+    public Integer getTid() {
+        return tid;
+    }
+
+    public void setTid(Integer tid) {
+        this.tid = tid;
+    }
+
+    @Basic
+    @Column(name = "did")
+    public Integer getDid() {
+        return did;
+    }
+
+    public void setDid(Integer did) {
+        this.did = did;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "eid", referencedColumnName = "eid", nullable = false)
+    public Achievementslc getJixiaoone() {
+        return jixiaoone;
+    }
+
+    public void setJixiaoone(Achievementslc jixiaoone) {
+        this.jixiaoone = jixiaoone;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "eid", referencedColumnName = "ateid", nullable = false)
+    public AssessmentTeamLc getAtlctow() {
+        return atlctow;
+    }
+
+    public void setAtlctow(AssessmentTeamLc atlctow) {
+        this.atlctow = atlctow;
     }
 }
