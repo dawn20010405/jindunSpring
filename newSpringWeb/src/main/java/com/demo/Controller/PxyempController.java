@@ -7,9 +7,11 @@ package com.demo.Controller;
 
 import com.demo.Services.PxyempServices;
 import com.demo.pojo.Emp;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -33,9 +35,11 @@ public class PxyempController {
       * @return ResultVO
       **/
     @RequestMapping("/listselectemp")
-    public List<Emp> listselectemp(){
-        List<Emp> plist=es.listselectemp();
-        System.out.println("listselectemp"+plist);
-        return plist;
+    public PageInfo<Emp> listselectemp(@RequestParam("no") Integer pageNo,
+                                       @RequestParam(value = "size",required = false) Integer pageSize){
+     /*   List<Emp> plist=es.listselectemp();*/
+        PageInfo<Emp> info = es.listselectemp(pageNo,pageSize);
+        System.out.println("info:"+info);
+        return info;
     }
 }

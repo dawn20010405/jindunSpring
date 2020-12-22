@@ -7,6 +7,8 @@ package com.demo.Services;
 
 import com.demo.model.Mapper.IPxyempMapper;
 import com.demo.pojo.Emp;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +32,12 @@ public class PxyempServices {
      * @Param []
      * @return java.util.List<com.demo.pojo.Emp>
      **/
-    public List<Emp> listselectemp(){
-        return mapper.listselectemp();
+    public PageInfo<Emp> listselectemp(Integer pageNo, Integer pageSize){
+        PageHelper.startPage(pageNo,pageSize);
+        //查询方法
+        List<Emp> list = mapper.listselectemp();
+        //将结果封装到pageInfo中。这个对象中包含了很多分页的信息（如总页数、总页码、当前第几页、是否有前一页等等）
+        PageInfo<Emp> info= new PageInfo<>(list);
+        return info;
     }
 }
