@@ -190,4 +190,44 @@ public class Emp {
     public void setExaminelist(List<Examine> examinelist) {
         this.examinelist = examinelist;
     }
+    @Basic
+    @Column(name = "pid", nullable = true)
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
+    }
+
+    @Basic
+    @Column(name = "jid", nullable = true)
+    public Integer getJid() {
+        return jid;
+    }
+
+    public void setJid(Integer jid) {
+        this.jid = jid;
+    }
+
+    @Basic
+    @Column(name = "tid", nullable = true)
+    public Integer getTid() {
+        return tid;
+    }
+
+    public void setTid(Integer tid) {
+        this.tid = tid;
+    }
+
+    @Basic
+    @Column(name = "did", nullable = true)
+    public Integer getDid() {
+        return did;
+    }
+
+    public void setDid(Integer did) {
+        this.did = did;
+    }
+
 }
