@@ -1,33 +1,44 @@
-/**
- * @ Author     ：彭欣雨
- * @ Date       ：Created in 21:20 2020-12-21
- * @ Description：
- */
 package com.demo.pojo;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 /**
- * @Auther: Administrator
- * @Date: 2020-12-21 21:20
- * @Description:
+ * @ClassName: Emp
+ * @Description: TODO
+ * @Author: zzl
+ * @Date: 2020-12-21 20:24
+ * @Version: v1.0
  */
 @Entity
 public class Emp {
     private Integer eid;
     private String ename;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp erutime;
     private String eiphone;
     private String epass;
-    private Just myjust;
-    private Transfer mytransfer;
-    private Dimission mydimission;
-    private Position myposition;
+    private Myproject myproject;
+    private List<Mycanyu> mycanyu;
+    private Mydynamic bdynamic;
+    private Myrisk wrisk;
+    private List<Exchangeassets> exassets;
+    private List<Consumingdetails> condetails;
+    private List<Purchase> purchase;
+    private Integer pid;
+    private Integer jid;
+    private Integer tid;
+    private Integer did;
+    private Achievementslc jixiaoone;
+    private AssessmentTeamLc atlctow;
+
+
+
+//    12 22 左增源 公司公告
+    private List<Notification> notifications;
+    private List<Examine> examines;
+    private List<Examine> examinelist;
 
     @Id
     @Column(name = "eid", nullable = false)
@@ -96,43 +107,157 @@ public class Emp {
         return Objects.hash(eid, ename, erutime, eiphone, epass);
     }
 
+    @OneToOne(mappedBy = "myfzr")
+    public Myproject getMyproject() {
+        return myproject;
+    }
+
+    public void setMyproject(Myproject myproject) {
+        this.myproject = myproject;
+    }
+
+    @OneToMany(mappedBy = "myemps")
+    public List<Mycanyu> getMycanyu() {
+        return mycanyu;
+    }
+
+    public void setMycanyu(List<Mycanyu> mycanyu) {
+        this.mycanyu = mycanyu;
+    }
+
+    @OneToOne(mappedBy = "bemp")
+    public Mydynamic getBdynamic() {
+        return bdynamic;
+    }
+
+    public void setBdynamic(Mydynamic bdynamic) {
+        this.bdynamic = bdynamic;
+    }
+
+    @OneToOne(mappedBy = "wemp")
+    public Myrisk getWrisk() {
+        return wrisk;
+    }
+
+    public void setWrisk(Myrisk wrisk) {
+        this.wrisk = wrisk;
+    }
+
+    @OneToMany(mappedBy = "emp")
+    public List<Exchangeassets> getExassets() {
+        return exassets;
+    }
+
+    public void setExassets(List<Exchangeassets> exassets) {
+        this.exassets = exassets;
+    }
+
+    @OneToMany(mappedBy = "emp")
+    public List<Consumingdetails> getCondetails() {
+        return condetails;
+    }
+
+    public void setCondetails(List<Consumingdetails> condetails) {
+        this.condetails = condetails;
+    }
+
+    @OneToMany(mappedBy = "emp")
+    public List<Purchase> getPurchase() {
+        return purchase;
+    }
+
+    public void setPurchase(List<Purchase> purchase) {
+        this.purchase = purchase;
+    }
+
+
+
     @OneToOne
-    @JoinColumn(name = "jid", referencedColumnName = "jid")
-    public Just getMyjust() {
-        return myjust;
+    @JoinColumn(name = "eid", referencedColumnName = "eid", nullable = false)
+    public Achievementslc getJixiaoone() {
+        return jixiaoone;
     }
 
-    public void setMyjust(Just myjust) {
-        this.myjust = myjust;
-    }
-
-    @OneToOne
-    @JoinColumn(name = "tid", referencedColumnName = "tids")
-    public Transfer getMytransfer() {
-        return mytransfer;
-    }
-
-    public void setMytransfer(Transfer mytransfer) {
-        this.mytransfer = mytransfer;
+    public void setJixiaoone(Achievementslc jixiaoone) {
+        this.jixiaoone = jixiaoone;
     }
 
     @OneToOne
-    @JoinColumn(name = "did", referencedColumnName = "dimid")
-    public Dimission getMydimission() {
-        return mydimission;
+    @JoinColumn(name = "eid", referencedColumnName = "ateid", nullable = false)
+    public AssessmentTeamLc getAtlctow() {
+        return atlctow;
     }
 
-    public void setMydimission(Dimission mydimission) {
-        this.mydimission = mydimission;
+    public void setAtlctow(AssessmentTeamLc atlctow) {
+        this.atlctow = atlctow;
     }
 
-    @OneToOne
-    @JoinColumn(name = "pid", referencedColumnName = "pid")
-    public Position getMyposition() {
-        return myposition;
+
+
+    @OneToMany(mappedBy = "mynoemp")
+    public List<Notification> getNotifications() {
+        return notifications;
     }
 
-    public void setMyposition(Position myposition) {
-        this.myposition = myposition;
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
+
+    @OneToMany(mappedBy = "myexemp")
+    public List<Examine> getExamines() {
+        return examines;
+    }
+
+    public void setExamines(List<Examine> examines) {
+        this.examines = examines;
+    }
+
+    @OneToMany(mappedBy = "myemp")
+    public List<Examine> getExaminelist() {
+        return examinelist;
+    }
+
+    public void setExaminelist(List<Examine> examinelist) {
+        this.examinelist = examinelist;
+    }
+    @Basic
+    @Column(name = "pid", nullable = true)
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
+    }
+
+    @Basic
+    @Column(name = "jid", nullable = true)
+    public Integer getJid() {
+        return jid;
+    }
+
+    public void setJid(Integer jid) {
+        this.jid = jid;
+    }
+
+    @Basic
+    @Column(name = "tid", nullable = true)
+    public Integer getTid() {
+        return tid;
+    }
+
+    public void setTid(Integer tid) {
+        this.tid = tid;
+    }
+
+    @Basic
+    @Column(name = "did", nullable = true)
+    public Integer getDid() {
+        return did;
+    }
+
+    public void setDid(Integer did) {
+        this.did = did;
+    }
+
 }

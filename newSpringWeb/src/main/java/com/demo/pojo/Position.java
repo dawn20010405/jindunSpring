@@ -1,31 +1,21 @@
-/**
- * @ Author     ：彭欣雨
- * @ Date       ：Created in 21:54 2020-12-21
- * @ Description：
- */
 package com.demo.pojo;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 /**
- * @Auther: Administrator
- * @Date: 2020-12-21 21:54
- * @Description:
+ * Description: 岗位类
+ * date: 2020/12/21 22:56、
+ * @author diga
  */
 @Entity
 public class Position {
-    private Emp myemp;
     private Integer pid;
     private String poname;
-    @OneToOne(mappedBy = "myposition")
-    public Emp getMyemp() {
-        return myemp;
-    }
-
-    public void setMyemp(Emp myemp) {
-        this.myemp = myemp;
-    }
+    private Integer ptype;
+    private Dept dept;
+    private List<Resume> rsid;
 
     @Id
     @Column(name = "pid", nullable = false)
@@ -47,7 +37,15 @@ public class Position {
         this.poname = poname;
     }
 
+    @Basic
+    @Column(name = "ptype", nullable = false)
+    public Integer getPtype() {
+        return ptype;
+    }
 
+    public void setPtype(Integer ptype) {
+        this.ptype = ptype;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -55,11 +53,31 @@ public class Position {
         if (o == null || getClass() != o.getClass()) return false;
         Position position = (Position) o;
         return Objects.equals(pid, position.pid) &&
-                Objects.equals(poname, position.poname) ;
+                Objects.equals(poname, position.poname) &&
+                Objects.equals(ptype, position.ptype);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pid, poname);
+        return Objects.hash(pid, poname, ptype);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "did", referencedColumnName = "did")
+    public Dept getDept() {
+        return dept;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
+    }
+
+    @OneToMany(mappedBy = "posi")
+    public List<Resume> getRsid() {
+        return rsid;
+    }
+
+    public void setRsid(List<Resume> rsid) {
+        this.rsid = rsid;
     }
 }

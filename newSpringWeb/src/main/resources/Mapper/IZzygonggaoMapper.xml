@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IZzygonggaoMapper">
+    <resultMap id="gonggaoiResilt" type="com.demo.pojo.Notification">
+        <id column="noid" property="noid"/>
+        <result column="noname" property="noname"/>
+        <result column="nofenlei" property="nofenlei"/>
+        <result column="notype" property="notype"/>
+        <result column="nodate" property="nodate"/>
+        <result column="zhengwen" property="zhengwen"/>
+        <result column="nobzdate" property="nobzdate"/>
+
+        <collection property="mynoemp" ofType="com.demo.pojo.Emp">
+            <id column="eid" property="eid"/>
+            <result column="ename" property="ename"/>
+        </collection>
+
+        <collection property="examines" ofType="com.demo.pojo.Examine">
+            <id column="exid" property="exid"/>
+            <result column="exstate" property="exstate"/>
+            <result column="wxwid" property="wxwid"/>
+            <result column="wxuser" property="exuser"/>
+            <result column="exdate" property="exdate"/>
+            <result column="exyijian" property="exyijian"/>
+            <result column="extype" property="extype"/>
+        </collection>
+    </resultMap>
+<!--    查询所有公告表 List<Notification> selectggAll();-->
+    <select id="selectggAll" resultMap="gonggaoiResilt">
+        SELECT n.nonid,n.noname,n.nofenlei,n.notype,n.nodate,n.zhengwen,n.nodzdate,e.ename,x.* from notification n
+                LEFT JOIN emp e ON e.eid = n.empno
+                LEFT JOIN examine x ON x.wxwid = n.nonid
+                where x.extype = 1
+    </select>
+
+</mapper>

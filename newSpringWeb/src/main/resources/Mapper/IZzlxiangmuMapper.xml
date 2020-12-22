@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IZzlxiangmuMapper">
+
+    <resultMap id="all" type="com.demo.pojo.Myproject">
+        <id property="xid" column="xid"/>
+        <result property="xname" column="xname"/>
+        <result property="start" column="start"/>
+        <result property="state" column="state"/>
+        <result property="end" column="end"/>
+        <result property="evel" column="evel"/>
+        <result property="cdate" column="cdate"/>
+        <association property="myfzr" javaType="com.demo.pojo.Emp">
+            <id property="eid" column="eid"/>
+            <result property="ename" column="ename"/>
+        </association>
+
+        <association property="mytype" javaType="com.demo.pojo.Projectype">
+            <id property="tid" column="tid"/>
+            <result property="tname" column="tname"/>
+        </association>
+    </resultMap>
+
+    <select id="listxiangmu" resultMap="all">
+        select m.xid,t.tname,m.xname,e.ename,m.start,m.state,m.end,m.evel,m.cdate from myproject m,projectype t,emp e where m.tid=t.tid and e.eid=m.empno
+    </select>
+
+
+
+    <insert id="addxiangmu">
+        insert into myproject(xname,empno,start,end,explain,evel,cdate,tid) VALUES()
+    </insert>
+</mapper>

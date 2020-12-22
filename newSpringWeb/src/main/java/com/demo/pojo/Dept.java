@@ -1,24 +1,19 @@
-/**
- * @ Author     ：彭欣雨
- * @ Date       ：Created in 21:32 2020-12-21
- * @ Description：
- */
 package com.demo.pojo;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 /**
- * @Auther: Administrator
- * @Date: 2020-12-21 21:32
- * @Description:
+ * Description: 部门类
+ * date: 2020/12/21 22:56
+ * @author diga
  */
 @Entity
 public class Dept {
     private Integer did;
     private String dname;
-
-
+    private List<Position> posi;
 
     @Id
     @Column(name = "did", nullable = false)
@@ -30,19 +25,6 @@ public class Dept {
         this.did = did;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dept dept = (Dept) o;
-        return Objects.equals(did, dept.did);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(did);
-    }
-
     @Basic
     @Column(name = "dname", nullable = false, length = 255)
     public String getDname() {
@@ -51,5 +33,28 @@ public class Dept {
 
     public void setDname(String dname) {
         this.dname = dname;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dept dept = (Dept) o;
+        return Objects.equals(did, dept.did) &&
+                Objects.equals(dname, dept.dname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(did, dname);
+    }
+
+    @OneToMany(mappedBy = "dept")
+    public List<Position> getPosi() {
+        return posi;
+    }
+
+    public void setPosi(List<Position> posi) {
+        this.posi = posi;
     }
 }
