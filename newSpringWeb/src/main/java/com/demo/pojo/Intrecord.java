@@ -4,11 +4,9 @@ import javax.persistence.*;
 import java.util.Objects;
 
 /**
- * Description: <br/>
- * date: 2020/12/21 23:19<br/>
- *
- * @author Administrator<br />
- * @since JDK 1.8
+ * Description: 面试记录类
+ * date: 2020/12/21 23:19
+ * @author diga
  */
 @Entity
 public class Intrecord {
