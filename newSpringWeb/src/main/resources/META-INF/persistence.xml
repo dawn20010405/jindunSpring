@@ -6,9 +6,11 @@
         <class>com.demo.pojo.Emp</class>
         <class>com.demo.pojo.Just</class>
         <class>com.demo.pojo.Transfer</class>
+        <class>com.demo.pojo.Dept</class>
+        <class>com.demo.pojo.Position</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://116.62.25.111:3306/test"/>
-            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
         </properties>
     </persistence-unit>
 

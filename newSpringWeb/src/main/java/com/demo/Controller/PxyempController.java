@@ -5,9 +5,14 @@
  */
 package com.demo.Controller;
 
+import com.demo.Services.PxyempServices;
+import com.demo.pojo.Emp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @Auther: 彭欣雨
@@ -15,7 +20,22 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description:
  */
 @RestController
-@RequestMapping("/platform")
+@RequestMapping("/emp")
 @CrossOrigin
 public class PxyempController {
+    @Autowired
+    PxyempServices es;
+    /*
+      * @Author Administrator
+      * @Description //TODO 员工表查询全部
+      * @Date 20:46 2020-12-21
+      * @Param []
+      * @return ResultVO
+      **/
+    @RequestMapping("/listselectemp")
+    public List<Emp> listselectemp(){
+        List<Emp> plist=es.listselectemp();
+        System.out.println("listselectemp"+plist);
+        return plist;
+    }
 }

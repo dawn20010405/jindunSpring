@@ -54,6 +54,7 @@ public class Transfer {
         return Objects.hash(tids, transfertime);
     }
 
+    @OneToOne(mappedBy = "mytransfer")
     @ManyToOne
     @JoinColumn(name = "eid", referencedColumnName = "eid")
     public Emp getMyemp() {

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IPxyempMapper">
+    <resultMap id="resultemp" type="com.demo.pojo.Emp">
+        <id property="eid" column="eid"/>
+        <result property="ename" column="ename"/>
+        <result property="pcolour" column="pcolour"/>
+        <result property="erutime" column="erutime"/>
+        <result property="eiphone" column="eiphone"/>
+        <result property="epass" column="epass"/>
+        <!--岗位表-->
+        <association property="myposition" javaType="com.demo.pojo.Position">
+            <id property="pid" column="pid"/>
+            <result property="poname" column="poname"/>
+        </association>
+        <!--转正表-->
+        <association property="myjust" javaType="com.demo.pojo.Just">
+            <id property="jid" column="jid"/>
+            <result property="justtime" column="justtime"/>
+        </association>
+        <!--离职表-->
+        <association property="mydimission" javaType="com.demo.pojo.Dimission">
+            <id property="dimid" column="dimid"/>
+            <result property="dimissiontime" column="dimissiontime"/>
+        </association>
+    </resultMap>
+    <select id="listselectemp" resultMap="resultemp">
+        select * from emp e inner join position p where p.pid=e.pid
+    </select>
+</mapper>

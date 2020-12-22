@@ -5,10 +5,7 @@
  */
 package com.demo.pojo;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -21,6 +18,7 @@ import java.util.Objects;
 public class Dimission {
     private Integer dimid;
     private Timestamp dimissiontime;
+    private Emp myemp;
 
     @Id
     @Column(name = "dimid", nullable = false)
@@ -54,5 +52,14 @@ public class Dimission {
     @Override
     public int hashCode() {
         return Objects.hash(dimid, dimissiontime);
+    }
+
+    @OneToOne(mappedBy = "mydimission")
+    public Emp getMyemp() {
+        return myemp;
+    }
+
+    public void setMyemp(Emp myemp) {
+        this.myemp = myemp;
     }
 }

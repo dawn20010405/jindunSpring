@@ -1,27 +1,33 @@
 /**
  * @ Author     ：彭欣雨
- * @ Date       ：Created in 16:55 2020-12-21
+ * @ Date       ：Created in 21:20 2020-12-21
  * @ Description：
  */
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Objects;
 
 /**
  * @Auther: Administrator
- * @Date: 2020-12-21 16:55
+ * @Date: 2020-12-21 21:20
  * @Description:
  */
 @Entity
 public class Emp {
     private Integer eid;
     private String ename;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp erutime;
     private String eiphone;
-    private List<Transfer> myreansfer;
+    private String epass;
+    private Just myjust;
+    private Transfer mytransfer;
+    private Dimission mydimission;
+    private Position myposition;
 
     @Id
     @Column(name = "eid", nullable = false)
@@ -63,6 +69,16 @@ public class Emp {
         this.eiphone = eiphone;
     }
 
+    @Basic
+    @Column(name = "epass", nullable = true, length = 30)
+    public String getEpass() {
+        return epass;
+    }
+
+    public void setEpass(String epass) {
+        this.epass = epass;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,20 +87,52 @@ public class Emp {
         return Objects.equals(eid, emp.eid) &&
                 Objects.equals(ename, emp.ename) &&
                 Objects.equals(erutime, emp.erutime) &&
-                Objects.equals(eiphone, emp.eiphone);
+                Objects.equals(eiphone, emp.eiphone) &&
+                Objects.equals(epass, emp.epass);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eid, ename, erutime, eiphone);
+        return Objects.hash(eid, ename, erutime, eiphone, epass);
     }
 
-    @OneToMany(mappedBy = "myemp")
-    public List<Transfer> getMyreansfer() {
-        return myreansfer;
+    @OneToOne
+    @JoinColumn(name = "jid", referencedColumnName = "jid")
+    public Just getMyjust() {
+        return myjust;
     }
 
-    public void setMyreansfer(List<Transfer> myreansfer) {
-        this.myreansfer = myreansfer;
+    public void setMyjust(Just myjust) {
+        this.myjust = myjust;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "tid", referencedColumnName = "tids")
+    public Transfer getMytransfer() {
+        return mytransfer;
+    }
+
+    public void setMytransfer(Transfer mytransfer) {
+        this.mytransfer = mytransfer;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "did", referencedColumnName = "dimid")
+    public Dimission getMydimission() {
+        return mydimission;
+    }
+
+    public void setMydimission(Dimission mydimission) {
+        this.mydimission = mydimission;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "pid", referencedColumnName = "pid")
+    public Position getMyposition() {
+        return myposition;
+    }
+
+    public void setMyposition(Position myposition) {
+        this.myposition = myposition;
     }
 }
