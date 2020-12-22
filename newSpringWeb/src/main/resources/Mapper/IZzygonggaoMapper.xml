@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IZzyexamineMapper">
+    <resultMap id="gonggaoiResilt" type="com.demo.pojo.Notification">
+        <id column="noid" property="noid"/>
+        <result column="noname" property="noname"/>
+        <result column="nofenlei" property="nofenlei"/>
+        <result column="notype" property="notype"/>
+        <result column="nodate" property="nodate"/>
+        <result column="zhengwen" property="zhengwen"/>
+        <result column="nobzdate" property="nobzdate"/>
+
+        <association property="mynoemp" javaType="com.demo.pojo.Emp"
+        select="com.demo.model.Mapper.IZzlLoginMapper.selectempAll"
+        column="eid"/>
+    </resultMap>
+<!--    查询所有公告表 List<Notification> selectggAll();-->
+    <select id="selectggAll" resultMap="gonggaoiResilt">
+        SELECT n.nonid,n.noname,n.nofenlei,n.notype,n.nodate,n.zhengwen,n.nodzdate,e.ename from notification n LEFT JOIN emp e ON e.eid = n.empno
+    </select>
+
+</mapper>

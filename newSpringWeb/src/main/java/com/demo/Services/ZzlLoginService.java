@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @ClassName: ZzlLoginService
  * @Description: TODO
@@ -21,5 +23,6 @@ public class ZzlLoginService {
     public Emp getLogin(@Param("phone") String phone, @Param("pass") String pass){
         return l.getLogin(phone, pass);
     }
+
 
 }
