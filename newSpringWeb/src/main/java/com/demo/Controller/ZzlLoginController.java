@@ -3,12 +3,18 @@ package com.demo.Controller;
 import com.demo.Services.ZzlLoginService;
 import com.demo.pojo.Emp;
 import com.demo.pojo.MyResult;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @ClassName: ZzlLoginController
@@ -32,8 +38,8 @@ public class ZzlLoginController {
  * @date: 2020-12-21 20:35
  */
     @RequestMapping("/denglu")
-    public MyResult getLogin(@Param("phone") String phone, @Param("pass") String pass){
-        return MyResult.returnObj(z.getLogin(phone, pass));
+    public MyResult getLogin(String phone,String pass) throws JsonProcessingException {
+        return MyResult.returnObj(z.getLogin(phone,pass));
     }
 
 }

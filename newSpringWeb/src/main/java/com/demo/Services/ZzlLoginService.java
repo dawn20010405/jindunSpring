@@ -18,6 +18,13 @@ public class ZzlLoginService {
     @Autowired
     IZzlLoginMapper l;
 
+    /**
+     * @Description:该方法名称(getLogin)
+     * @param: [phone, pass]
+     * @return: com.demo.pojo.Emp
+     * @auther: zzl
+     * @date: 2020-12-22 16:30
+     */
     public Emp getLogin(@Param("phone") String phone, @Param("pass") String pass){
         return l.getLogin(phone, pass);
     }
