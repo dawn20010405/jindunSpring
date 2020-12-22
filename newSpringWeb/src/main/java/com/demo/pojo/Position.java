@@ -16,6 +16,7 @@ public class Position {
     private Integer ptype;
     private Dept dept;
     private List<Resume> rsid;
+    private List<Recruitment> recru;
 
     @Id
     @Column(name = "pid", nullable = false)
@@ -58,6 +59,15 @@ public class Position {
     }
 
     @Override
+    public String toString() {
+        return "Position{" +
+                "pid=" + pid +
+                ", poname='" + poname + '\'' +
+                ", ptype=" + ptype +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(pid, poname, ptype);
     }
@@ -79,5 +89,14 @@ public class Position {
 
     public void setRsid(List<Resume> rsid) {
         this.rsid = rsid;
+    }
+
+    @OneToMany(mappedBy = "posi")
+    public List<Recruitment> getRecru() {
+        return recru;
+    }
+
+    public void setRecru(List<Recruitment> recru) {
+        this.recru = recru;
     }
 }

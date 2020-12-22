@@ -57,4 +57,12 @@ public class Dept {
     public void setPosi(List<Position> posi) {
         this.posi = posi;
     }
+
+    @Override
+    public String toString() {
+        return "Dept{" +
+                "did=" + did +
+                ", dname='" + dname + '\'' +
+                '}';
+    }
 }

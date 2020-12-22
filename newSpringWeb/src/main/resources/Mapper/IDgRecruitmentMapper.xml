@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IDgRecruitmentMapper">
+    <resultMap id="BaseResultMap" type="com.demo.pojo.Recruitment">
+        <id column="rid" property="rid"/>
+        <result column="hopetime" property="hopetime"/>
+        <result column="peopcout" property="peopcout"/>
+        <result column="recrudemand" property="recrudemand"/>
+        <result column="retype" property="retype"/>
+        <association property="posi" javaType="com.demo.pojo.Position">
+            <id column="pid" property="pid"/>
+            <result column="poname" property="poname"/>
+            <result column="ptype" property="ptype"/>
+            <association property="dept" javaType="com.demo.pojo.Dept">
+                <id column="did" property="did"/>
+                <result column="dname" property="dname"/>
+            </association>
+        </association>
+    </resultMap>
+    <!--查询所有招聘信息-->
+    <select id="listRecruAll" resultMap="BaseResultMap">
+        select * from recruitment r
+        inner join position p on r.pid=p.pid
+        inner join dept d on d.did=p.did
+        <where>
+            <if test="retype!=null and retyp!='' ">
+                and r.retype=#{retype}
+            </if>
+            <if test="poname!=null and poname!='' ">
+                and p.poname like contact('%',#{poname},'%')
+            </if>
+            <if test="dname!=null and dname!='' ">
+                and d.dname like contact('%',#{dname},'%')
+            </if>
+            <if test="recrudemand!=null and recrudemand!='' ">
+                and r.recrudemand like contact('%',#{recrudemand},'%')
+            </if>
+            <if test="peopcout!=null and peopcout!='' ">
+                and r.peopcout=#{peopcout}
+            </if>
+            <if test="hopetime1!=null and hopetime1!=''">
+                and r.hopetime &gt; #{hopetime1}
+            </if>
+            <if test="hopetime2!=null and hopetime2!=''">
+                and r.hopetime &lt; #{hopetime2}
+            </if>
+        </where>
+        order by r.rid desc
+    </select>
+</mapper>
