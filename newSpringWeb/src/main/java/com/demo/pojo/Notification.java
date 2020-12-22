@@ -25,6 +25,9 @@ public class Notification {
     private String zhuangtai;
     private Emp mynoemp;
 
+    /*公告关联审批表*/
+    private List<Examine> examines;
+
     @Id
     @Column(name = "noid", nullable = false)
     public Integer getNoid() {

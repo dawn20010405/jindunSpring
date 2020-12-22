@@ -15,7 +15,7 @@ import java.util.List;
  * @description: 审批
  */
 @Service
-public class IZzyexamineServices {
+public class ZzyexamineServices {
     @Autowired
     IZzyexamineMapper zzyshenpiMapper;
 
