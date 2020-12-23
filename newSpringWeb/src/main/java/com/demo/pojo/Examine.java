@@ -20,9 +20,9 @@ public class Examine {
     private String exwid;
     private String zhuangtai;
     private Emp myexemp;
-    private String wxwid;
     private Integer extype;
     private Emp myemp;
+    private Integer wxwid;
 
     @Id
     @Column(name = "exid", nullable = false)
@@ -111,17 +111,6 @@ public class Examine {
         this.myexemp = myexemp;
     }
 
-
-    @Basic
-    @Column(name = "wxwid", nullable = true, length = 255)
-    public String getWxwid() {
-        return wxwid;
-    }
-
-    public void setWxwid(String wxwid) {
-        this.wxwid = wxwid;
-    }
-
     @Basic
     @Column(name = "extype", nullable = true)
     public Integer getExtype() {
@@ -140,5 +129,15 @@ public class Examine {
 
     public void setMyemp(Emp myemp) {
         this.myemp = myemp;
+    }
+
+    @Basic
+    @Column(name = "wxwid", nullable = true)
+    public Integer getWxwid() {
+        return wxwid;
+    }
+
+    public void setWxwid(Integer wxwid) {
+        this.wxwid = wxwid;
     }
 }

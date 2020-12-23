@@ -1,5 +1,7 @@
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -16,9 +18,13 @@ import java.util.Objects;
 public class Emp {
     private Integer eid;
     private String ename;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp erutime;
     private String eiphone;
     private String epass;
+    private String ezt;
+    private String esex;
+
     private Myproject myproject;
     private List<Mycanyu> mycanyu;
     private Mydynamic bdynamic;
@@ -26,10 +32,6 @@ public class Emp {
     private List<Exchangeassets> exassets;
     private List<Consumingdetails> condetails;
     private List<Purchase> purchase;
-    private Integer pid;
-    private Integer jid;
-    private Integer tid;
-    private Integer did;
     private Achievementslc jixiaoone;
     private AssessmentTeamLc atlctow;
 
@@ -42,6 +44,7 @@ public class Emp {
     private Position myposition;
     private Just myjust;
     private Dimission mydimission;
+    private List<Transfer> mytransfer;
 
     @Id
     @Column(name = "eid", nullable = false)
@@ -220,46 +223,6 @@ public class Emp {
         this.examinelist = examinelist;
     }
 
-    @Basic
-    @Column(name = "pid", nullable = true)
-    public Integer getPid() {
-        return pid;
-    }
-
-    public void setPid(Integer pid) {
-        this.pid = pid;
-    }
-
-    @Basic
-    @Column(name = "jid", nullable = true)
-    public Integer getJid() {
-        return jid;
-    }
-
-    public void setJid(Integer jid) {
-        this.jid = jid;
-    }
-
-    @Basic
-    @Column(name = "tid", nullable = true)
-    public Integer getTid() {
-        return tid;
-    }
-
-    public void setTid(Integer tid) {
-        this.tid = tid;
-    }
-
-    @Basic
-    @Column(name = "did", nullable = true)
-    public Integer getDid() {
-        return did;
-    }
-
-    public void setDid(Integer did) {
-        this.did = did;
-    }
-
     @OneToOne
     @JoinColumn(name = "pid", referencedColumnName = "pid")
     public Position getMyposition() {
@@ -288,5 +251,47 @@ public class Emp {
 
     public void setMydimission(Dimission mydimission) {
         this.mydimission = mydimission;
+    }
+
+    @Basic
+    @Column(name = "ezt", nullable = true, length = 255)
+    public String getEzt() {
+        return ezt;
+    }
+
+    public void setEzt(String ezt) {
+        this.ezt = ezt;
+    }
+
+    @Override
+    public String toString() {
+        return "Emp{" +
+                "eid=" + eid +
+                ", ename='" + ename + '\'' +
+                ", erutime=" + erutime +
+                ", eiphone='" + eiphone + '\'' +
+                ", epass='" + epass + '\'' +
+                ", myposition=" + myposition +
+                ", ezt='" + ezt + '\'' +
+                '}';
+    }
+
+    @Basic
+    @Column(name = "esex", nullable = true, length = 255)
+    public String getEsex() {
+        return esex;
+    }
+
+    public void setEsex(String esex) {
+        this.esex = esex;
+    }
+
+    @OneToMany(mappedBy = "myemp")
+    public List<Transfer> getMytransfer() {
+        return mytransfer;
+    }
+
+    public void setMytransfer(List<Transfer> mytransfer) {
+        this.mytransfer = mytransfer;
     }
 }

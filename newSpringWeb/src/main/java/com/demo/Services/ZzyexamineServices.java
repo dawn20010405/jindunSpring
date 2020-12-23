@@ -27,4 +27,8 @@ public class ZzyexamineServices {
     public List<Examine> selectysAll(){
         return zzyshenpiMapper.selectysAll();
     }
+    /*新增审批表*/
+    public Integer insertExamine(String exstate,Integer wxwid){
+        return zzyshenpiMapper.insertExamine(exstate,wxwid);
+    }
 }

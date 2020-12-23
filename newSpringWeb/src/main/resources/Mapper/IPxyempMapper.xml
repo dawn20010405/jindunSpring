@@ -10,15 +10,22 @@
         <result property="eiphone" column="eiphone"/>
         <result property="epass" column="epass"/>
         <result property="ezt" column="ezt"/>
+        <result property="esex" column="esex"/>
         <!--岗位表-->
         <association property="myposition" javaType="com.demo.pojo.Position">
             <id property="pid" column="pid"/>
             <result property="poname" column="poname"/>
+            <association property="dept" javaType="com.demo.pojo.Dept">
+                <id property="did" column="did"/>
+                <result property="dname" column="dname"/>
+            </association>
         </association>
         <!--转正表-->
         <association property="myjust" javaType="com.demo.pojo.Just">
             <id property="jid" column="jid"/>
             <result property="justtime" column="justtime"/>
+            <result property="jzong" column="jzong"/>
+            <result property="jsehngpi" column="jsehngpi"/>
         </association>
         <!--离职表-->
         <association property="mydimission" javaType="com.demo.pojo.Dimission">
@@ -26,8 +33,10 @@
             <result property="dimissiontime" column="dimissiontime"/>
         </association>
     </resultMap>
-    <select id="listselectemp" resultMap="resultemp">
-        select * from emp e inner join position p on p.pid=e.pid
+    <select id="listselectemppage" resultMap="resultemp">
+        select * from emp e
+        inner join position p on p.pid=e.pid
+        inner join dept d on p.did = d.did
         <where>
             <if test="eid!=null and eid!=''">
                 and e.eid=#{eid}
@@ -40,4 +49,22 @@
             </if>
         </where>
     </select>
+    <select id="listempselect" resultMap="resultemp">
+        select * from emp e where e.ezt='实习'
+    </select>
+    <select id="listempselect2" resultMap="resultemp">
+        select * from emp e
+    </select>
+    <select id="listempselectByeid" resultMap="resultemp">
+        select * from emp e
+        inner join position p on p.pid=e.pid
+        inner join dept d on p.did=d.did
+        where e.eid=#{eid}
+    </select>
+    <update id="updateempbyeid" parameterType="com.demo.pojo.Emp">
+        update emp e set e.ezt='转正审核中' where e.eid=#{eid}
+    </update>
+    <update id="updateempPidbyeid" parameterType="com.demo.pojo.Emp">
+        update emp e set e.pid=#{pid} where e.eid=#{eid}
+    </update>
 </mapper>

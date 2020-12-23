@@ -32,17 +32,49 @@ public class PxyempController {
      * @Description //TODO 员工表查询全部
      * @Date 20:46 2020-12-21
      * @Param []
-     * @return ResultVO
+     * @return PageInfo
      **/
-    @RequestMapping("/listselectemp")
-    public PageInfo<Emp> listselectemp(@RequestParam("no") Integer pageNo,
+    @RequestMapping("/listselectemppage")
+    public PageInfo<Emp> listselectemppage(@RequestParam("no") Integer pageNo,
                                        @RequestParam(value = "size",required = false) Integer pageSize,
                                        Integer eid,String ename,String eiphone){
-        System.out.println("我是listselectemp 员工表查询全部");
-        PageInfo<Emp> info = es.listselectemp(pageNo,pageSize,eid,ename,eiphone);
+        System.out.println("我是listselectemp 员工表分页查询全部");
+        PageInfo<Emp> info = es.listselectemppage(pageNo,pageSize,eid,ename,eiphone);
         System.out.println("info:"+info);
         return info;
     }
-    /*@RestController("/listempselectByeid")
-    public */
+    /*
+      * @Author Administrator
+      * @Description //TODO 我是listempselect 员工表查询全部
+      * @Date 10:22 2020-12-23
+      * @Param []
+      * @return java.util.List<com.demo.pojo.Emp>
+      **/
+    @RequestMapping("/listempselect")
+    public List<Emp> listempselect(){
+        System.out.println("我是listempselect 员工表查询全部实习员工");
+        List<Emp> list =es.listempselect();
+        return list;
+    }
+    @RequestMapping("/listempselect2")
+    public List<Emp> listempselect2(){
+        System.out.println("listempselect2 员工表查询全部");
+        List<Emp> list =es.listempselect2();
+        return list;
+    }
+    /*
+      * @Author Administrator
+      * @Description //TODO 我是listempselectByeid 员工表根据eid查询全部
+      * @Date 10:23 2020-12-23
+      * @Param []
+      * @return java.util.List<com.demo.pojo.Emp>
+      **/
+    @RequestMapping("/listempselectByeid")
+    public Emp listempselectByeid(Integer eid){
+        System.out.println("我是listempselectByeid 员工表根据eid查询全部");
+        Emp list =es.listempselectByeid(eid);
+        System.out.println("值："+list);
+        return list;
+    }
+
 }

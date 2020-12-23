@@ -17,6 +17,7 @@ public class Position {
     private Dept dept;
     private List<Resume> rsid;
     private Emp myemp;
+    private Transfer mytransfer;
 
     @Id
     @Column(name = "pid", nullable = false)
@@ -89,5 +90,14 @@ public class Position {
 
     public void setMyemp(Emp myemp) {
         this.myemp = myemp;
+    }
+
+    @OneToOne(mappedBy = "myposition")
+    public Transfer getMytransfer() {
+        return mytransfer;
+    }
+
+    public void setMytransfer(Transfer mytransfer) {
+        this.mytransfer = mytransfer;
     }
 }

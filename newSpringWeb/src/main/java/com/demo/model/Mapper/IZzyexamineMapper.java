@@ -22,4 +22,7 @@ public interface IZzyexamineMapper {
     List<Examine> selectdsAll();
     /*查询所有已审批*/
     List<Examine> selectysAll();
+    /*新增审批表*/
+    Integer insertExamine(String exstate,Integer wxwid);
+
 }
