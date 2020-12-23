@@ -41,7 +41,9 @@ public class AchievementslcController {
             **/
     @PostMapping("/addac/{eid}")
     public Integer addac(@RequestBody Achievementslc ac,@PathVariable Integer eid){
+        System.out.println(ac.getEmpacone());
         ac.setEmpacone(as.empbyid(eid));
+        System.out.println(ac.getEmpacone());
         return as.addAchievementslc(ac);
     }
     /*
@@ -67,4 +69,5 @@ public class AchievementslcController {
         String a="%"+acname+"%";
         return as.likename(no,a);
     }
+
 }

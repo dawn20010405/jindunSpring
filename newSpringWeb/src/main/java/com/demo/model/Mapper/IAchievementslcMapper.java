@@ -2,6 +2,7 @@ package com.demo.model.Mapper;
 
 import com.demo.pojo.Achievementslc;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -32,4 +33,12 @@ public interface IAchievementslcMapper {
      * @return
             **/
     List<Achievementslc> likeAc(String acname);
+    /*
+     * @Author lichao
+     * @Description //新增一个绩效活动
+     * @Date 23:13 2020/12/22
+     * @Param
+     * @return
+            **/
+    Integer addaclc(@Param("ac") Achievementslc ac);
 }

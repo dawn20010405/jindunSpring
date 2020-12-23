@@ -49,7 +49,7 @@ public class AchievementslcService {
             **/
     public Integer addAchievementslc(Achievementslc ac){
         try {
-            ad.save(ac);
+           am.addaclc(ac);
             return 1;
         } catch (Exception e) {
             return -1;
@@ -89,4 +89,5 @@ public class AchievementslcService {
         return info;
 
     }
+
 }
