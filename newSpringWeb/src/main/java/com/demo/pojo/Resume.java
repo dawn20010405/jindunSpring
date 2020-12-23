@@ -18,9 +18,9 @@ public class Resume {
     private String workyear;
     private String education;
     private Date createdate;
-    private Position posi;
     private Interview inter;
     private Entry enty;
+    private Recruitment recru;
 
     @Id
     @Column(name = "rsid", nullable = false)
@@ -111,16 +111,6 @@ public class Resume {
         return Objects.hash(rsid, rname, rsex, rbirthday, workyear, education, createdate);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "pid", referencedColumnName = "pid")
-    public Position getPosi() {
-        return posi;
-    }
-
-    public void setPosi(Position posi) {
-        this.posi = posi;
-    }
-
     @OneToOne
     @JoinColumn(name = "rsid", referencedColumnName = "rsid", nullable = false)
     public Interview getInter() {
@@ -139,5 +129,15 @@ public class Resume {
 
     public void setEnty(Entry enty) {
         this.enty = enty;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "rid", referencedColumnName = "rid")
+    public Recruitment getRecru() {
+        return recru;
+    }
+
+    public void setRecru(Recruitment recru) {
+        this.recru = recru;
     }
 }

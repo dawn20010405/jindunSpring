@@ -15,7 +15,6 @@ public class Position {
     private String poname;
     private Integer ptype;
     private Dept dept;
-    private List<Resume> rsid;
     private List<Recruitment> recru;
 
     @Id
@@ -80,15 +79,6 @@ public class Position {
 
     public void setDept(Dept dept) {
         this.dept = dept;
-    }
-
-    @OneToMany(mappedBy = "posi")
-    public List<Resume> getRsid() {
-        return rsid;
-    }
-
-    public void setRsid(List<Resume> rsid) {
-        this.rsid = rsid;
     }
 
     @OneToMany(mappedBy = "posi")

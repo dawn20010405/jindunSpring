@@ -25,6 +25,28 @@ public interface IDgRecruitmentMapper {
                                    @RequestParam(value = "dname",required = false)String dname,
                                    @RequestParam(value = "recrudemand",required = false)String recrudemand,
                                    @RequestParam(value = "peopcout",required = false)Integer peopcout,
-                                   @RequestParam(value = "hopetime1",required = false)Date hopetime1,
-                                   @RequestParam(value = "hopetime2",required = false)Date hopetime2);
+                                   @RequestParam(value = "hopetime1",required = false)String hopetime1,
+                                   @RequestParam(value = "hopetime2",required = false)String hopetime2,
+                                   @RequestParam(value = "rcreate",required = false)String rcreate);
+
+    /*
+    * @Author diga
+    * @Date 2020/12/23 11:06
+    * @Description 新增招聘需求
+    */
+    Integer insertRecru(Integer pid,Date hopetime,Integer peopcout,String recrudemand, Date rcreate, Integer retype);
+
+    /*
+    * @Author diga
+    * @Date 2020/12/23 19:28
+    * @Description 修改招聘需求
+    */
+    Integer updateRecru(Integer peopcout,Date hopetime,Integer rid);
+
+    /*
+     * @Author diga
+     * @Date 2020/12/23 19:28
+     * @Description 修改招聘状态(取消)
+     */
+    Integer updateRetype(Integer rid);
 }

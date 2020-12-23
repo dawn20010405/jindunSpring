@@ -30,8 +30,55 @@ public class DgRecruitmentService {
                                           @RequestParam(value = "dname",required = false)String dname,
                                           @RequestParam(value = "recrudemand",required = false)String recrudemand,
                                           @RequestParam(value = "peopcout",required = false)Integer peopcout,
-                                          @RequestParam(value = "hopetime1",required = false)Date hopetime1,
-                                          @RequestParam(value = "hopetime2",required = false)Date hopetime2){
-        return mapper.listRecruAll(retype, poname, dname, recrudemand, peopcout, hopetime1, hopetime2);
+                                          @RequestParam(value = "hopetime1",required = false)String hopetime1,
+                                          @RequestParam(value = "hopetime2",required = false)String hopetime2,
+                                          @RequestParam(value = "rcreate",required = false)String rcreate){
+        return mapper.listRecruAll(retype, poname, dname, recrudemand, peopcout, hopetime1, hopetime2,rcreate);
+    }
+
+    /*
+    * @Author diga
+    * @Date 2020/12/23 11:07
+    * @Description 新增招聘需求
+    */
+    public Integer insertRecru(Integer pid,Date hopetime,Integer peopcout,String recrudemand,Date rcreate, Integer retype){
+        try {
+            Integer a=mapper.insertRecru(pid, hopetime, peopcout, recrudemand, rcreate, retype);
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+
+    }
+
+    /*
+     * @Author diga
+     * @Date 2020/12/23 19:28
+     * @Description 修改招聘需求
+     */
+    public Integer updateRecru(Integer peopcout,Date hopetime,Integer rid){
+        try {
+            Integer a=mapper.updateRecru(peopcout, hopetime, rid);
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    /*
+     * @Author diga
+     * @Date 2020/12/23 19:28
+     * @Description 修改招聘状态(取消)
+     */
+    public Integer updateRetype(Integer rid){
+        try {
+            Integer a=mapper.updateRetype(rid);
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }

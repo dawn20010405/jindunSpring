@@ -9,6 +9,7 @@
         <result column="peopcout" property="peopcout"/>
         <result column="recrudemand" property="recrudemand"/>
         <result column="retype" property="retype"/>
+        <result column="rcreate" property="rcreate"/>
         <association property="posi" javaType="com.demo.pojo.Position">
             <id column="pid" property="pid"/>
             <result column="poname" property="poname"/>
@@ -25,17 +26,17 @@
         inner join position p on r.pid=p.pid
         inner join dept d on d.did=p.did
         <where>
-            <if test="retype!=null and retyp!='' ">
+            <if test="retype!=null and retype!='' ">
                 and r.retype=#{retype}
             </if>
             <if test="poname!=null and poname!='' ">
-                and p.poname like contact('%',#{poname},'%')
+                and p.poname like concat('%',#{poname},'%')
             </if>
             <if test="dname!=null and dname!='' ">
-                and d.dname like contact('%',#{dname},'%')
+                and d.dname like concat('%',#{dname},'%')
             </if>
             <if test="recrudemand!=null and recrudemand!='' ">
-                and r.recrudemand like contact('%',#{recrudemand},'%')
+                and r.recrudemand like concat('%',#{recrudemand},'%')
             </if>
             <if test="peopcout!=null and peopcout!='' ">
                 and r.peopcout=#{peopcout}
@@ -46,7 +47,22 @@
             <if test="hopetime2!=null and hopetime2!=''">
                 and r.hopetime &lt; #{hopetime2}
             </if>
+            <if test="rcreate!=null and rcreate!=''">
+                and r.rcreate=#{rcreate}
+            </if>
         </where>
         order by r.rid desc
     </select>
+    <!--新增招聘需求-->
+    <insert id="insertRecru">
+        insert into recruitment value(null,#{pid},#{hopetime},#{peopcout},#{recrudemand},#{rcreate},#{retype})
+    </insert>
+    <!--修改招聘需求-->
+    <update id="updateRecru">
+        update recruitment set peopcout=#{peopcout},hopetime=#{hopetime} where rid=#{rid}
+    </update>
+    <!--修改招聘状态(取消)-->
+    <update id="updateRetype">
+        update recruitment set retype=2 where rid=#{rid}
+    </update>
 </mapper>

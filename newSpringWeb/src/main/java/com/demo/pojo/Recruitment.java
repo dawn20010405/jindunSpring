@@ -18,6 +18,8 @@ public class Recruitment {
     private String recrudemand;
     private Integer retype;
     private Position posi;
+    private Date rcreate;
+    private Resume resum;
 
     @Id
     @Column(name = "rid", nullable = false)
@@ -78,12 +80,13 @@ public class Recruitment {
                 Objects.equals(hopetime, that.hopetime) &&
                 Objects.equals(peopcout, that.peopcout) &&
                 Objects.equals(recrudemand, that.recrudemand) &&
+                Objects.equals(rcreate, that.rcreate) &&
                 Objects.equals(retype, that.retype);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rid, hopetime, peopcout, recrudemand, retype);
+        return Objects.hash(rid, hopetime, peopcout, recrudemand,rcreate, retype);
     }
 
     @ManyToOne
@@ -94,5 +97,24 @@ public class Recruitment {
 
     public void setPosi(Position posi) {
         this.posi = posi;
+    }
+
+    @Basic
+    @Column(name = "rcreate", nullable = false)
+    public Date getRcreate() {
+        return rcreate;
+    }
+
+    public void setRcreate(Date rcreate) {
+        this.rcreate = rcreate;
+    }
+
+    @OneToOne(mappedBy = "recru")
+    public Resume getResum() {
+        return resum;
+    }
+
+    public void setResum(Resume resum) {
+        this.resum = resum;
     }
 }
