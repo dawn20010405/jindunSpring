@@ -40,4 +40,12 @@ public interface IQqcAssetsMapper {
      * @Description ：资产修改
      */
     int updateone(Assets record);
+
+    /**
+     * @Author: qqc on 2020/12/23 9:47
+     * @param : [Status]
+     * @return : java.util.List<com.demo.pojo.Assets>
+     * @Description :返回某种情况下的list
+     */
+    List<Assets> countByStatus(String Status);
 }

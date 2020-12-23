@@ -19,5 +19,6 @@ public interface IQqcNumsetMapper {
      * @Description :查询当前编号表
      */
     Numset getone();
-    Numset updateone(Numset numset);
+
+    int updateone(Numset numset);
 }

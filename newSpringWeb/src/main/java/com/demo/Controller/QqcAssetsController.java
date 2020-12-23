@@ -43,14 +43,34 @@ public class QqcAssetsController {
     @RequestMapping("/add")
     public MyResult insertAssets(@RequestBody Assets assets){
         try{
-            Boolean x=qqcAssetsService.insertAssets(assets);
-            if (x){
-                return MyResult.SUCCESS;
-            }else {
-                return MyResult.ERROR("新增失败！");
+            //根据资产分类分别新增资产
+            int i=1;
+            int x=assets.getAssetsquantity();
+            if (assets.getAssetstype().equals("非低值消耗类")){
+                //非低值消耗类需要单个添加
+                assets.setAssetsquantity(1);
+                //根据资产状态分类判断是否为新增
+                if (assets.getAssetsstatus() !=null){
+                    i=qqcAssetsService.countByStatus(assets.getAssetsstatus())+1;
+                }else{
+                    //新物品名称为资产分类
+                    assets.setAssetsstatus(assets.getAssetsname());
+                }
+                //根据数量单个添加资产
+                for(int m=0;m<x;m++){
+                    //根据总数更改名字
+                    assets.setAssetsname(assets.getAssetsstatus()+i);
+                    qqcAssetsService.insertAssets(assets);
+                    i++;
+                }
+            //低值消耗类一起添加，新物品不与老物品叠加
+            }else{
+                assets.setAssetsstatus("固定资产");
+                qqcAssetsService.insertAssets(assets);
             }
+            return MyResult.SUCCESS;
         }catch (Exception e){
-
+            e.printStackTrace();
             return MyResult.ERROR("新增失败！");
         }
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @Title: QqcAssetsService
@@ -48,13 +49,20 @@ public class QqcAssetsService {
             StringBuffer x=qqcNumsetService.updateone();
             StringBuffer num=new StringBuffer("SZ");
             num=num.append(x);
+            System.out.println("最后的编号为"+num);
             assets.setAssetsnum(num.toString());
             assets.setAssetsretime(new Timestamp(System.currentTimeMillis()));
             iQqcAssetsMapper.insert(assets);
             return true;
         }catch (Exception e){
+            e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return false;
         }
+    }
+
+    public int countByStatus(String status){
+        List<Assets> list=iQqcAssetsMapper.countByStatus(status);
+        return list.size();
     }
 }
