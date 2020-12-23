@@ -1,7 +1,9 @@
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,15 +18,20 @@ import java.util.Objects;
 public class Myproject {
     private Integer xid;
     private String xname;
-    private Date start;
-    private Date end;
-    private String explain;
+    @JsonFormat(pattern ="yyyy-MM-dd")
+    private Date startime;
+    @JsonFormat(pattern ="yyyy-MM-dd")
+    private Date endtime;
+    private String explains;
     private Integer evel;
     private Integer state;
     private Integer jindu;
     private Integer ziping;
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private Date skaishi;
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private Date sjieshu;
+    @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss")
     private Date cdate;
     private Projectype mytype;
     private Emp myfzr;
@@ -55,31 +62,31 @@ public class Myproject {
     @Basic
     @Column(name = "start", nullable = true)
     public Date getStart() {
-        return start;
+        return startime;
     }
 
     public void setStart(Date start) {
-        this.start = start;
+        this.startime = start;
     }
 
     @Basic
-    @Column(name = "end", nullable = true)
+    @Column(name = "ends", nullable = true)
     public Date getEnd() {
-        return end;
+        return endtime;
     }
 
     public void setEnd(Date end) {
-        this.end = end;
+        this.endtime = end;
     }
 
     @Basic
     @Column(name = "explain", nullable = true, length = 50)
     public String getExplain() {
-        return explain;
+        return explains;
     }
 
     public void setExplain(String explain) {
-        this.explain = explain;
+        this.explains = explain;
     }
 
     @Basic
@@ -159,9 +166,9 @@ public class Myproject {
         Myproject myproject = (Myproject) o;
         return Objects.equals(xid, myproject.xid) &&
                 Objects.equals(xname, myproject.xname) &&
-                Objects.equals(start, myproject.start) &&
-                Objects.equals(end, myproject.end) &&
-                Objects.equals(explain, myproject.explain) &&
+                Objects.equals(startime, myproject.startime) &&
+                Objects.equals(endtime, myproject.endtime) &&
+                Objects.equals(explains, myproject.explains) &&
                 Objects.equals(evel, myproject.evel) &&
                 Objects.equals(state, myproject.state) &&
                 Objects.equals(jindu, myproject.jindu) &&
@@ -173,7 +180,7 @@ public class Myproject {
 
     @Override
     public int hashCode() {
-        return Objects.hash(xid, xname, start, end, explain, evel, state, jindu, ziping, skaishi, sjieshu, cdate);
+        return Objects.hash(xid, xname, startime, endtime, explains, evel, state, jindu, ziping, skaishi, sjieshu, cdate);
     }
 
     @OneToOne(mappedBy = "myproject")
@@ -220,5 +227,23 @@ public class Myproject {
 
     public void setMrisk(List<Myrisk> mrisk) {
         this.mrisk = mrisk;
+    }
+
+    @Override
+    public String toString() {
+        return "Myproject{" +
+                "xid=" + xid +
+                ", xname='" + xname + '\'' +
+                ", start=" + startime +
+                ", end=" + endtime +
+                ", explain='" + explains + '\'' +
+                ", evel=" + evel +
+                ", state=" + state +
+                ", jindu=" + jindu +
+                ", ziping=" + ziping +
+                ", skaishi=" + skaishi +
+                ", sjieshu=" + sjieshu +
+                ", cdate=" + cdate +
+                '}';
     }
 }
