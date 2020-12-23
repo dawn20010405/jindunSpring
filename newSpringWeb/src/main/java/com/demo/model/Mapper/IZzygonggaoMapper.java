@@ -18,4 +18,10 @@ import java.util.List;
 public interface IZzygonggaoMapper {
     /*查询所有公告表*/
     List<Notification> selectggAll();
+
+    /*根据ID查询*/
+    Notification getselectid(Integer noid);
+
+    /*根据ID修改状态*/
+    Integer updategonggao(Integer notype,Integer noid);
 }

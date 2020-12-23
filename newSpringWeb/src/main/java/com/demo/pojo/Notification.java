@@ -1,14 +1,15 @@
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Objects;
 
 /**
  * @ClassName: Notification
  * @Author: 左增源
- * @create: 2020-12-22 09:13
+ * @create: 2020-12-23 15:03
  * @program: demo
  * @description:
  */
@@ -18,15 +19,11 @@ public class Notification {
     private String noname;
     private String nofenlei;
     private String notype;
-    private Timestamp nodate;
     private String zhengwen;
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="GMT+8")
+//    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Timestamp nodzdate;
-    private String nonid;
-    private String zhuangtai;
     private Emp mynoemp;
-
-    /*公告关联审批表*/
-    private List<Examine> examines;
 
     @Id
     @Column(name = "noid", nullable = false)
@@ -69,16 +66,6 @@ public class Notification {
     }
 
     @Basic
-    @Column(name = "nodate", nullable = true)
-    public Timestamp getNodate() {
-        return nodate;
-    }
-
-    public void setNodate(Timestamp nodate) {
-        this.nodate = nodate;
-    }
-
-    @Basic
     @Column(name = "zhengwen", nullable = true, length = 999)
     public String getZhengwen() {
         return zhengwen;
@@ -98,26 +85,6 @@ public class Notification {
         this.nodzdate = nodzdate;
     }
 
-    @Basic
-    @Column(name = "nonid", nullable = true, length = 255)
-    public String getNonid() {
-        return nonid;
-    }
-
-    public void setNonid(String nonid) {
-        this.nonid = nonid;
-    }
-
-    @Basic
-    @Column(name = "zhuangtai", nullable = true, length = 255)
-    public String getZhuangtai() {
-        return zhuangtai;
-    }
-
-    public void setZhuangtai(String zhuangtai) {
-        this.zhuangtai = zhuangtai;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -127,16 +94,13 @@ public class Notification {
                 Objects.equals(noname, that.noname) &&
                 Objects.equals(nofenlei, that.nofenlei) &&
                 Objects.equals(notype, that.notype) &&
-                Objects.equals(nodate, that.nodate) &&
                 Objects.equals(zhengwen, that.zhengwen) &&
-                Objects.equals(nodzdate, that.nodzdate) &&
-                Objects.equals(nonid, that.nonid) &&
-                Objects.equals(zhuangtai, that.zhuangtai);
+                Objects.equals(nodzdate, that.nodzdate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(noid, noname, nofenlei, notype, nodate, zhengwen, nodzdate, nonid, zhuangtai);
+        return Objects.hash(noid, noname, nofenlei, notype, zhengwen, nodzdate);
     }
 
     @ManyToOne
@@ -148,5 +112,4 @@ public class Notification {
     public void setMynoemp(Emp mynoemp) {
         this.mynoemp = mynoemp;
     }
-
 }

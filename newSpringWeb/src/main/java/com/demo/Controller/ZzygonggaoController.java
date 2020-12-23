@@ -1,13 +1,12 @@
 package com.demo.Controller;
 
-import com.demo.Services.ZzlLoginService;
 import com.demo.Services.ZzygonggaoServices;
 import com.demo.pojo.Notification;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @ClassName: ZzygonggaoController
@@ -24,7 +23,27 @@ public class ZzygonggaoController {
 
     /*查询所有公告*/
     @RequestMapping("/ggAll")
-    public List<Notification> selectggAll(){
-        return zzygonggaoServices.selectggAll();
+    public PageInfo<Notification> selectggAll(@RequestParam(value = "no", required = false) Integer pageNo,
+                                              @RequestParam(value = "size", required = false) Integer pageSize) {
+        Integer no = (pageNo != null && pageNo >= 1) ? pageNo : 1;
+        Integer size = (pageSize != null) ? pageSize : 1;
+        System.out.println(no+"--------------"+size);
+        return zzygonggaoServices.selectggAll(no,size);
     }
+
+    /*根据ID查询*/
+    @RequestMapping("/ggid")
+    public Notification Updatesborr(@RequestParam("noid") Integer noid){
+        return  zzygonggaoServices.getselectid(noid);
+    }
+
+    /*根据ID修改状态*/
+    @RequestMapping("/updtgg")
+    public Integer updategonggao(@RequestParam("notype")Integer notype,
+                                 @RequestParam("noid")Integer noid){
+        System.out.println("进入公告修改！！！");
+        return zzygonggaoServices.updategonggao(notype,noid);
+    }
+
+
 }

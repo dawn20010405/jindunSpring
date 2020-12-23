@@ -1,5 +1,7 @@
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -7,7 +9,7 @@ import java.util.Objects;
 /**
  * @ClassName: Examine
  * @Author: 左增源
- * @create: 2020-12-22 09:13
+ * @create: 2020-12-23 15:03
  * @program: demo
  * @description:
  */
@@ -15,14 +17,13 @@ import java.util.Objects;
 public class Examine {
     private Integer exid;
     private String exstate;
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone="GMT+8")
+//    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Timestamp exdate;
     private String exyijian;
-    private String exwid;
-    private String zhuangtai;
-    private Emp myexemp;
     private String wxwid;
     private Integer extype;
-    private Emp myemp;
+    private Emp myexemp;
 
     @Id
     @Column(name = "exid", nullable = false)
@@ -65,54 +66,6 @@ public class Examine {
     }
 
     @Basic
-    @Column(name = "exwid", nullable = true, length = 255)
-    public String getExwid() {
-        return exwid;
-    }
-
-    public void setExwid(String exwid) {
-        this.exwid = exwid;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Examine examine = (Examine) o;
-        return Objects.equals(exid, examine.exid) &&
-                Objects.equals(exstate, examine.exstate) &&
-                Objects.equals(exdate, examine.exdate) &&
-                Objects.equals(exyijian, examine.exyijian) &&
-                Objects.equals(exwid, examine.exwid);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(exid, exstate, exdate, exyijian, exwid);
-    }
-
-    @Basic
-    @Column(name = "zhuangtai", nullable = true, length = 255)
-    public String getZhuangtai() {
-        return zhuangtai;
-    }
-
-    public void setZhuangtai(String zhuangtai) {
-        this.zhuangtai = zhuangtai;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "empno", referencedColumnName = "eid")
-    public Emp getMyexemp() {
-        return myexemp;
-    }
-
-    public void setMyexemp(Emp myexemp) {
-        this.myexemp = myexemp;
-    }
-
-
-    @Basic
     @Column(name = "wxwid", nullable = true, length = 255)
     public String getWxwid() {
         return wxwid;
@@ -132,13 +85,31 @@ public class Examine {
         this.extype = extype;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "exuser", referencedColumnName = "eid")
-    public Emp getMyemp() {
-        return myemp;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Examine examine = (Examine) o;
+        return Objects.equals(exid, examine.exid) &&
+                Objects.equals(exstate, examine.exstate) &&
+                Objects.equals(exdate, examine.exdate) &&
+                Objects.equals(exyijian, examine.exyijian) &&
+                Objects.equals(wxwid, examine.wxwid) &&
+                Objects.equals(extype, examine.extype);
     }
 
-    public void setMyemp(Emp myemp) {
-        this.myemp = myemp;
+    @Override
+    public int hashCode() {
+        return Objects.hash(exid, exstate, exdate, exyijian, wxwid, extype);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "exuser", referencedColumnName = "eid")
+    public Emp getMyexemp() {
+        return myexemp;
+    }
+
+    public void setMyexemp(Emp myexemp) {
+        this.myexemp = myexemp;
     }
 }

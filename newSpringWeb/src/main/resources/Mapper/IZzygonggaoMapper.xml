@@ -6,10 +6,8 @@
     <resultMap id="gonggaoiResilt" type="com.demo.pojo.Notification">
         <id column="noid" property="noid"/>
         <result column="noname" property="noname"/>
-        <result column="nonid" property="nonid"/>
         <result column="nofenlei" property="nofenlei"/>
         <result column="notype" property="notype"/>
-        <result column="nodate" property="nodate"/>
         <result column="zhengwen" property="zhengwen"/>
         <result column="nodzdate" property="nodzdate"/>
 
@@ -21,7 +19,19 @@
     </resultMap>
 <!--    查询所有公告表 List<Notification> selectggAll();-->
     <select id="selectggAll" resultMap="gonggaoiResilt">
-        SELECT n.nonid,n.noname,n.nofenlei,n.notype,n.nodate,n.zhengwen,n.nodzdate,e.ename from notification n LEFT JOIN emp e ON e.eid = n.empno
+        SELECT n.noid,n.noname,n.nofenlei,n.notype,n.zhengwen,n.nodzdate,e.ename from notification n
+				LEFT JOIN emp e ON n.empno = e.eid where n.notype = '0'
     </select>
+
+<!--    根据ID查询 Integer getselectid(String wxwid);-->
+    <select id="getselectid" resultMap="gonggaoiResilt">
+        SELECT n.noid,n.noname,n.nofenlei,n.notype,n.zhengwen,n.nodzdate,e.ename
+               from notification n LEFT JOIN emp e ON e.eid = n.empno where n.noid = #{wxwid}
+    </select>
+
+<!--    根据ID修改状态 Integer updategonggao(Integer notype,Integer noid);-->
+    <update id="updategonggao">
+        UPDATE notification n set n.notype = #{notype} where n.noid = #{noid}
+    </update>
 
 </mapper>

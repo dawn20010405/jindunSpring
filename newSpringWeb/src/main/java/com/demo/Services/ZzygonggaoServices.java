@@ -2,6 +2,8 @@ package com.demo.Services;
 
 import com.demo.model.Mapper.IZzygonggaoMapper;
 import com.demo.pojo.Notification;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,24 @@ public class ZzygonggaoServices {
     IZzygonggaoMapper zzygonggaoMapper;
 
     /*查询所有公告*/
-    public List<Notification> selectggAll(){
-        return zzygonggaoMapper.selectggAll();
+    public PageInfo<Notification> selectggAll(Integer pageNo, Integer pageSize) {
+        //配置分页信息
+        PageHelper.startPage(pageNo, pageSize);
+        //调用Mapper的查询方法
+        List<Notification> list = zzygonggaoMapper.selectggAll();
+        //将结果集封装到分页对象中
+        PageInfo<Notification> info = new PageInfo<>(list);
+        //返回
+        return info;
+    }
+
+    /*根据ID查询*/
+    public Notification getselectid(Integer noid){
+        return zzygonggaoMapper.getselectid(noid);
+    }
+
+    /*根据ID修改状态*/
+    public Integer updategonggao(Integer notype,Integer noid){
+        return zzygonggaoMapper.updategonggao(notype,noid);
     }
 }

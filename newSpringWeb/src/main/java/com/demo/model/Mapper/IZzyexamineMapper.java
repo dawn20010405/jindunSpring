@@ -3,9 +3,8 @@ package com.demo.model.Mapper;
 import com.demo.pojo.Examine;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,4 +21,6 @@ public interface IZzyexamineMapper {
     List<Examine> selectdsAll();
     /*查询所有已审批*/
     List<Examine> selectysAll();
+    /*跟据ID进行审批*/
+    Integer updategonggao(Date exdate,String exyijian,Integer extype,String exstate,Integer wxwid);
 }

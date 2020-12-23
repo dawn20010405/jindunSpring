@@ -2,9 +2,12 @@ package com.demo.Services;
 
 import com.demo.model.Mapper.IZzyexamineMapper;
 import com.demo.pojo.Examine;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,11 +23,30 @@ public class ZzyexamineServices {
     IZzyexamineMapper zzyshenpiMapper;
 
     /*查询待审批*/
-    public List<Examine> selectdsAll(){
-        return zzyshenpiMapper.selectdsAll();
+    public PageInfo<Examine> selectdsAll(Integer pageNo, Integer pageSize) {
+        //配置分页信息
+        PageHelper.startPage(pageNo, pageSize);
+        //调用Mapper的查询方法
+        List<Examine> list = zzyshenpiMapper.selectdsAll();
+        //将结果集封装到分页对象中
+        PageInfo<Examine> info = new PageInfo<>(list);
+        //返回
+        return info;
     }
     /*查询已审批*/
-    public List<Examine> selectysAll(){
-        return zzyshenpiMapper.selectysAll();
+    public PageInfo<Examine> selectysAll(Integer pageNo, Integer pageSize) {
+        //配置分页信息
+        PageHelper.startPage(pageNo, pageSize);
+        //调用Mapper的查询方法
+        List<Examine> list = zzyshenpiMapper.selectysAll();
+        //将结果集封装到分页对象中
+        PageInfo<Examine> info = new PageInfo<>(list);
+        //返回
+        return info;
+    }
+
+    /*跟据ID进行审批 Integer updategonggao(Date exdate,String exyijian,Integer extype,Integer wxwid);*/
+    public Integer updategonggao(Date exdate, String exyijian, Integer extype,String exstate, Integer wxwid){
+        return zzyshenpiMapper.updategonggao(exdate,exyijian,extype,exstate,wxwid);
     }
 }

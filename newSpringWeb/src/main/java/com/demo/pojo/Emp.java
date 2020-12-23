@@ -26,22 +26,18 @@ public class Emp {
     private List<Exchangeassets> exassets;
     private List<Consumingdetails> condetails;
     private List<Purchase> purchase;
-    private Integer pid;
-    private Integer jid;
-    private Integer tid;
-    private Integer did;
     private Achievementslc jixiaoone;
     private AssessmentTeamLc atlctow;
 
-
-
-//    12 22 左增源 公司公告
+    //    12 22 左增源 公司公告
     private List<Notification> notifications;
-    private List<Examine> examines;
     private List<Examine> examinelist;
+
     private Position myposition;
     private Just myjust;
     private Dimission mydimission;
+    private String ezt;
+    private String esex;
 
     @Id
     @Column(name = "eid", nullable = false)
@@ -74,7 +70,7 @@ public class Emp {
     }
 
     @Basic
-    @Column(name = "eiphone", nullable = true, length = 11)
+    @Column(name = "eiphone", nullable = false, length = 11)
     public String getEiphone() {
         return eiphone;
     }
@@ -84,7 +80,7 @@ public class Emp {
     }
 
     @Basic
-    @Column(name = "epass", nullable = true, length = 30)
+    @Column(name = "epass", nullable = false, length = 30)
     public String getEpass() {
         return epass;
     }
@@ -202,64 +198,6 @@ public class Emp {
         this.notifications = notifications;
     }
 
-    @OneToMany(mappedBy = "myexemp")
-    public List<Examine> getExamines() {
-        return examines;
-    }
-
-    public void setExamines(List<Examine> examines) {
-        this.examines = examines;
-    }
-
-    @OneToMany(mappedBy = "myemp")
-    public List<Examine> getExaminelist() {
-        return examinelist;
-    }
-
-    public void setExaminelist(List<Examine> examinelist) {
-        this.examinelist = examinelist;
-    }
-
-    @Basic
-    @Column(name = "pid", nullable = true)
-    public Integer getPid() {
-        return pid;
-    }
-
-    public void setPid(Integer pid) {
-        this.pid = pid;
-    }
-
-    @Basic
-    @Column(name = "jid", nullable = true)
-    public Integer getJid() {
-        return jid;
-    }
-
-    public void setJid(Integer jid) {
-        this.jid = jid;
-    }
-
-    @Basic
-    @Column(name = "tid", nullable = true)
-    public Integer getTid() {
-        return tid;
-    }
-
-    public void setTid(Integer tid) {
-        this.tid = tid;
-    }
-
-    @Basic
-    @Column(name = "did", nullable = true)
-    public Integer getDid() {
-        return did;
-    }
-
-    public void setDid(Integer did) {
-        this.did = did;
-    }
-
     @OneToOne
     @JoinColumn(name = "pid", referencedColumnName = "pid")
     public Position getMyposition() {
@@ -288,5 +226,34 @@ public class Emp {
 
     public void setMydimission(Dimission mydimission) {
         this.mydimission = mydimission;
+    }
+
+    @Basic
+    @Column(name = "ezt", nullable = true, length = 255)
+    public String getEzt() {
+        return ezt;
+    }
+
+    public void setEzt(String ezt) {
+        this.ezt = ezt;
+    }
+
+    @OneToMany(mappedBy = "myexemp")
+    public List<Examine> getExaminelist() {
+        return examinelist;
+    }
+
+    public void setExaminelist(List<Examine> examinelist) {
+        this.examinelist = examinelist;
+    }
+
+    @Basic
+    @Column(name = "esex", nullable = true, length = 255)
+    public String getEsex() {
+        return esex;
+    }
+
+    public void setEsex(String esex) {
+        this.esex = esex;
     }
 }

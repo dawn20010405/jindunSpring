@@ -14,12 +14,15 @@
         <collection property="myexemp" ofType="com.demo.pojo.Emp">
             <id column="eid" property="eid"/>
             <result column="ename" property="ename"/>
+
         </collection>
+
     </resultMap>
 
 <!--    查询所有待审批 List<Examine> selectdsAll();-->
     <select id="selectdsAll" resultMap="shenpiResilt">
-        SELECT p.*,e.* from examine e LEFT JOIN emp p ON e.exuser=p.eid where e.extype = 0
+        SELECT e.exid,e.exdate,e.exuser,e.exstate,e.exyijian,e.wxwid,e.extype from examine e
+            LEFT JOIN emp p ON e.exuser=p.eid where e.extype = 0
     </select>
 
 <!--    查询所有通过 List<Examine> selectysAll();-->
@@ -27,6 +30,10 @@
         SELECT p.*,e.* from examine e LEFT JOIN emp p ON e.exuser=p.eid where e.extype = 1
     </select>
 
+<!--    跟据ID进行审批 Integer updategonggao(Date exdate,String exyijian,Integer extype,Integer wxwid);-->
+    <select id="updategonggao">
+        UPDATE examine e set e.exdate=#{exdate},e.exyijian=#{exyijian},e.extype=#{extype} where e.exstate=#{exstate} and e.wxwid=#{wxwid}
+    </select>
 
 
 </mapper>
