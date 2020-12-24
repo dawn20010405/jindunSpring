@@ -74,4 +74,13 @@ public class DgResumeSerivce {
             return -1;
         }
     }
+
+    /*
+     * @Author diga
+     * @Date 2020/12/24 21:54
+     * @Description 根据简历编号查询
+     */
+    public Resume getRsid(Integer rsid){
+       return mapper.getRsid(rsid);
+    }
 }

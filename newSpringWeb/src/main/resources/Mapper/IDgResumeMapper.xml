@@ -42,4 +42,8 @@
     <update id="updateRstype">
         update resume set rstype=0 where rsid=#{rsid}
     </update>
+    <!--根据简历编号查询-->
+    <select id="getRsid" resultType="com.demo.pojo.Resume">
+        select * from resume where rsid=#{rsid}
+    </select>
 </mapper>
