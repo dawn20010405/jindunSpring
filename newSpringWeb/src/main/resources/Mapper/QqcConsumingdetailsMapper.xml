@@ -16,4 +16,13 @@
             <result column="assetsname" property="assetsname"/>
         </association>
     </resultMap>
+    <insert id="insertOne" parameterType="com.demo.pojo.Consumingdetails">
+        insert into consumingdetails(conexasid, codename, codeempid, codedept, codetype, codeassetsid, codestatus, codestart, codesquantity)
+        values (#{exassets.exchangeassetsid},#{codename},#{emp.eid},#{codedept},#{codetype},#{assets.assetsid},#{codestatus},#{codestart},#{codesquantity})
+    </insert>
+    <select id="listByExid" resultMap="QqcChangeMap">
+        select * from consumingdetails c
+        left join assets a on c.codeassetsid=a.assetsid
+        where conexasid =#{exid}
+    </select>
 </mapper>

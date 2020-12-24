@@ -21,8 +21,26 @@ public class Exchangeassets {
     private List<Consumingdetails> codes;
     private Emp emp;
 
+    @Override
+    public String toString() {
+        return "Exchangeassets{" +
+                "exchangeassetsid=" + exchangeassetsid +
+                ", exchassetsname='" + exchassetsname + '\'' +
+                ", exasnum='" + exasnum + '\'' +
+                ", exastype='" + exastype + '\'' +
+                ", exasstatus='" + exasstatus + '\'' +
+                ", exasstart=" + exasstart +
+                ", exasreason='" + exasreason + '\'' +
+                ", exasfollow='" + exasfollow + '\'' +
+                ", exasback=" + exasback +
+                ", codes=" + codes +
+                ", emp=" + emp +
+                '}';
+    }
+
     @Id
     @Column(name = "exchangeassetsid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getExchangeassetsid() {
         return exchangeassetsid;
     }

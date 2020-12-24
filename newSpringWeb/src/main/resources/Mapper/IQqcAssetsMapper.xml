@@ -29,6 +29,11 @@
 
         order by assetsretime desc ,assetsstatus desc
     </select>
+    <select id="listSelectByType" resultMap="QqcsetMap">
+        select * from assets
+        where assetstype  like concat('',#{assetstype,jdbcType=VARCHAR},'%')
+        and assetsgstatus like concat('%',#{assetsgstatus,jdbcType=VARCHAR},'%')
+    </select>
     <insert id="insert" parameterType="com.demo.pojo.Assets">
         insert into assets(assetsnum, assetsname, assetstype, assetsquantity, assetsretime, assetsgstatus, assetsorivalue, assetsstatus)
         values (#{assetsnum}, #{assetsname}, #{assetstype}, #{assetsquantity}, #{assetsretime}, #{assetsgstatus}, #{assetsorivalue}, #{assetsstatus})
@@ -51,5 +56,9 @@
     <select id="countByStatus" resultMap="QqcsetMap">
         select * from assets
         where assetsstatus like concat('%',#{Status,jdbcType=VARCHAR},'%')
+    </select>
+    <select id="getByPk" resultMap="QqcsetMap">
+        select * from assets
+        where assetsid =#{assetsid}
     </select>
 </mapper>

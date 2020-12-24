@@ -60,9 +60,25 @@ public class QqcAssetsService {
             return false;
         }
     }
-
+    /**
+     * @Author: qqc on 2020/12/24 9:31
+     * @param : [status]
+     * @return : int
+     * @Description :统计某一种物品拥有得个数
+     */
     public int countByStatus(String status){
         List<Assets> list=iQqcAssetsMapper.countByStatus(status);
         return list.size();
+    }
+
+    /**
+     * @Author: qqc on 2020/12/24 14:38
+     * @param : [assetstype]
+     * @return : java.util.List<com.demo.pojo.Assets>
+     * @Description :根据资产类型查询未领用的物资
+     */
+    public List<Assets> listSelectByType(String assetstype){
+
+        return iQqcAssetsMapper.listSelectByType(assetstype,"未领用");
     }
 }

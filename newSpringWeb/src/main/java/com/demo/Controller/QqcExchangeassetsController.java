@@ -40,18 +40,31 @@ public class QqcExchangeassetsController {
         }
     }
 
+    /**
+     * @Author: qqc on 2020/12/24 20:37
+     * @param : [exchangeassetsid]
+     * @return : com.demo.pojo.MyResult
+     * @Description : 根据主键查询单个交换记录
+     */
     @RequestMapping("/findone")
     public MyResult getSelectByPk(@RequestParam("exchangeassetsid")Integer exchangeassetsid){
         try{
-            return MyResult.returnObj(qqcExchangeassetsService.getSelectByPk(exchangeassetsid));
+
+           return  MyResult.returnObj(qqcExchangeassetsService.getSelectByPk(exchangeassetsid)) ;
         }catch (Exception e){
             e.printStackTrace();
             return MyResult.ERROR("查询失败！");
         }
     }
-
+    /**
+     * @Author: qqc on 2020/12/24 20:38
+     * @param : [exchangeassets]
+     * @return : com.demo.pojo.MyResult
+     * @Description : 领用记录添加
+     */
     @RequestMapping("/addone")
     public MyResult insertOne(@RequestBody Exchangeassets exchangeassets){
+
         try{
             qqcExchangeassetsService.insertOne(exchangeassets);
             return MyResult.SUCCESS;
