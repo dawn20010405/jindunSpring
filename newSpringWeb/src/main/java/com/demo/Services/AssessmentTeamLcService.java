@@ -5,6 +5,8 @@ package com.demo.Services;/**
  */
 
 import com.demo.model.Mapper.IAssessmentTeamLcMapper;
+import com.demo.model.Mapper.IQualitativeLcMapper;
+import com.demo.model.Mapper.IRationLcMapper;
 import com.demo.pojo.Achievementslc;
 import com.demo.pojo.AssessmentTeamLc;
 import com.demo.pojo.QualitativeLc;
@@ -25,6 +27,10 @@ import java.util.List;
 public class AssessmentTeamLcService {
     @Autowired
     IAssessmentTeamLcMapper am;
+    @Autowired
+    IRationLcMapper rm;
+    @Autowired
+    IQualitativeLcMapper qm;
     /*
      * @Author lichao
      * @Description //新增一个被考核人
@@ -61,7 +67,7 @@ public class AssessmentTeamLcService {
      * @return 
             **/
     public List<RationLc> aa(Integer atid){
-        return am.aa(atid);
+        return rm.aa(atid);
     }
     /*
      * @Author lichao
@@ -71,7 +77,7 @@ public class AssessmentTeamLcService {
      * @return
             **/
     public List<QualitativeLc> bb(Integer atid){
-        return am.bb(atid);
+        return qm.bb(atid);
     }
 
     /*
@@ -103,5 +109,33 @@ public class AssessmentTeamLcService {
         } catch (Exception e) {
             return -1;
         }
+    }
+    /*
+     * @Author lichao
+     * @Description //修改总分
+     * @Date 9:51 2020/12/24
+     * @Param
+     * @return
+            **/
+    public Integer updataat(Integer scoreeid,String acopinion,Integer actotal,Integer atid){
+        try {
+            am.updataat(scoreeid, acopinion, actotal, atid);
+            return 1;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+    /*
+     * @Author lichao
+     * @Description //查询我参与的绩效活动
+     * @Date 16:06 2020/12/24
+     * @Param
+     * @return
+            **/
+    public PageInfo<AssessmentTeamLc> byatid(Integer no,Integer ateid){
+        PageHelper.startPage(no,3);
+        List<AssessmentTeamLc> list=am.byatid(ateid);
+        PageInfo<AssessmentTeamLc> info=new PageInfo<>(list);
+        return info;
     }
 }

@@ -24,6 +24,18 @@ public class AppealFormLc {
     private String afadopt;
     private AssessmentTeamLc aflclone;
 
+    @Override
+    public String toString() {
+        return "AppealFormLc{" +
+                "afid=" + afid +
+                ", afreason='" + afreason + '\'' +
+                ", aftime=" + aftime +
+                ", oldrascore=" + oldrascore +
+                ", newrascore=" + newrascore +
+                ", afadopt='" + afadopt + '\'' +
+                '}';
+    }
+
     @Id
     @Column(name = "afid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

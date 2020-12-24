@@ -53,13 +53,13 @@
        select * from assessment_team_lc at  join achievementslc ac on at.acid = ac.acid join emp e on at.ateid = e.eid where ac.acid=#{acid} order by ac.acend desc
     </select>
 <!--    查询定量表-->
-    <select id="aa" resultMap="aclt">
-        select * from assessment_team_lc at   join ration_lc rl on at.atid = rl.atid where at.atid=#{atid}
-    </select>
+<!--    <select id="aa" resultMap="aclt">-->
+<!--        select * from assessment_team_lc at   join ration_lc rl on at.atid = rl.atid where at.atid=#{atid}-->
+<!--    </select>-->
 <!--    查询定性表-->
-    <select id="bb" resultMap="aclt">
-        select * from assessment_team_lc at join qualitative_lc ql on at.atid = ql.atid where at.atid=#{atid}
-    </select>
+<!--    <select id="bb" resultMap="aclt">-->
+<!--        select * from assessment_team_lc at join qualitative_lc ql on at.atid = ql.atid where at.atid=#{atid}-->
+<!--    </select>-->
     
 <!--    新增定量表-->
     <insert id="addration" parameterType="com.demo.pojo.RationLc">
@@ -69,4 +69,12 @@
     <insert id="addqualitative" parameterType="com.demo.pojo.QualitativeLc">
         insert into qualitative_lc values(null,#{qu.quname},#{qu.quscore},#{qu.quaclcone.atid},#{qu.quother})
     </insert>
+<!--    修改总分-->
+    <update id="updataat" parameterType="com.demo.pojo.AssessmentTeamLc">
+        update assessment_team_lc set scoreeid=#{scoreeid},acopinion=#{acopinion},actotal=#{actotal} where atid=#{atid}
+    </update>
+<!--查询我参与的绩效活动-->
+    <select id="byatid" resultMap="aclt">
+        select * from assessment_team_lc at join achievementslc ac on at.acid = ac.acid where at.ateid=#{ateid}
+    </select>
 </mapper>

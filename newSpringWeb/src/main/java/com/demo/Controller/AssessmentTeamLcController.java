@@ -64,6 +64,7 @@ public class AssessmentTeamLcController {
             **/
     @RequestMapping("/aa")
     public List<RationLc> a1(Integer atid){
+        System.out.println(atid);
         return as.aa(atid);
     }
     /*
@@ -84,7 +85,7 @@ public class AssessmentTeamLcController {
      * @Param
      * @return
             **/
-    @RequestMapping("/addration/{atid}")
+    @PostMapping("/addration/{atid}")
     public Integer addration(@RequestBody Integer init[],@PathVariable("atid") Integer atid){
         RationLc ra=new RationLc();
         String data[] = new String[3]; /*开辟了一个长度为3的数组*/
@@ -92,14 +93,13 @@ public class AssessmentTeamLcController {
         data[1] = "月度工作量"; // 第二个元素
         data[2] = "上级交办其他事项"; // 第三个元素
 
-        for(int x:init){
+        for (int i=0;i<init.length;i++){
         AssessmentTeamLc assessmentTeamLc=new AssessmentTeamLc();
         assessmentTeamLc.setAtid(atid);
         ra.setAtlcraone(assessmentTeamLc);
-            for (String s : data) {
-                ra.setRaname(s);
-            }
+        ra.setRaname(data[i]);
         ra.setRaothr("暂无");
+        ra.setRascore(init[i]);
         as.addration(ra);
         }
         return  1;
@@ -111,7 +111,7 @@ public class AssessmentTeamLcController {
      * @Param
      * @return
             **/
-    @RequestMapping("/addqualitative/{atid}")
+    @PostMapping("/addqualitative/{atid}")
     public Integer addqualitative(@RequestBody Integer init2[],@PathVariable("atid") Integer atid){
         QualitativeLc qu=new QualitativeLc();
         String data[] = new String[3]; /*开辟了一个长度为3的数组*/
@@ -119,16 +119,39 @@ public class AssessmentTeamLcController {
         data[1] = "团队协作性"; // 第二个元素
         data[2] = "工作态度"; // 第三个元素
 
-        for(int x:init2){
-            AssessmentTeamLc assessmentTeamLc=new AssessmentTeamLc();
-            assessmentTeamLc.setAtid(atid);
-            qu.setQuaclcone(assessmentTeamLc);
-            for (String s : data) {
-                qu.setQuname(s);
-            }
-            qu.setQuother("暂无");
-            as.addqualitative(qu);
+        for (int i=0;i<init2.length;i++){
+         AssessmentTeamLc assessmentTeamLc=new AssessmentTeamLc();
+         assessmentTeamLc.setAtid(atid);
+         qu.setQuaclcone(assessmentTeamLc);
+         qu.setQuscore(init2[i]);
+         qu.setQuname(data[i]);
+         qu.setQuother("暂无");
+         as.addqualitative(qu);
         }
+
         return  1;
+    }
+    /*
+     * @Author lichao
+     * @Description //修改总分
+     * @Date 9:53 2020/12/24
+     * @Param
+     * @return
+            **/
+    @RequestMapping("/updaatlc")
+    public Integer updaatlc(Integer scoreeid,String acopinion,Integer actotal,Integer atid){
+        System.out.println(scoreeid);
+        return as.updataat(scoreeid, acopinion, actotal, atid);
+    }
+    /*
+     * @Author lichao
+     * @Description //查询我参与的绩效活动
+     * @Date 16:07 2020/12/24
+     * @Param
+     * @return
+            **/
+    @RequestMapping("/byatid")
+    public PageInfo<AssessmentTeamLc> byatid(Integer no,Integer ateid){
+        return as.byatid(no,ateid);
     }
 }

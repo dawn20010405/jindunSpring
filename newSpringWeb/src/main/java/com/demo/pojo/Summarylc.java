@@ -21,6 +21,16 @@ public class Summarylc {
     private String suother;
     private AssessmentTeamLc summarylcatone;
 
+    @Override
+    public String toString() {
+        return "Summarylc{" +
+                "suid=" + suid +
+                ", suneirong='" + suneirong + '\'' +
+                ", sutime=" + sutime +
+                ", suother='" + suother + '\'' +
+                '}';
+    }
+
     @Id
     @Column(name = "suid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

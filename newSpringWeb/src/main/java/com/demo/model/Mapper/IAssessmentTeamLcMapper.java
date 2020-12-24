@@ -39,22 +39,6 @@ public interface IAssessmentTeamLcMapper {
     List<AssessmentTeamLc> onetomanyac(Integer acid);
     /*
      * @Author lichao
-     * @Description //查询定量表
-     * @Date 17:09 2020/12/23
-     * @Param
-     * @return
-            **/
-     List<RationLc> aa(Integer atid);
-    /*
-     * @Author lichao
-     * @Description //询定性表
-     * @Date 17:09 2020/12/23
-     * @Param
-     * @return
-            **/
-    List<QualitativeLc> bb(Integer atid);
-    /*
-     * @Author lichao
      * @Description //新增定量表
      * @Date 21:25 2020/12/23
      * @Param
@@ -69,4 +53,20 @@ public interface IAssessmentTeamLcMapper {
      * @return
             **/
     Integer addqualitative(@Param("qu") QualitativeLc qu);
+    /*
+     * @Author lichao
+     * @Description //修改总分
+     * @Date 9:49 2020/12/24
+     * @Param
+     * @return
+            **/
+    Integer updataat(Integer scoreeid,String acopinion,Integer actotal,Integer atid);
+    /*
+     * @Author lichao
+     * @Description //查询我参与的绩效活动
+     * @Date 16:05 2020/12/24
+     * @Param  
+     * @return 
+            **/
+    List<AssessmentTeamLc> byatid(Integer ateid);
 }
