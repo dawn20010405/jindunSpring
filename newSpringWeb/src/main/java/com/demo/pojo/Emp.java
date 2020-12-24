@@ -220,14 +220,14 @@ public class Emp {
         this.examines = examines;
     }
 
-    @OneToMany(mappedBy = "myemp")
-    public List<Examine> getExaminelist() {
-        return examinelist;
-    }
-
-    public void setExaminelist(List<Examine> examinelist) {
-        this.examinelist = examinelist;
-    }
+//    @OneToMany(mappedBy = "myemp")
+//    public List<Examine> getExaminelist() {
+//        return examinelist;
+//    }
+//
+//    public void setExaminelist(List<Examine> examinelist) {
+//        this.examinelist = examinelist;
+//    }
 
 
 
