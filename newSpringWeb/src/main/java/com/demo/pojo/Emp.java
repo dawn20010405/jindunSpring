@@ -40,6 +40,18 @@ public class Emp {
     private Just myjust;
     private Dimission mydimission;
 
+    @Override
+    public String toString() {
+        return "Emp{" +
+                "eid=" + eid +
+                ", ename='" + ename + '\'' +
+                ", erutime=" + erutime +
+                ", eiphone='" + eiphone + '\'' +
+                ", epass='" + epass + '\'' +
+
+                '}';
+    }
+
     @Id
     @Column(name = "eid", nullable = false)
     public Integer getEid() {
@@ -216,6 +228,9 @@ public class Emp {
     public void setExaminelist(List<Examine> examinelist) {
         this.examinelist = examinelist;
     }
+
+
+
 
     @OneToOne
     @JoinColumn(name = "pid", referencedColumnName = "pid")

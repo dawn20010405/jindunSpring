@@ -39,10 +39,6 @@
                 <result column="eiphone" property="eiphone"/>
                 <result column="epass" property="epass"/>
                 <result column="erutime" property="erutime"/>
-                <result column="pid" property="pid"/>
-                <result column="jid" property="jid"/>
-                <result column="tid" property="tid"/>
-                <result column="did" property="did"/>
             </association>
             <collection property="atllist" ofType="com.demo.pojo.AssessmentTeamLc">
                 <id column="atid" property="atid"/>
@@ -53,10 +49,14 @@
         </resultMap>
 <!--    绩效和参与人，发布人-->
     <select id="selectAc" resultMap="sss">
-       select * from test.achievementslc ac join test.assessment_team_lc at on ac.acid = at.acid join test.emp  e on ac.eid = e.eid where ac.fachievement=0 order by ac.acend desc
+      select * from test.achievementslc ac join test.emp  e on ac.eid = e.eid where ac.fachievement=0 order by ac.acend desc
     </select>
 <!--    like查询-->
     <select id="likeAc" resultMap="sss">
-        select * from test.achievementslc ac join test.assessment_team_lc at on ac.acid = at.acid join test.emp  e on ac.eid = e.eid where ac.acname like #{acname} order by ac.acend desc
+        select * from test.achievementslc ac join test.emp  e on ac.eid = e.eid where ac.acname like #{acname} order by ac.acend desc
     </select>
+<!--    新增一个绩效活动-->
+    <insert id="addaclc" parameterType="Achievementslc">
+        insert into achievementslc values(NULL,#{ac.acname},#{ac.acobjectives},#{ac.actype},#{ac.acyear},#{ac.achalf},#{ac.starttime},#{ac.endtime},#{ac.empacone.eid},#{ac.acend},#{ac.fachievement},#{ac.fanonymous},#{ac.startup},#{ac.feedbacklc},#{ac.acother})
+    </insert>
 </mapper>

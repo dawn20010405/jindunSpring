@@ -33,6 +33,26 @@ public class Achievementslc {
     private Emp empacone;
     private List<AssessmentTeamLc> atllist;
 
+    @Override
+    public String toString() {
+        return "Achievementslc{" +
+                "acid=" + acid +
+                ", acname='" + acname + '\'' +
+                ", acobjectives='" + acobjectives + '\'' +
+                ", actype=" + actype +
+                ", acyear=" + acyear +
+                ", achalf=" + achalf +
+                ", starttime=" + starttime +
+                ", endtime=" + endtime +
+                ", acend=" + acend +
+                ", fachievement=" + fachievement +
+                ", fanonymous=" + fanonymous +
+                ", startup=" + startup +
+                ", feedbacklc=" + feedbacklc +
+                ", acother='" + acother + '\'' +
+                '}';
+    }
+
     @Id
     @Column(name = "acid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

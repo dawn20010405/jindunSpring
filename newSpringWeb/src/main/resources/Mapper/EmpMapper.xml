@@ -24,10 +24,6 @@
         <result column="eiphone" property="eiphone"/>
         <result column="epass" property="epass"/>
         <result column="erutime" property="erutime"/>
-        <result column="pid" property="pid"/>
-        <result column="jid" property="jid"/>
-        <result column="tid" property="tid"/>
-        <result column="did" property="did"/>
     </resultMap>
 <!--    AchievementslcService里面使用了-->
     <select id="empbyid" resultMap="emp">
