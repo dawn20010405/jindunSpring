@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IZzyexamineMapper">
+    <resultMap id="shenpiResilt" type="com.demo.pojo.Examine">
+        <id column="exid" property="exid"/>
+        <result column="exstate" property="exstate"/>
+        <result column="wxwid" property="wxwid"/>
+        <result column="exdate" property="exdate"/>
+        <result column="exyijian" property="exyijian"/>
+        <result column="extype" property="extype"/>
+
+        <collection property="myexemp" ofType="com.demo.pojo.Emp">
+            <id column="eid" property="eid"/>
+            <result column="ename" property="ename"/>
+
+        </collection>
+
+    </resultMap>
+
+<!--    查询所有待审批 List<Examine> selectdsAll();-->
+    <select id="selectdsAll" resultMap="shenpiResilt">
+        SELECT e.exstate,e.wxwid,e.extype from examine e WHERE e.extype = 0
+    </select>
+
+<!--    查询所有通过 List<Examine> selectysAll();-->
+    <select id="selectysAll" resultMap="shenpiResilt">
+        SELECT e.exstate,e.wxwid,e.extype from examine e WHERE e.extype = 1
+    </select>
+
+    <!--    查询所有未通过 List<Examine> selectwtgAll();-->
+    <select id="selectwtgAll" resultMap="shenpiResilt">
+        SELECT e.exstate,e.wxwid,e.extype from examine e WHERE e.extype = 2
+    </select>
+
+<!--    跟据ID进行审批 Integer updategonggao(Date exdate,String exyijian,Integer extype,Integer wxwid);-->
+    <select id="updategonggao">
+        UPDATE examine e set e.exdate=#{exdate},e.exyijian=#{exyijian},e.extype=#{extype} where e.exstate=#{exstate} and e.wxwid=#{wxwid}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IDgInterviewMapper">
+    <resultMap id="BaseResultMap" type="com.demo.pojo.Interview">
+        <id column="iid" property="iid"/>
+        <result column="intype" property="intype"/>
+        <result column="intime" property="intime"/>
+        <result column="inaddress" property="inaddress"/>
+        <association property="resu" javaType="com.demo.pojo.Resume">
+            <id column="rsid" property="rsid"/>
+            <result column="rname" property="rname"/>
+            <result column="rsex" property="rsex"/>
+            <result column="rbirthday" property="rbirthday"/>
+            <result column="workyear" property="workyear"/>
+            <result column="education" property="education"/>
+            <result column="createdate" property="createdate"/>
+            <association property="recru" javaType="com.demo.pojo.Recruitment">
+                <id column="rid" property="rid"/>
+                <result column="hopetime" property="hopetime"/>
+                <result column="peopcout" property="peopcout"/>
+                <result column="recrudemand" property="recrudemand"/>
+                <result column="rcreate" property="rcreate"/>
+                <association property="posi" javaType="com.demo.pojo.Position">
+                    <id column="pid" property="pid"/>
+                    <result column="poname" property="poname"/>
+                    <result column="ptype" property="ptype"/>
+                </association>
+            </association>
+        </association>
+    </resultMap>
+    <!--根据简历新增面试-->
+    <insert id="insertInterView">
+        insert into interview value(null,#{intype},#{intime},#{inaddress},#{rsid})
+    </insert>
+    <!--查询面试-->
+    <select id="listInterViewAll" resultMap="BaseResultMap">
+        select * from interview i
+        left join resume s on i.rsid=s.rsid
+        left join recruitment r on s.rid=r.rid
+        left join position p on r.pid=p.pid
+        order by i.iid desc
+    </select>
+</mapper>

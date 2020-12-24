@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IQqcExchangeassetsMapper">
+    <resultMap id="QqcChangeMap" type="com.demo.pojo.Exchangeassets">
+        <id column="exchangeassetsid" property="exchangeassetsid"/>
+        <result column="exasback" property="exasback"/>
+        <result column="exasfollow" property="exasfollow"/>
+        <result column="exasnum" property="exasnum"/>
+        <result column="exasstatus" property="exasstatus"/>
+        <result column="exasreason" property="exasreason"/>
+        <result column="exasstart" property="exasstart"/>
+        <result column="exastype" property="exastype"/>
+        <result column="exchassetsname" property="exchassetsname"/>
+        <!--<collection property="codes" ofType="com.demo.pojo.Consumingdetails">
+            <id column="consumingdetailsid" property="consumingdetailsid"/>
+            <result column="codedept" property="codedept"/>
+            <result column="codename" property="codename"/>
+            <result column="codestart" property="codestart"/>
+            <result column="codestatus" property="codestatus"/>
+            <result column="codetype" property="codetype"/>
+            <association property="assets" javaType="com.demo.pojo.Assets">
+                <id column="assetsid" property="assets.assetsid"/>
+                <result column="assetsname" property="assets.assetsname"/>
+            </association>
+        </collection>-->
+        <association property="emp" javaType="com.demo.pojo.Emp">
+            <id column="eid" property="eid"/>
+            <result column="ename" property="ename"/>
+        </association>
+    </resultMap>
+    <resultMap id="QqcChangeMapTwo" type="com.demo.pojo.Exchangeassets">
+        <id column="exchangeassetsid" property="exchangeassetsid"/>
+        <result column="exasback" property="exasback"/>
+        <result column="exasfollow" property="exasfollow"/>
+        <result column="exasnum" property="exasnum"/>
+        <result column="exasstatus" property="exasstatus"/>
+        <result column="exasreason" property="exasreason"/>
+        <result column="exasstart" property="exasstart"/>
+        <result column="exastype" property="exastype"/>
+        <result column="exchassetsname" property="exchassetsname"/>
+        <association property="emp" javaType="com.demo.pojo.Emp">
+            <id column="eid" property="eid"/>
+            <result column="ename" property="ename"/>
+        </association>
+        <collection property="codes" ofType="com.demo.pojo.Consumingdetails">
+            <id column="consumingdetailsid" property="consumingdetailsid"/>
+            <result column="codedept" property="codedept"/>
+            <result column="codename" property="codename"/>
+            <result column="codestart" property="codestart"/>
+            <result column="codestatus" property="codestatus"/>
+            <result column="codetype" property="codetype"/>
+            <result column="codesquantity" property="codesquantity"/>
+            <association property="assets" javaType="com.demo.pojo.Assets">
+                <id column="assetsid" property="assetsid"/>
+                <result column="assetsname" property="assetsname"/>
+            </association>
+        </collection>
+    </resultMap>
+    <select id="listSelectAll" resultMap="QqcChangeMap">
+        select * from exchangeassets eca
+        left join emp e on eca.exasempid=e.eid
+        <where>
+            <if test="exasnum != null and exasnum != ''">
+                and exasnum like concat('%',#{exasnum,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="exastype !=null and exastype!= ''">
+                and exastype like concat('%',#{exastype,jdbcType=VARCHAR},'%')
+            </if>
+            and exasempid = #{empid}
+        </where>
+
+    </select>
+    <select id="getSelectByPk" resultMap="QqcChangeMapTwo">
+        select * from exchangeassets ex
+        left join consumingdetails code on ex.exchangeassetsid=code.conexasid
+        left join assets a on code.conexasid=a.assetsid
+        where exchangeassetsid =#{exid}
+    </select>
+    <insert id="insertone" useGeneratedKeys="true" keyProperty="exchangeassetsid" parameterType="com.demo.pojo.Exchangeassets">
+        insert into exchangeassets(exchassetsname,exasnum,exastype,exasstatus,exasstart,exasreason,exasfollow,exasback,exasempid)
+        values (#{exchassetsname},#{exasnum},#{exastype},#{exasstatus},#{exasstart},#{exasreason},#{exasfollow},#{exasback},#{emp.eid})
+    </insert>
+</mapper>

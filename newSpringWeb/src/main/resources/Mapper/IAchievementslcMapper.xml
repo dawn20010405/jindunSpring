@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IAchievementslcMapper">
+<!--     private Integer acid;
+    private String acname;
+    private String acobjectives;
+    private Integer actype;
+    private Integer acyear;
+    private Integer achalf;
+    private Date starttime;
+    private Date endtime;
+    private Date acend;
+    private Integer fachievement;
+    private Integer fanonymous;
+    private Integer startup;
+    private Integer feedbacklc;
+    private String acother;
+    private Emp empacone;-->
+        <resultMap id="sss" type="com.demo.pojo.Achievementslc">
+            <id column="acid" property="acid"/>
+            <result column="acname" property="acname"/>
+            <result column="acobjectives" property="acobjectives"/>
+            <result column="actype" property="actype"/>
+            <result column="acyear" property="acyear"/>
+            <result column="achalf" property="achalf"/>
+            <result column="starttime" property="starttime"/>
+            <result column="endtime" property="endtime"/>
+            <result column="acend" property="acend"/>
+            <result column="fachievement" property="fachievement"/>
+            <result column="fanonymous" property="fanonymous"/>
+            <result column="startup" property="startup"/>
+            <result column="feedbacklc" property="feedbacklc"/>
+            <result column="acother" property="acother"/>
+            <association property="empacone" javaType="com.demo.pojo.Emp">
+                <id column="eid" property="eid"/>
+                <result column="ename" property="ename"/>
+                <result column="eiphone" property="eiphone"/>
+                <result column="epass" property="epass"/>
+                <result column="erutime" property="erutime"/>
+            </association>
+            <collection property="atllist" ofType="com.demo.pojo.AssessmentTeamLc">
+                <id column="atid" property="atid"/>
+                <result column="" property="scoreeid"/>
+                <result column="" property="acopinion"/>
+                <result column="" property="actotal"/>
+            </collection>
+        </resultMap>
+<!--    绩效和参与人，发布人-->
+    <select id="selectAc" resultMap="sss">
+      select * from achievementslc ac join emp  e on ac.eid = e.eid where ac.fachievement=0 order by ac.acend desc
+    </select>
+<!--    like查询-->
+    <select id="likeAc" resultMap="sss">
+        select * from achievementslc ac join emp  e on ac.eid = e.eid where ac.acname like #{acname} order by ac.acend desc
+    </select>
+<!--    新增一个绩效活动-->
+    <insert id="addaclc" parameterType="Achievementslc">
+        insert into achievementslc values(NULL,#{ac.acname},#{ac.acobjectives},#{ac.actype},#{ac.acyear},#{ac.achalf},#{ac.starttime},#{ac.endtime},#{ac.empacone.eid},#{ac.acend},#{ac.fachievement},#{ac.fanonymous},#{ac.startup},#{ac.feedbacklc},#{ac.acother})
+    </insert>
+</mapper>

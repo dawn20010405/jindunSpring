@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IPxyempMapper">
+    <resultMap id="resultemp" type="com.demo.pojo.Emp">
+        <id property="eid" column="eid"/>
+        <result property="ename" column="ename"/>
+        <result property="pcolour" column="pcolour"/>
+        <result property="erutime" column="erutime"/>
+        <result property="eiphone" column="eiphone"/>
+        <result property="epass" column="epass"/>
+        <result property="ezt" column="ezt"/>
+        <result property="esex" column="esex"/>
+        <!--岗位表-->
+        <association property="myposition" javaType="com.demo.pojo.Position">
+            <id property="pid" column="pid"/>
+            <result property="poname" column="poname"/>
+            <association property="dept" javaType="com.demo.pojo.Dept">
+                <id property="did" column="did"/>
+                <result property="dname" column="dname"/>
+            </association>
+        </association>
+        <!--转正表-->
+        <association property="myjust" javaType="com.demo.pojo.Just">
+            <id property="jid" column="jid"/>
+            <result property="justtime" column="justtime"/>
+            <result property="jzong" column="jzong"/>
+            <result property="jsehngpi" column="jsehngpi"/>
+        </association>
+        <!--离职表-->
+        <association property="mydimission" javaType="com.demo.pojo.Dimission">
+            <id property="dimid" column="dimid"/>
+            <result property="dimissiontime" column="dimissiontime"/>
+        </association>
+    </resultMap>
+    <select id="listselectemppage" resultMap="resultemp">
+        select * from emp e
+        inner join position p on p.pid=e.pid
+        inner join dept d on p.did = d.did
+        <where>
+            <if test="eid!=null and eid!=''">
+                and e.eid=#{eid}
+            </if>
+            <if test="ename!=null and ename!=''">
+                and e.ename like concat('%',#{ename},'%')
+            </if>
+            <if test="eiphone!=null and eiphone!=''">
+                and e.eiphone=#{eiphone}
+            </if>
+        </where>
+    </select>
+    <select id="listempselect" resultMap="resultemp">
+        select * from emp e where e.ezt='实习'
+    </select>
+    <select id="listempselect2" resultMap="resultemp">
+        select * from emp e
+    </select>
+    <select id="listempselectByeid" resultMap="resultemp">
+        select * from emp e
+        inner join position p on p.pid=e.pid
+        inner join dept d on p.did=d.did
+        where e.eid=#{eid}
+    </select>
+    <update id="updateempbyeid" parameterType="com.demo.pojo.Emp">
+        update emp e set e.ezt='转正审核中' where e.eid=#{eid}
+    </update>
+    <update id="updateempPidbyeid" parameterType="com.demo.pojo.Emp">
+        update emp e set e.pid=#{pid} where e.eid=#{eid}
+    </update>
+    <update id="updateempeqianyuebyeid" parameterType="com.demo.pojo.Emp">
+        update emp e set e.eqianyue=1 where e.eid=#{eid}
+    </update>
+
+
+    <!--    左增源  员工状态修改 Integer updateempzet(String zet, Integer eid);-->
+    <update id="updateempzet">
+        UPDATE emp e set e.ezt = #{ezt} where e.eid = #{eid}
+    </update>
+
+    <insert id="insertEmp">
+        insert into emp value(null,#{ename},#{erutime},#{eiphone},'123456','实习',#{esex})
+    </insert>
+
+</mapper>

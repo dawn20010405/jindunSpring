@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IPxyDimissiontMapper">
+    <resultMap id="resultdimission" type="com.demo.pojo.Dimission">
+        <!--离职表-->
+        <id property="dimid" column="dimid"/>
+        <result property="dimissiontime" column="dimissiontime"/>
+        <result property="dshenpi" column="dshenpi"/>
+        <result property="dzong" column="dzong"/>
+        <!--员工表-->
+        <association property="myemp" javaType="com.demo.pojo.Emp">
+            <id property="eid" column="eid"/>
+            <result property="ename" column="ename"/>
+            <result property="erutime" column="erutime"/>
+            <result property="eiphone" column="eiphone"/>
+            <result property="epass" column="epass"/>
+            <result property="ezt" column="ezt"/>
+            <result property="esex" column="esex"/>
+            <!--岗位表-->
+            <association property="myposition" javaType="com.demo.pojo.Position">
+                <id property="pid" column="pid"/>
+                <result property="poname" column="poname"/>
+                <association property="dept" javaType="com.demo.pojo.Dept">
+                    <id property="did" column="did"/>
+                    <result property="dname" column="dname"/>
+                </association>
+            </association>
+
+        </association>
+
+    </resultMap>
+    <!--查询全部-->
+    <select id="listselectdimission" resultMap="resultdimission">
+        select * from dimission dim
+        inner join emp e on dim.eid=e.eid
+        inner join position p on p.pid=e.pid
+        inner join dept d on d.did=p.did
+        <where>
+            <if test="eid!=null and eid!=''">
+                and e.eid=#{eid}
+            </if>
+            <if test="dimid!=null and dimid!=''">
+                and dim.dimid =#{dimid}
+            </if>
+
+        </where>
+    </select>
+    <!--新增离职表-->
+    <insert id="Insertdimission" parameterType="com.demo.pojo.Dimission">
+        insert into dimission(dimissiontime,dzong,eid)
+        values (#{dimissiontime},#{dzong},#{eid})
+    </insert>
+    <select id="selectDimissionzui" resultType="com.demo.pojo.Dimission">
+        Select  * from dimission d order by d.dimid desc limit 1
+    </select>
+
+
+
+    <!--    左增源  离职表待审批查询 List<Dimission> listselecetlzall();-->
+    <select id="listselecetlzall" resultMap="resultdimission">
+        SELECT d.dimid,d.dimissiontime,d.dshenpi,d.dzong,e.eid,e.ename from dimission d
+				LEFT JOIN emp e ON d.eid = e.eid where d.dshenpi = 0
+    </select>
+    <!--    左增源  根据ID修改离职表 Integer updatelizhiId(Integer dshenpi,Integer dimid);-->
+    <update id="updatelizhiId">
+        UPDATE dimission d set d.dshenpi = #{dshenpi} where d.dimid = #{dimid}
+    </update>
+
+</mapper>

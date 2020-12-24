@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IZzygonggaoMapper">
+    <resultMap id="gonggaoiResilt" type="com.demo.pojo.Notification">
+        <id column="noid" property="noid"/>
+        <result column="noname" property="noname"/>
+        <result column="nofenlei" property="nofenlei"/>
+        <result column="notype" property="notype"/>
+        <result column="zhengwen" property="zhengwen"/>
+        <result column="nodzdate" property="nodzdate"/>
+
+        <collection property="mynoemp" ofType="com.demo.pojo.Emp">
+            <id column="eid" property="eid"/>
+            <result column="ename" property="ename"/>
+        </collection>
+
+    </resultMap>
+<!--    查询所有公告表 List<Notification> selectggAll();-->
+    <select id="selectggAll" resultMap="gonggaoiResilt">
+        SELECT n.noid,n.noname,n.nofenlei,n.notype,n.zhengwen,n.nodzdate,e.ename from notification n
+				LEFT JOIN emp e ON n.empno = e.eid where n.notype = '0'
+    </select>
+
+<!--    根据ID查询 Integer getselectid(String wxwid);-->
+    <select id="getselectid" resultMap="gonggaoiResilt">
+        SELECT n.noid,n.noname,n.nofenlei,n.notype,n.zhengwen,n.nodzdate,e.ename
+               from notification n LEFT JOIN emp e ON e.eid = n.empno where n.noid = #{wxwid}
+    </select>
+
+<!--    根据ID修改状态 Integer updategonggao(Integer notype,Integer noid);-->
+    <update id="updategonggao">
+        UPDATE notification n set n.notype = #{notype} where n.noid = #{noid}
+    </update>
+
+</mapper>

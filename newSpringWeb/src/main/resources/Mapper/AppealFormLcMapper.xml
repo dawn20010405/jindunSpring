@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IAppealFormLcMapper">
+<!--     private Integer afid;
+    private String afreason;
+    private Date aftime;
+    private Integer oldrascore;
+    private Integer newrascore;
+    private String afadopt;
+    private AssessmentTeamLc aflclone;-->
+    <resultMap id="add" type="com.demo.pojo.AppealFormLc">
+        <id column="afid" property="afid"/>
+        <result column="afreason" property="afreason"/>
+        <result column="aftime" property="aftime"/>
+        <result column="oldrascore" property="oldrascore"/>
+        <result column="newrascore" property="newrascore"/>
+        <result column="afadopt" property="afadopt"/>
+        <association property="aflclone" javaType="com.demo.pojo.AssessmentTeamLc">
+            <id column="atid" property="atid"/>
+            <result column="scoreeid" property="scoreeid"/>
+            <result column="acopinion" property="acopinion"/>
+            <result column="actotal" property="actotal"/>
+        </association>
+    </resultMap>
+    <!--    新增一个申诉表-->
+    <insert id="addAppealFormLc" parameterType="com.demo.pojo.AppealFormLc">
+        insert into appeal_form_lc values (null,#{af.afreason},#{af.aflclone.atid},#{af.aftime},#{af.oldrascore},#{af.newrascore},#{af.afadopt});
+    </insert>
+<!--查询所有的申诉表-->
+    <select id="tu" resultMap="add">
+        select * from appeal_form_lc af join assessment_team_lc at on af.atid = at.atid
+    </select>
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IPxyTransferMapper">
+    <resultMap id="resulttransfer" type="com.demo.pojo.Transfer">
+        <!--调岗表-->
+        <id property="tids" column="tids"/>
+        <result property="transfertime" column="transfertime"/>
+        <result property="tzong" column="tzong"/>
+        <result property="jsehngpi" column="jsehngpi"/>
+        <result property="tsehngpi" column="tsehngpi"/>
+        <!--员工表-->
+        <association property="myemp" javaType="com.demo.pojo.Emp">
+            <id property="eid" column="eid"/>
+            <result property="ename" column="ename"/>
+            <result property="erutime" column="erutime"/>
+            <result property="eiphone" column="eiphone"/>
+            <result property="epass" column="epass"/>
+            <result property="ezt" column="ezt"/>
+            <result property="esex" column="esex"/>
+        </association>
+        <!--岗位表-->
+        <association property="myposition" javaType="com.demo.pojo.Position">
+            <id property="pid" column="pid"/>
+            <result property="poname" column="poname"/>
+            <association property="dept" javaType="com.demo.pojo.Dept">
+                <id property="did" column="did"/>
+                <result property="dname" column="dname"/>
+            </association>
+        </association>
+    </resultMap>
+    <select id="listselectTransfer" resultMap="resulttransfer">
+        select * from transfer t
+        inner join emp e on t.eid=e.eid
+        inner join position p on t.pid=p.pid
+        inner join dept d on p.did=d.did
+        <where>
+            <if test="eid!=null and eid!=''">
+                and e.eid=#{eid}
+            </if>
+            <if test="tids!=null and tids!=''">
+                and t.tids =#{tids}
+            </if>
+
+        </where>
+    </select>
+    <select id="selectTransferzui" resultType="com.demo.pojo.Transfer">
+        Select  * from transfer t order by t.tids desc limit 1
+    </select>
+    <insert id="InsertTransfer" parameterType="com.demo.pojo.Transfer">
+        insert into transfer(eid,transfertime,tzong,did,pid)
+        values (#{eid},#{transfertime},#{tzong},#{did},#{pid})
+    </insert>
+
+
+    <!--    左增源  调岗表待审批查询 List<Transfer> listselectdgll();-->
+    <select id="listselectdgll" resultMap="resulttransfer">
+        SELECT t.tids,t.transfertime,t.tzong,t.tsehngpi,e.eid,e.ename from transfer t
+				LEFT JOIN emp e ON t.eid = e.eid where t.tsehngpi = 0
+    </select>
+    <!--    左增源  根据ID修改调岗表 Integer updatediaogangId(Integer tsehngpi,Integer tids);-->
+    <update id="updatediaogangId">
+        UPDATE transfer t set t.tsehngpi = #{tsehngpi} where t.tids = #{tids}
+    </update>
+</mapper>
