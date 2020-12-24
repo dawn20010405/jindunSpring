@@ -78,8 +78,8 @@
         left join assets a on code.conexasid=a.assetsid
         where exchangeassetsid =#{exid}
     </select>
-    <insert id="insertone" parameterType="com.demo.pojo.Exchangeassets">
-        insert into exchangeassets(exchassetsname,exasnum,exastype,exasstatus,exasstart,exasreason,exasfollow,exasback)
-        values (#{exchassetsname},#{exasnum},#{exastype},#{exasstatus},#{exasstart},#{exasreason},#{exasfollow},#{exasback})
+    <insert id="insertone" useGeneratedKeys="true" keyProperty="exchangeassetsid" parameterType="com.demo.pojo.Exchangeassets">
+        insert into exchangeassets(exchassetsname,exasnum,exastype,exasstatus,exasstart,exasreason,exasfollow,exasback,exasempid)
+        values (#{exchassetsname},#{exasnum},#{exastype},#{exasstatus},#{exasstart},#{exasreason},#{exasfollow},#{exasback},#{emp.eid})
     </insert>
 </mapper>

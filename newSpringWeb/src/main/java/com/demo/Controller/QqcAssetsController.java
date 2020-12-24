@@ -39,9 +39,15 @@ public class QqcAssetsController {
             return MyResult.ERROR("查询失败！");
         }
     }
-
+    /**
+     * @Author: qqc on 2020/12/24 14:38
+     * @param : [assets]
+     * @return : com.demo.pojo.MyResult
+     * @Description :根据资产类别，是否关联物品新增
+     */
     @RequestMapping("/add")
     public MyResult insertAssets(@RequestBody Assets assets){
+
         try{
             //根据资产分类分别新增资产
             int i=1;
@@ -74,5 +80,17 @@ public class QqcAssetsController {
             return MyResult.ERROR("新增失败！");
         }
 
+    }
+
+
+    @RequestMapping("/loadtype")
+    public MyResult listSelectByType(@RequestParam("assetstype")String assetstype){
+
+        try{
+            return MyResult.returnObjs(qqcAssetsService.listSelectByType(assetstype));
+        }catch (Exception e){
+            e.printStackTrace();
+            return MyResult.ERROR("查询失败！");
+        }
     }
 }

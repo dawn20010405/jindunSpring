@@ -21,6 +21,7 @@ public class Consumingdetails {
 
     @Id
     @Column(name = "consumingdetailsid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getConsumingdetailsid() {
         return consumingdetailsid;
     }

@@ -31,6 +31,11 @@ public interface IQqcExchangeassetsMapper {
      * @Description :查询单条领用归还记录详细信息
      */
     Exchangeassets getSelectByPk(Integer exid);
-
+    /**
+     * @Author: qqc on 2020/12/24 17:16
+     * @param : [record]
+     * @return : int
+     * @Description :新增领用归还记录表
+     */
     int insertone(Exchangeassets record);
 }
