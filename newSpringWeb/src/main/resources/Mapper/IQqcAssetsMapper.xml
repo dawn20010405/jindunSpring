@@ -26,7 +26,8 @@
             </if>
 
         </where>
-        order by assetsretime desc
+
+        order by assetsretime desc ,assetsstatus desc
     </select>
     <insert id="insert" parameterType="com.demo.pojo.Assets">
         insert into assets(assetsnum, assetsname, assetstype, assetsquantity, assetsretime, assetsgstatus, assetsorivalue, assetsstatus)
@@ -46,4 +47,9 @@
         where assetsid = #{assetsid}
 
     </update>
+
+    <select id="countByStatus" resultMap="QqcsetMap">
+        select * from assets
+        where assetsstatus like concat('%',#{Status,jdbcType=VARCHAR},'%')
+    </select>
 </mapper>

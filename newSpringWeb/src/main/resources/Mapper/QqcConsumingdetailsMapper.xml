@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IQqcConsumingdetailsMapper">
+    <resultMap id="QqcChangeMap" type="com.demo.pojo.Consumingdetails">
+        <id column="consumingdetailsid" property="consumingdetailsid"/>
+        <result column="codedept" property="codedept"/>
+        <result column="codename" property="codename"/>
+        <result column="codestart" property="codestart"/>
+        <result column="codestatus" property="codestatus"/>
+        <result column="codetype" property="codetype"/>
+        <result column="codesquantity" property="codesquantity"/>
+        <association property="assets" javaType="com.demo.pojo.Assets">
+            <id column="assetsid" property="assetsid"/>
+            <result column="assetsname" property="assetsname"/>
+        </association>
+    </resultMap>
+</mapper>

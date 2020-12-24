@@ -13,7 +13,7 @@ public class Exchangeassets {
     private String exchassetsname;
     private String exasnum;
     private String exastype;
-    private Integer exasquantity;
+    private String exasstatus;
     private Timestamp exasstart;
     private String exasreason;
     private String exasfollow;
@@ -62,13 +62,13 @@ public class Exchangeassets {
     }
 
     @Basic
-    @Column(name = "exasquantity", nullable = true)
-    public Integer getExasquantity() {
-        return exasquantity;
+    @Column(name = "exasstatus", nullable = true,length = 20)
+    public String getExasstatus() {
+        return exasstatus;
     }
 
-    public void setExasquantity(Integer exasquantity) {
-        this.exasquantity = exasquantity;
+    public void setExasstatus(String exasstatus) {
+        this.exasstatus = exasstatus;
     }
 
 
@@ -125,7 +125,7 @@ public class Exchangeassets {
             return false;
         if (exasnum != null ? !exasnum.equals(that.exasnum) : that.exasnum != null) return false;
         if (exastype != null ? !exastype.equals(that.exastype) : that.exastype != null) return false;
-        if (exasquantity != null ? !exasquantity.equals(that.exasquantity) : that.exasquantity != null) return false;
+        if (exasstatus != null ? !exasstatus.equals(that.exasstatus) : that.exasstatus != null) return false;
         if (exasstart != null ? !exasstart.equals(that.exasstart) : that.exasstart != null) return false;
         if (exasreason != null ? !exasreason.equals(that.exasreason) : that.exasreason != null) return false;
         if (exasfollow != null ? !exasfollow.equals(that.exasfollow) : that.exasfollow != null) return false;
@@ -140,7 +140,7 @@ public class Exchangeassets {
         result = 31 * result + (exchassetsname != null ? exchassetsname.hashCode() : 0);
         result = 31 * result + (exasnum != null ? exasnum.hashCode() : 0);
         result = 31 * result + (exastype != null ? exastype.hashCode() : 0);
-        result = 31 * result + (exasquantity != null ? exasquantity.hashCode() : 0);
+        result = 31 * result + (exasstatus != null ? exasstatus.hashCode() : 0);
         result = 31 * result + (exasstart != null ? exasstart.hashCode() : 0);
         result = 31 * result + (exasreason != null ? exasreason.hashCode() : 0);
         result = 31 * result + (exasfollow != null ? exasfollow.hashCode() : 0);
