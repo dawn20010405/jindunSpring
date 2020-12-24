@@ -15,4 +15,9 @@ import java.util.List;
 @Repository
 public interface IPxyJustMapper {
      List<Just> listselectJust(Integer eid, Integer jid);
+
+     /*左增源  转正表待审批查询*/
+     List<Just> listselectdsAll();
+     /*左增源  根据ID修改转正表*/
+     Integer updatezhuanzhenId(Integer jsehngpi,Integer jid);
 }

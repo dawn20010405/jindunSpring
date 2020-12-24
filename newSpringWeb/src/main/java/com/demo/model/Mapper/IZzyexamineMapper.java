@@ -21,6 +21,8 @@ public interface IZzyexamineMapper {
     List<Examine> selectdsAll();
     /*查询所有已审批*/
     List<Examine> selectysAll();
+    /*查询所有未通过*/
+    List<Examine> selectwtgAll();
     /*跟据ID进行审批*/
     Integer updategonggao(Date exdate,String exyijian,Integer extype,String exstate,Integer wxwid);
 }

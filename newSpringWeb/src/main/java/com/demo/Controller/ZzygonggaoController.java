@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/gonggao")
 @RestController
 public class ZzygonggaoController {
+    /*公告查询*/
     @Autowired
     ZzygonggaoServices zzygonggaoServices;
+    /**/
 
     /*查询所有公告*/
     @RequestMapping("/ggAll")

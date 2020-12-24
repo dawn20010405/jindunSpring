@@ -31,4 +31,14 @@
 
         </where>
     </select>
+
+<!--    左增源  转正表待审批查询 List<Just> listselectdsAll();-->
+    <select id="listselectdsAll" resultMap="resultjust">
+        SELECT j.jzong,j.justtime,j.jsehngpi,e.ename from just j
+				LEFT JOIN emp e ON e.eid = j.eid where j.jsehngpi = 0
+    </select>
+<!--    左增源  根据ID修改转正表 Integer updatezhuanzhenId(Integer jid);-->
+    <select id="getselectId" resultMap="resultjust">
+        UPDATE just j set j.jsehngpi = #{jsehngpi} where j.jid = #{jid}
+    </select>
 </mapper>

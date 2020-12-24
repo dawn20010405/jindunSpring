@@ -23,7 +23,7 @@ public class ZzyexamineController {
     @Autowired
     ZzyexamineServices zzyexamineServices;
 
-    /*查询待审*/
+    /*查询待审批*/
     @RequestMapping("/dsall")
     public PageInfo<Examine> selectdsAll(@RequestParam(value = "no", required = false) Integer pageNo,
                                          @RequestParam(value = "size", required = false) Integer pageSize) {
@@ -41,6 +41,17 @@ public class ZzyexamineController {
         System.out.println(no+"--------------"+size);
         return zzyexamineServices.selectysAll(no,size);
     }
+
+    /*查询未通过*/
+    @RequestMapping("/wtgall")
+    public PageInfo<Examine> selectwtgAll(@RequestParam(value = "no", required = false) Integer pageNo,
+                                         @RequestParam(value = "size", required = false) Integer pageSize) {
+        Integer no = (pageNo != null && pageNo >= 1) ? pageNo : 1;
+        Integer size = (pageSize != null) ? pageSize : 1;
+        System.out.println(no+"--------------"+size);
+        return zzyexamineServices.selectwtgAll(no,size);
+    }
+
     /*修改审批*/
     @RequestMapping("/updtsp")
     public Integer updategonggao(@RequestParam("exyijian") String exyijian,

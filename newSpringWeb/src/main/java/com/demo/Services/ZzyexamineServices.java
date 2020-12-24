@@ -44,6 +44,17 @@ public class ZzyexamineServices {
         //返回
         return info;
     }
+    /*查询未通过*/
+    public PageInfo<Examine> selectwtgAll(Integer pageNo, Integer pageSize) {
+        //配置分页信息
+        PageHelper.startPage(pageNo, pageSize);
+        //调用Mapper的查询方法
+        List<Examine> list = zzyshenpiMapper.selectwtgAll();
+        //将结果集封装到分页对象中
+        PageInfo<Examine> info = new PageInfo<>(list);
+        //返回
+        return info;
+    }
 
     /*跟据ID进行审批 Integer updategonggao(Date exdate,String exyijian,Integer extype,Integer wxwid);*/
     public Integer updategonggao(Date exdate, String exyijian, Integer extype,String exstate, Integer wxwid){
