@@ -1,6 +1,11 @@
 package com.demo.model.Mapper;
 
+import com.demo.pojo.Entry;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.util.List;
 
 /**
  * Description: 入职dao层
@@ -10,4 +15,17 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface IDgEntryMapper {
+    /*
+    * @Author diga
+    * @Date 2020/12/24 20:03
+    * @Description 查询所有入职信息
+    */
+    List<Entry> listEntryAll();
+
+    /*
+    * @Author diga
+    * @Date 2020/12/24 20:04
+    * @Description 新增入职信息
+    */
+    Integer insertEntry(Integer rsid, BigDecimal emoney, Date gotime,String eniphone,Date creatime);
 }

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.model.Mapper.IDgPositionMapper">
-    <resultMap id="BaseResultMap" type="com.demo.pojo.Position">
+    <resultMap id="BaseResultMaps" type="com.demo.pojo.Position">
         <id column="pid" property="pid"/>
         <result column="poname" property="poname"/>
         <result column="ptype" property="ptype"/>
@@ -13,8 +13,8 @@
         </association>
     </resultMap>
     <!--根据部门编号查询该部门下的所有岗位-->
-    <select id="listByDid" resultMap="BaseResultMap">
-        select * from position p inner join dept d on p.did=d.did where d.did=#{did}
+    <select id="listByDid" resultMap="BaseResultMaps">
+        select * from position p inner join dept d on p.did=d.did where d.did=#{did} order by p.pid desc
     </select>
     <!--查询所有岗位-->
     <select id="listPosiAll" resultType="com.demo.pojo.Position">
@@ -25,7 +25,7 @@
         insert into position values(null,#{poname},0,#{did})
     </insert>
     <!--根据部门编号、岗位名称查询-->
-    <select id="getPoname" resultMap="BaseResultMap">
+    <select id="getPoname" resultMap="BaseResultMaps">
         select * from position p inner join dept d on p.did=d.did where d.did=#{did} and p.poname=#{poname}
     </select>
 </mapper>

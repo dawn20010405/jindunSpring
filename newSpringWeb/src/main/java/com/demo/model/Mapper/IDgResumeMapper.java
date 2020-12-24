@@ -34,4 +34,11 @@ public interface IDgResumeMapper {
     * @Description 根据姓名、性别、生日、工作年限、学历查询
     */
     Resume getResumeExist(String rname, Integer rsex, String rbirthday,String workyear,String education);
+
+    /*
+    * @Author diga
+    * @Date 2020/12/24 16:01
+    * @Description 修改简历状态
+    */
+    Integer updateRstype(Integer rsid);
 }
