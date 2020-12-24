@@ -1,0 +1,37 @@
+package com.demo.model.Mapper;
+
+import com.demo.pojo.Resume;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.sql.Date;
+import java.util.List;
+
+/**
+ * Description: 简历dao层
+ * date: 2020/12/22 8:45
+ *
+ * @author: diga
+ */
+@Mapper
+public interface IDgResumeMapper {
+    /*
+    * @Author diga
+    * @Date 2020/12/23 16:17
+    * @Description 根据招聘信息查询所有简历
+    */
+    List<Resume> listResumeAll(Integer rid);
+
+    /*
+    * @Author diga
+    * @Date 2020/12/23 16:17
+    * @Description 根据招聘信息新增简历
+    */
+    Integer insertResume(String rname, Integer rsex, Date rbirthday,String workyear,String education,Date createdate,Integer rid);
+
+    /*
+    * @Author diga
+    * @Date 2020/12/23 16:18
+    * @Description 根据姓名、性别、生日、工作年限、学历查询
+    */
+    Resume getResumeExist(String rname, Integer rsex, String rbirthday,String workyear,String education);
+}

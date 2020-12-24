@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IDgResumeMapper">
+    <resultMap id="BaseResultMap" type="com.demo.pojo.Resume">
+        <id column="rsid" property="rsid"/>
+        <result column="rname" property="rname"/>
+        <result column="rsex" property="rsex"/>
+        <result column="rbirthday" property="rbirthday"/>
+        <result column="workyear" property="workyear"/>
+        <result column="education" property="education"/>
+        <result column="createdate" property="createdate"/>
+        <association property="recru" javaType="com.demo.pojo.Recruitment">
+            <id column="rid" property="rid"/>
+            <result column="hopetime" property="hopetime"/>
+            <result column="peopcout" property="peopcout"/>
+            <result column="recrudemand" property="recrudemand"/>
+            <result column="retype" property="retype"/>
+            <result column="rcreate" property="rcreate"/>
+        </association>
+    </resultMap>
+    <!--根据招聘信息查询所有简历-->
+    <select id="listResumeAll" resultMap="BaseResultMap">
+        select * from resume s inner join recruitment r on s.rid=r.rid where r.rid=#{rid}
+    </select>
+    <!--根据招聘信息新增简历-->
+    <insert id="insertResume">
+        insert into resume value(null,#{rname},#{rsex},#{rbirthday},#{workyear},#{education},#{createdate},#{rid})
+    </insert>
+    <!--根据姓名、性别、生日、工作年限、学历查询-->
+    <select id="getResumeExist" resultType="com.demo.pojo.Resume">
+        select * from resume where rname=#{rname} and rsex=#{rsex}
+            <if test="rbirthday!=null and rbirthday!=''">
+                and rbirthday=#{rbirthday}
+            </if>
+         and workyear=#{workyear}
+         and education=#{education}
+    </select>
+</mapper>
