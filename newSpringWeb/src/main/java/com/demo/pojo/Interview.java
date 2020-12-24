@@ -1,7 +1,8 @@
 package com.demo.pojo;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -13,10 +14,9 @@ import java.util.Objects;
 public class Interview {
     private Integer iid;
     private Integer intype;
-    private Date intime;
+    private Timestamp intime;
     private String inaddress;
     private Resume resu;
-    private Integer rsid;
     private Intrecord inrd;
 
     @Id
@@ -41,11 +41,11 @@ public class Interview {
 
     @Basic
     @Column(name = "intime", nullable = false)
-    public Date getIntime() {
+    public Timestamp getIntime() {
         return intime;
     }
 
-    public void setIntime(Date intime) {
+    public void setIntime(Timestamp intime) {
         this.intime = intime;
     }
 
@@ -82,16 +82,6 @@ public class Interview {
 
     public void setResu(Resume resu) {
         this.resu = resu;
-    }
-
-    @Basic
-    @Column(name = "rsid", nullable = true)
-    public Integer getRsid() {
-        return rsid;
-    }
-
-    public void setRsid(Integer rsid) {
-        this.rsid = rsid;
     }
 
     @OneToOne

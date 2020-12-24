@@ -11,6 +11,7 @@
         <result column="workyear" property="workyear"/>
         <result column="education" property="education"/>
         <result column="createdate" property="createdate"/>
+        <result column="rstype" property="rstype"/>
         <association property="recru" javaType="com.demo.pojo.Recruitment">
             <id column="rid" property="rid"/>
             <result column="hopetime" property="hopetime"/>
@@ -26,7 +27,7 @@
     </select>
     <!--根据招聘信息新增简历-->
     <insert id="insertResume">
-        insert into resume value(null,#{rname},#{rsex},#{rbirthday},#{workyear},#{education},#{createdate},#{rid})
+        insert into resume value(null,#{rname},#{rsex},#{rbirthday},#{workyear},#{education},#{createdate},1,#{rid})
     </insert>
     <!--根据姓名、性别、生日、工作年限、学历查询-->
     <select id="getResumeExist" resultType="com.demo.pojo.Resume">
@@ -37,4 +38,8 @@
          and workyear=#{workyear}
          and education=#{education}
     </select>
+    <!--修改简历状态-->
+    <update id="updateRstype">
+        update resume set rstype=0 where rsid=#{rsid}
+    </update>
 </mapper>

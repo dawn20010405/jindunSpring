@@ -18,6 +18,7 @@ public class Resume {
     private String workyear;
     private String education;
     private Date createdate;
+    private Integer rstype;
     private Interview inter;
     private Entry enty;
     private Recruitment recru;
@@ -92,6 +93,16 @@ public class Resume {
         this.createdate = createdate;
     }
 
+    @Basic
+    @Column(name = "rstype", nullable = true)
+    public Integer getRstype() {
+        return rstype;
+    }
+
+    public void setRstype(Integer rstype) {
+        this.rstype = rstype;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -103,12 +114,27 @@ public class Resume {
                 Objects.equals(rbirthday, resume.rbirthday) &&
                 Objects.equals(workyear, resume.workyear) &&
                 Objects.equals(education, resume.education) &&
+                Objects.equals(rstype, resume.rstype) &&
                 Objects.equals(createdate, resume.createdate);
     }
 
     @Override
+    public String toString() {
+        return "Resume{" +
+                "rsid=" + rsid +
+                ", rname='" + rname + '\'' +
+                ", rsex=" + rsex +
+                ", rbirthday=" + rbirthday +
+                ", workyear='" + workyear + '\'' +
+                ", education='" + education + '\'' +
+                ", createdate=" + createdate + '\'' +
+                ", rstype=" + rstype +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
-        return Objects.hash(rsid, rname, rsex, rbirthday, workyear, education, createdate);
+        return Objects.hash(rsid, rname, rsex, rbirthday, workyear, education, createdate,rstype);
     }
 
     @OneToOne

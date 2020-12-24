@@ -2,12 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.demo.model.Mapper.IDgInterviewMapper">
-    <resultMap id="BaseResultMap" type="com.demo.pojo.Interview">
-        <id column="iid" property="iid"/>
-        <result column="intype" property="intype"/>
-        <result column="intime" property="intime"/>
-        <result column="inaddress" property="inaddress"/>
+<mapper namespace="com.demo.model.Mapper.IDgEntryMapper">
+    <resultMap id="BaseResultMap" type="com.demo.pojo.Entry">
+        <id column="enid" property="enid"/>
+        <result column="emoney" property="emoney"/>
+        <result column="gotime" property="gotime"/>
+        <result column="creatime" property="creatime"/>
         <association property="resu" javaType="com.demo.pojo.Resume">
             <id column="rsid" property="rsid"/>
             <result column="rname" property="rname"/>
@@ -26,20 +26,24 @@
                     <id column="pid" property="pid"/>
                     <result column="poname" property="poname"/>
                     <result column="ptype" property="ptype"/>
+                    <association property="dept" javaType="com.demo.pojo.Dept">
+                        <id column="did" property="did"/>
+                        <result column="dname" property="dname"/>
+                    </association>
                 </association>
             </association>
         </association>
     </resultMap>
-    <!--根据简历新增面试-->
-    <insert id="insertInterView">
-        insert into interview value(null,#{intype},#{intime},#{inaddress},#{rsid})
-    </insert>
-    <!--查询面试-->
-    <select id="listInterViewAll" resultMap="BaseResultMap">
-        select * from interview i
-        left join resume s on i.rsid=s.rsid
-        left join recruitment r on s.rid=r.rid
-        left join position p on r.pid=p.pid
-        order by i.iid desc
+    <!--查询所有入职信息-->
+    <select id="listEntryAll" resultMap="BaseResultMap">
+        select * from entry e
+        inner join resume s on e.rsid=s.rsid
+        inner join recruitment r on r.rid=s.rid
+        inner join position p on p.pid=r.pid
+        inner join dept d on d.did=p.did
     </select>
+    <!--新增入职信息-->
+    <insert id="insertEntry">
+        insert into entry value(null,#{rsid},#{emoney},#{gotime},#{eniphone},#{creatime})
+    </insert>
 </mapper>

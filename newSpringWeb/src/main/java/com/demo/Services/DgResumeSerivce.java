@@ -2,6 +2,8 @@ package com.demo.Services;
 
 import com.demo.model.Mapper.IDgResumeMapper;
 import com.demo.pojo.Resume;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +26,14 @@ public class DgResumeSerivce {
     * @Date 2020/12/23 16:21
     * @Description 根据招聘信息查询所有简历信息
     */
-    public List<Resume> listResumeAll(Integer rid){
-        return mapper.listResumeAll(rid);
+    public PageInfo<Resume> listResumeAll(Integer rid,int size,int num){
+        PageHelper.startPage(num,size);
+        List<Resume> list=mapper.listResumeAll(rid);
+        for (Resume rs:list) {
+            System.out.println("集合的值："+rs);
+        }
+        PageInfo<Resume> page=new PageInfo<>(list);
+        return page;
     }
 
     /*
@@ -50,5 +58,20 @@ public class DgResumeSerivce {
      */
     public Resume getResumeExist(String rname, Integer rsex, String rbirthday,String workyear,String education){
         return mapper.getResumeExist(rname, rsex, rbirthday, workyear, education);
+    }
+
+    /*
+     * @Author diga
+     * @Date 2020/12/24 16:01
+     * @Description 修改简历状态
+     */
+    public Integer updateRstype(Integer rsid){
+        try {
+            Integer a=mapper.updateRstype(rsid);
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }

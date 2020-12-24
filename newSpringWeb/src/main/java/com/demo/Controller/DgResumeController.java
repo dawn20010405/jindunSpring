@@ -3,6 +3,7 @@ package com.demo.Controller;
 import com.demo.Services.DgResumeSerivce;
 import com.demo.pojo.MyResult;
 import com.demo.pojo.Resume;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +30,20 @@ public class DgResumeController {
      * @Description 根据招聘信息查询所有简历信息
      */
     @RequestMapping("/finall/{rid}")
-    public MyResult listResumeAll(@PathVariable Integer rid){
-        List<Resume> list=rs.listResumeAll(rid);
-        return MyResult.returnObjs(list);
+    public PageInfo<Resume> listResumeAll(@PathVariable Integer rid,
+                                          @RequestParam(value = "pagesize",required = false) Integer pagesize,
+                                          Integer pagenum){
+        System.out.println("RID："+rid+" Size："+pagesize+" Num："+pagenum);
+        Integer size=8;
+        if (pagesize!=null){
+            size=pagesize;
+        }
+        PageInfo<Resume> page=rs.listResumeAll(rid,pagesize,pagenum);
+
+        for (Resume e:page.getList()) {
+            System.out.println(e);
+        }
+        return page;
     }
 
     /*
