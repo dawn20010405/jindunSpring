@@ -26,6 +26,12 @@ public class QqcPurchaseController {
     @Autowired
     QqcPurchaseService qqcPurchaseService;
 
+    /**
+     * @Author: qqc on 2020/12/24 20:39
+     * @param : [pageNum, pageSize, purchasetype, start, end, pname, empid]
+     * @return : com.demo.pojo.MyResult
+     * @Description :加载查询主界面
+     */
     @RequestMapping("/load")
     public MyResult pageSelectAll(@RequestParam("pageNum")Integer pageNum,
                                   @RequestParam("pageSize")Integer pageSize,
@@ -34,6 +40,7 @@ public class QqcPurchaseController {
                                   @RequestParam("end")String end,
                                   @RequestParam("pname")String pname,
                                   @RequestParam("empid")Integer empid){
+
         try{
             return MyResult.returnObj(qqcPurchaseService.pagerSelectAll(pageNum,pageSize,start,end,pname,empid,purchasetype));
         }catch (Exception e){

@@ -82,9 +82,15 @@ public class QqcAssetsController {
 
     }
 
-
+    /**
+     * @Author: qqc on 2020/12/24 20:38
+     * @param : [assetstype]
+     * @return : com.demo.pojo.MyResult
+     * @Description : 根据方式查询不同种类的物资
+     */
     @RequestMapping("/loadtype")
     public MyResult listSelectByType(@RequestParam("assetstype")String assetstype){
+
 
         try{
             return MyResult.returnObjs(qqcAssetsService.listSelectByType(assetstype));

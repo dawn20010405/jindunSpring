@@ -12,5 +12,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IQqcActualpurdetailsMapper {
 
+    /**
+     * @Author: qqc on 2020/12/24 20:39
+     * @param : [actualpurdetails]
+     * @return : int
+     * @Description :新增采购申请
+     */
     int insertOne(Actualpurdetails actualpurdetails);
 }

@@ -21,5 +21,12 @@ public interface IQqcConsumingdetailsMapper {
      * @Description :新增领用详情记录
      */
     int  insertOne(Consumingdetails consumingdetails);
+
+    /**
+     * @Author: qqc on 2020/12/24 20:40
+     * @param : [exid]
+     * @return : java.util.List<com.demo.pojo.Consumingdetails>
+     * @Description : 根据领用记录主键查询详细的领用记录
+     */
     List<Consumingdetails> listByExid(Integer exid);
 }
