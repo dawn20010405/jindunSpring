@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -32,12 +33,53 @@ public class PxyempServices {
      * @Param []
      * @return java.util.List<com.demo.pojo.Emp>
      **/
-    public PageInfo<Emp> listselectemp(Integer pageNo, Integer pageSize, Integer eid,String ename,String eiphone){
+    public PageInfo<Emp> listselectemppage(Integer pageNo, Integer pageSize, Integer eid,String ename,String eiphone){
         PageHelper.startPage(pageNo,pageSize);
         //查询方法
-        List<Emp> list = mapper.listselectemp(eid,ename,eiphone);
+        List<Emp> list = mapper.listselectemppage(eid,ename,eiphone);
         //将结果封装到pageInfo中。这个对象中包含了很多分页的信息（如总页数、总页码、当前第几页、是否有前一页等等）
         PageInfo<Emp> info= new PageInfo<>(list);
         return info;
+    }
+    public List<Emp> listempselect(){
+        return mapper.listempselect();
+    }
+    public List<Emp> listempselect2(){
+        return mapper.listempselect2();
+    }
+
+    public Emp listempselectByeid(Integer eid){
+        return mapper.listempselectByeid(eid);
+    }
+    /*
+      * @Author Administrator
+      * @Description //TODO  转正申请后 改变员工状态为转正审核中
+      * @Date 16:10 2020-12-23
+      * @Param [eid]
+      * @return java.lang.Integer
+      **/
+    public Integer updateempbyeid(Integer eid){
+        return mapper.updateempbyeid(eid);
+    }
+    public Integer updateempPidbyeid(Integer pid,Integer eid){
+        return mapper.updateempPidbyeid(pid,eid);
+    }
+    public Integer updateempeqianyuebyeid(Integer eid){
+        return mapper.updateempeqianyuebyeid(eid);
+    }
+
+    /*
+     * @Author diga
+     * @Date 2020/12/24 21:50
+     * @Description 员工新增
+     */
+    public Integer insertEmp(String ename, Date erutime, String eiphone, String esex){
+        try {
+            Integer a=mapper.insertEmp(ename, erutime, eiphone, esex);
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }

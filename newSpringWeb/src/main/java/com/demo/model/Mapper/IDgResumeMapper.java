@@ -41,4 +41,11 @@ public interface IDgResumeMapper {
     * @Description 修改简历状态
     */
     Integer updateRstype(Integer rsid);
+
+    /*
+    * @Author diga
+    * @Date 2020/12/24 21:54
+    * @Description 根据简历编号查询
+    */
+    Resume getRsid(Integer rsid);
 }

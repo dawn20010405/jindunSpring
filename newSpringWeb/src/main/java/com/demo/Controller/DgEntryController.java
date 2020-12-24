@@ -1,9 +1,12 @@
 package com.demo.Controller;
 
 import com.demo.Services.DgEntryService;
+import com.demo.Services.DgResumeSerivce;
+import com.demo.Services.PxyempServices;
 import com.demo.pojo.Entry;
 import com.demo.pojo.Interview;
 import com.demo.pojo.MyResult;
+import com.demo.pojo.Resume;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,10 @@ import java.util.List;
 public class DgEntryController {
     @Autowired
     DgEntryService es;
+    @Autowired
+    PxyempServices ps;
+    @Autowired
+    DgResumeSerivce rs;
 
     /*
      * @Author diga
@@ -70,6 +77,18 @@ public class DgEntryController {
             //获取当前系统时间
             Date date1=new Date(new java.util.Date().getTime());
             Integer a=es.insertEntry(rsid, emoney, date, eniphone, date1);
+
+            //根据简历编号查询
+            Resume r=rs.getRsid(rsid);
+            //性别调整
+            String sex=null;
+            if (r.getRsex()==0){
+                sex="女";
+            }else{
+                sex="男";
+            }
+            //新增员工
+            Integer b=ps.insertEmp(r.getRname(),date,eniphone,sex);
             if (a>0){
                 return new MyResult(1,"新增成功");
             }else{
