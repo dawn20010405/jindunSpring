@@ -3,6 +3,7 @@ package com.demo.model.Mapper;
 import com.demo.pojo.Position;
 import javafx.geometry.Pos;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @author: diga
  */
 @Mapper
+@Repository
 public interface IDgPositionMapper {
     /*
     * @Author diga

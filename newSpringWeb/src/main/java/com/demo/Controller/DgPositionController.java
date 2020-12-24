@@ -33,6 +33,19 @@ public class DgPositionController {
         System.out.println("进来了");
         return MyResult.returnObjs(list);
     }
+    /*
+     * @Author Administrator
+     * @Description //TODO  Positionselectbydid 根据部门did 查询岗位信息
+     * @Date 15:13 2020-12-23
+     * @Param [did]
+     * @return java.util.List<com.demo.pojo.Position>
+     **/
+    @RequestMapping("/Positionselectbydid")
+    public List<Position> Positionselectbydid( Integer did){
+        List<Position> list=ps.listByDid(did);
+        System.out.println("Positionselectbydid");
+        return list;
+    }
 
     /*
     * @Author diga

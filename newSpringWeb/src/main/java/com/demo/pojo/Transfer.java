@@ -5,6 +5,8 @@
  */
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -17,8 +19,22 @@ import java.util.Objects;
 @Entity
 public class Transfer {
     private Integer tids;
+    @JsonFormat(pattern = "yyyy-MM-dd  HH:mm:ss",timezone = "GMT+8")
     private Timestamp transfertime;
     private Emp myemp;
+    private String tzong;
+    private Integer tsehngpi;
+    private Position myposition;
+
+    @ManyToOne
+    @JoinColumn(name = "eid", referencedColumnName = "eid")
+    public Emp getMyemp() {
+        return myemp;
+    }
+
+    public void setMyemp(Emp myemp) {
+        this.myemp = myemp;
+    }
 
     @Id
     @Column(name = "tids", nullable = false)
@@ -54,14 +70,33 @@ public class Transfer {
         return Objects.hash(tids, transfertime);
     }
 
-    @OneToOne(mappedBy = "mytransfer")
-    @ManyToOne
-    @JoinColumn(name = "eid", referencedColumnName = "eid")
-    public Emp getMyemp() {
-        return myemp;
+    @Basic
+    @Column(name = "tzong", nullable = true, length = 255)
+    public String getTzong() {
+        return tzong;
     }
 
-    public void setMyemp(Emp myemp) {
-        this.myemp = myemp;
+    public void setTzong(String tzong) {
+        this.tzong = tzong;
+    }
+
+    @Basic
+    @Column(name = "tsehngpi", nullable = true, length = 255)
+    public Integer getTsehngpi() {
+        return tsehngpi;
+    }
+
+    public void setTsehngpi(Integer tsehngpi) {
+        this.tsehngpi = tsehngpi;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "pid", referencedColumnName = "pid")
+    public Position getMyposition() {
+        return myposition;
+    }
+
+    public void setMyposition(Position myposition) {
+        this.myposition = myposition;
     }
 }

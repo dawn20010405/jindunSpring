@@ -5,6 +5,8 @@
  */
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -17,8 +19,11 @@ import java.util.Objects;
 @Entity
 public class Dimission {
     private Integer dimid;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp dimissiontime;
     private Emp myemp;
+    private String dshenpi;
+    private String dzong;
 
     @Id
     @Column(name = "dimid", nullable = false)
@@ -62,4 +67,25 @@ public class Dimission {
     public void setMyemp(Emp myemp) {
         this.myemp = myemp;
     }
+
+    @Basic
+    @Column(name = "dshenpi", nullable = true, length = 255)
+    public String getDshenpi() {
+        return dshenpi;
+    }
+
+    public void setDshenpi(String dshenpi) {
+        this.dshenpi = dshenpi;
+    }
+
+    @Basic
+    @Column(name = "dzong", nullable = true, length = 255)
+    public String getDzong() {
+        return dzong;
+    }
+
+    public void setDzong(String dzong) {
+        this.dzong = dzong;
+    }
+
 }

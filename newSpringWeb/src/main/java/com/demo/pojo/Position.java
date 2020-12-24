@@ -15,9 +15,8 @@ public class Position {
     private String poname;
     private Integer ptype;
     private Dept dept;
-    private List<Resume> rsid;
-    private Emp myemp;
     private List<Recruitment> recru;
+    private Emp myemp;
 
     @Id
     @Column(name = "pid", nullable = false)
@@ -83,14 +82,7 @@ public class Position {
         this.dept = dept;
     }
 
-    @OneToMany(mappedBy = "posi")
-    public List<Recruitment> getRecru() {
-        return recru;
-    }
 
-    public void setRecru(List<Recruitment> recru) {
-        this.recru = recru;
-    }
 
     @OneToOne(mappedBy = "myposition")
     public Emp getMyemp() {
@@ -99,5 +91,13 @@ public class Position {
 
     public void setMyemp(Emp myemp) {
         this.myemp = myemp;
+    }
+    @OneToMany(mappedBy = "posi")
+    public List<Recruitment> getRecru() {
+        return recru;
+    }
+
+    public void setRecru(List<Recruitment> recru) {
+        this.recru = recru;
     }
 }

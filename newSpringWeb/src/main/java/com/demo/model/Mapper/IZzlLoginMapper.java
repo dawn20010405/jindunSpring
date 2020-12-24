@@ -18,7 +18,4 @@ import java.util.List;
 @Repository
 public interface IZzlLoginMapper {
     Emp getLogin(@Param("phone") String phone,@Param("pass") String pass);
-
-    /*zuo 查询所有Emp表*/
-    List<Emp> selectempAll();
 }

@@ -5,10 +5,9 @@
  */
 package com.demo.pojo;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -20,9 +19,14 @@ import java.util.Objects;
 @Entity
 public class Contracts {
     private Integer cids;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp ckaitime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp cjietime;
     private Integer cqixian;
+    private String cleixing;
+    private Integer cmoney;
+    private Emp myemp;
 
     @Id
     @Column(name = "cids", nullable = false)
@@ -78,5 +82,35 @@ public class Contracts {
     @Override
     public int hashCode() {
         return Objects.hash(cids, ckaitime, cjietime, cqixian);
+    }
+
+    @Basic
+    @Column(name = "cleixing", nullable = true, length = 255)
+    public String getCleixing() {
+        return cleixing;
+    }
+
+    public void setCleixing(String cleixing) {
+        this.cleixing = cleixing;
+    }
+
+    @Basic
+    @Column(name = "cmoney", nullable = true)
+    public Integer getCmoney() {
+        return cmoney;
+    }
+
+    public void setCmoney(Integer cmoney) {
+        this.cmoney = cmoney;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "eid", referencedColumnName = "eid")
+    public Emp getMyemp() {
+        return myemp;
+    }
+
+    public void setMyemp(Emp myemp) {
+        this.myemp = myemp;
     }
 }

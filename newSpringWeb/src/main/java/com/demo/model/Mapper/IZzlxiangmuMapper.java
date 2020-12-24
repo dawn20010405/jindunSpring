@@ -1,9 +1,7 @@
 package com.demo.model.Mapper;
 
 
-import com.demo.pojo.Emp;
-import com.demo.pojo.Myproject;
-import com.demo.pojo.Myrisk;
+import com.demo.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -118,6 +116,86 @@ public interface IZzlxiangmuMapper {
      * @date: 2020-12-23 21:22
      */
     List<Emp> listemp();
-
+/**
+ * @Description:该方法名称(listrisk)
+ * @param: [xid]
+ * @return: java.util.List<com.demo.pojo.Myrisk>
+ * @auther: zzl
+ * @date: 2020-12-24 9:50
+ */
     List<Myrisk> listrisk(Integer xid);
+
+    /**
+     * @Description:该方法名称(listjilu)
+     * @param: [xid]
+     * @return: java.util.List<com.demo.pojo.Mydynamic>
+     * @auther: zzl
+     * @date: 2020-12-24 10:00
+     */
+    List<Mydynamic> listjilu(Integer xid);
+
+    /**
+     * @Description:该方法名称(listrisktype)
+     * @param: []
+     * @return: java.util.List<com.demo.pojo.Myrisk>
+     * @auther: zzl
+     * @date: 2020-12-24 13:14
+     */
+    List<Myrisk> listrisktype();
+
+    /**
+     * @Description:该方法名称(getByxid)
+     * @param: [xid]
+     * @return: com.demo.pojo.Myproject
+     * @auther: zzl
+     * @date: 2020-12-24 14:13
+     */
+    Myproject getByxid(Integer xid);
+
+
+    /**
+     * @Description:该方法名称(listcanyu)
+     * @param: [xid]
+     * @return: java.util.List<com.demo.pojo.Emp>
+     * @auther: zzl
+     * @date: 2020-12-24 16:47
+     */
+    List<Emp> listcanyu(Integer xid);
+
+    /**
+     * @Description:该方法名称(updatejindu)
+     * @param: [jindu, zidping, xid]
+     * @return: java.lang.Integer
+     * @auther: zzl
+     * @date: 2020-12-24 19:04
+     */
+    Integer updatejindu(@Param("jindu")Integer jindu,@Param("ziping")Integer zidping,@Param("xid") Integer xid);
+//    fname,empno,btype,content,xid,cdate,level
+    /**
+     * @Description:该方法名称(addrisk)
+     * @param: [fname, empno, btype, content, xid, cdate, level]
+     * @return: java.lang.Integer
+     * @auther: zzl
+     * @date: 2020-12-24 19:32
+     */
+    Integer addrisk(@Param("fname")String fname,@Param("empno")Integer empno,@Param("btype")String btype,@Param("content")String content,@Param("xid")Integer xid,@Param("cdate")Timestamp cdate,@Param("level")Integer level);
+
+    /**
+     * @Description:该方法名称(delectcanyu)
+     * @param: [cid]
+     * @return: java.lang.Integer
+     * @auther: zzl
+     * @date: 2020-12-24 19:55
+     */
+    Integer delectcanyu(Integer cid);
+
+    Integer wancheng(Integer xid);
+
+    /*左增源  查询项目待审批*/
+    List<Myproject> listxmall();
+
+    /*左增源  修改项目表状态*/
+    Integer updatexiangmu(Integer state,Integer xid);
+
+
 }

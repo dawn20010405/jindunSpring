@@ -22,13 +22,16 @@ public interface IPxyempMapper {
      * @Param []
      * @return java.util.List<com.demo.pojo.Emp>
      **/
-    public abstract List<Emp> listselectemppage(Integer eid, String ename, String eiphone);
-     List<Emp> listempselect();
-     List<Emp> listempselect2();
-     Emp listempselectByeid(Integer eid);
-     Integer updateempPidbyeid(Integer pid, Integer eid);
-     Integer updateempbyeid(Integer eid);
-     Integer updateempeqianyuebyeid(Integer eid);
+    public abstract List<Emp> listselectemppage(Integer eid,String ename,String eiphone);
+    List<Emp> listempselect();
+    List<Emp> listempselect2();
+    Emp listempselectByeid(Integer eid);
+    Integer updateempPidbyeid(Integer pid,Integer eid);
+    Integer updateempbyeid(Integer eid);
+    Integer updateempeqianyuebyeid(Integer eid);
+
+    /*左增源  员工状态修改*/
+    Integer updateempzet(String ezt, Integer eid);
 
      /*
      * @Author diga
