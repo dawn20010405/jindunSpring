@@ -7,11 +7,13 @@
     <resultMap id="all" type="com.demo.pojo.Myproject">
         <id property="xid" column="xid"/>
         <result property="xname" column="xname"/>
-        <result property="start" column="start"/>
+        <result property="startime" column="startime"/>
+        <result property="endtime" column="endtime"/>
         <result property="state" column="state"/>
         <result property="end" column="end"/>
         <result property="evel" column="evel"/>
         <result property="cdate" column="cdate"/>
+        <result property="explains" column="explains"/>
         <association property="myfzr" javaType="com.demo.pojo.Emp">
             <id property="eid" column="eid"/>
             <result property="ename" column="ename"/>
@@ -32,4 +34,15 @@
     <insert id="addxiangmu">
         insert into myproject(xname,empno,start,end,explain,evel,cdate,tid) VALUES()
     </insert>
+
+<!--    左增源  查询项目待审批 List<Myproject> listxmall();-->
+    <select id="listxmall" resultMap="all">
+        SELECT p.xid,p.xname,p.startime,p.endtime,p.explains,p.state,e.ename from myproject p
+				LEFT JOIN emp e ON p.empno = e.eid where p.state = 0
+    </select>
+
+<!--    左增源  修改项目表状态 Integer updatexiangmu(Integer state,Integer xid);-->
+    <update id="updatexiangmu">
+        UPDATE myproject m set m.state = #{state} where m.xid = #{xid}
+    </update>
 </mapper>

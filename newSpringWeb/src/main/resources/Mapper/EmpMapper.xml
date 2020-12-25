@@ -3,21 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.model.Mapper.EmpMapper">
-<!--     private Integer eid;
-    private String ename;
-    private Timestamp erutime;
-    private String eiphone;
-    private String epass;
-    private Myproject myproject;
-    private List<Mycanyu> mycanyu;
-    private Mydynamic bdynamic;
-    private Myrisk wrisk;
-    private Integer pid;
-    private Integer jid;
-    private Integer tid;
-    private Integer did;
-    private Achievementslc jixiaoone;
-    private AssessmentTeamLc atlctow;-->
+
     <resultMap id="emp" type="com.demo.pojo.Emp">
         <id column="eid" property="eid"/>
         <result column="ename" property="ename"/>

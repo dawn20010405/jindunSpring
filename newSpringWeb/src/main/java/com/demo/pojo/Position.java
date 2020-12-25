@@ -16,7 +16,10 @@ public class Position {
     private Integer ptype;
     private Dept dept;
     private List<Resume> rsid;
+
     private Emp myemp;
+    private Transfer mytransfer;
+    private Dimission mydimission;
 
     @Id
     @Column(name = "pid", nullable = false)
@@ -89,5 +92,24 @@ public class Position {
 
     public void setMyemp(Emp myemp) {
         this.myemp = myemp;
+    }
+
+    @OneToOne(mappedBy = "myposition")
+    public Transfer getMytransfer() {
+        return mytransfer;
+    }
+
+    public void setMytransfer(Transfer mytransfer) {
+        this.mytransfer = mytransfer;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "pid", referencedColumnName = "pid", nullable = false)
+    public Dimission getMydimission() {
+        return mydimission;
+    }
+
+    public void setMydimission(Dimission mydimission) {
+        this.mydimission = mydimission;
     }
 }

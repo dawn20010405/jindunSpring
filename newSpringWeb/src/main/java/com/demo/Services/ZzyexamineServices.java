@@ -60,4 +60,24 @@ public class ZzyexamineServices {
     public Integer updategonggao(Date exdate, String exyijian, Integer extype,String exstate, Integer wxwid){
         return zzyshenpiMapper.updategonggao(exdate,exyijian,extype,exstate,wxwid);
     }
+
+//    查询待审批数量 Integer Countdsselect();
+    public Integer selectdsCount(){
+        return zzyshenpiMapper.Countdsselect();
+    }
+
+//    查询已审批数量 Integer Countysselect();
+    public Integer selectysCount(){
+    return zzyshenpiMapper.Countysselect();
+}
+
+    /*新增审批表*/
+    public Integer insertExamine(String exstate,Integer wxwid){
+        return zzyshenpiMapper.insertExamine(exstate,wxwid);
+    }
+
+//    查询已审批数量 Integer Countwtgselect();
+    public Integer cuountwtgselect(){
+        return zzyshenpiMapper.Countwtgselect();
+    }
 }

@@ -1,5 +1,7 @@
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.Objects;
 public class Emp {
     private Integer eid;
     private String ename;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp erutime;
     private String eiphone;
     private String epass;
@@ -28,17 +31,21 @@ public class Emp {
     private List<Purchase> purchase;
     private Achievementslc jixiaoone;
     private AssessmentTeamLc atlctow;
-
+    private String ezt;
+    private String esex;
 
 
 //    12 22 左增源 公司公告
     private List<Notification> notifications;
-    private List<Examine> examines;
     private List<Examine> examinelist;
 
     private Position myposition;
     private Just myjust;
     private Dimission mydimission;
+    private List<Transfer> mytransfer;
+    private Integer eqianyue;
+    private Contracts mycontracts;
+
 
     @Id
     @Column(name = "eid", nullable = false)
@@ -71,7 +78,7 @@ public class Emp {
     }
 
     @Basic
-    @Column(name = "eiphone", nullable = true, length = 11)
+    @Column(name = "eiphone", nullable = false, length = 11)
     public String getEiphone() {
         return eiphone;
     }
@@ -81,7 +88,7 @@ public class Emp {
     }
 
     @Basic
-    @Column(name = "epass", nullable = true, length = 30)
+    @Column(name = "epass", nullable = false, length = 30)
     public String getEpass() {
         return epass;
     }
@@ -200,15 +207,6 @@ public class Emp {
     }
 
     @OneToMany(mappedBy = "myexemp")
-    public List<Examine> getExamines() {
-        return examines;
-    }
-
-    public void setExamines(List<Examine> examines) {
-        this.examines = examines;
-    }
-
-    @OneToMany(mappedBy = "myemp")
     public List<Examine> getExaminelist() {
         return examinelist;
     }
@@ -245,5 +243,54 @@ public class Emp {
 
     public void setMydimission(Dimission mydimission) {
         this.mydimission = mydimission;
+    }
+
+    @Basic
+    @Column(name = "ezt", nullable = true, length = 255)
+    public String getEzt() {
+        return ezt;
+    }
+
+    public void setEzt(String ezt) {
+        this.ezt = ezt;
+    }
+
+    @Basic
+    @Column(name = "esex", nullable = true, length = 255)
+    public String getEsex() {
+        return esex;
+    }
+
+    public void setEsex(String esex) {
+        this.esex = esex;
+    }
+
+    @Basic
+    @Column(name = "eqianyue", nullable = true)
+    public Integer getEqianyue() {
+        return eqianyue;
+    }
+
+    public void setEqianyue(Integer eqianyue) {
+        this.eqianyue = eqianyue;
+    }
+
+    @OneToMany(mappedBy = "myemp")
+    public List<Transfer> getMytransfer() {
+        return mytransfer;
+    }
+
+    public void setMytransfer(List<Transfer> mytransfer) {
+        this.mytransfer = mytransfer;
+    }
+
+
+    @OneToOne(mappedBy = "myemp")
+    public Contracts getMycontracts() {
+        return mycontracts;
+    }
+
+    public void setMycontracts(Contracts mycontracts) {
+        this.mycontracts = mycontracts;
     }
 }

@@ -64,4 +64,21 @@ public class ZzyexamineController {
 
     }
 
+    //    查询待审批数量 Integer Countdsselect();
+    @RequestMapping("/dscoun")
+    public Integer selectdsCount(){
+        return zzyexamineServices.selectdsCount();
+    }
+
+    //    查询已审批数量 Integer Countysselect();
+    @RequestMapping("/yscoun")
+    public Integer selectysCount(){
+        return zzyexamineServices.selectysCount();
+    }
+
+//    查询已审批数量 Integer Countwtgselect();
+    @RequestMapping("/wtgcoun")
+    public Integer selectwtgcount(){
+        return zzyexamineServices.cuountwtgselect();
+    }
 }

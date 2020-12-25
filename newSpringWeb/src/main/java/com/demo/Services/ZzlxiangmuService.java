@@ -1,6 +1,7 @@
 package com.demo.Services;
 
 import com.demo.model.Mapper.IZzlxiangmuMapper;
+import com.demo.pojo.Just;
 import com.demo.pojo.Myproject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -32,6 +33,23 @@ public class ZzlxiangmuService {
 
     public Integer addxiangmu(){
         return z.addxiangmu();
+    }
+
+//    左增源  查询项目待审批 List<Myproject> listxmall();
+public PageInfo<Myproject> selectxmall(Integer pageNo, Integer pageSize) {
+    //配置分页信息
+    PageHelper.startPage(pageNo, pageSize);
+    //调用Mapper的查询方法
+    List<Myproject> list = z.listxmall();
+    //将结果集封装到分页对象中
+    PageInfo<Myproject> info = new PageInfo<>(list);
+    //返回
+    return info;
+}
+
+//    左增源  修改项目表状态 Integer updatexiangmu(Integer state,Integer xid);
+    public Integer updatexiangmu(Integer state,Integer xid){
+        return z.updatexiangmu(state,xid);
     }
 
 }

@@ -18,8 +18,14 @@ public class QqcNumsetService {
     @Autowired
     IQqcNumsetMapper iQqcNumsetMapper;
 
-
+    /**
+     * @Author: qqc on 2020/12/23 10:03
+     * @param : []
+     * @return : java.lang.StringBuffer
+     * @Description :编号更新
+     */
     public StringBuffer updateone(){
+
         Numset numset=iQqcNumsetMapper.getone();
         Date now=new Date();
         Calendar calendar=Calendar.getInstance();
@@ -38,10 +44,10 @@ public class QqcNumsetService {
             numset.setNid(100001);
         }
         iQqcNumsetMapper.updateone(numset);
-        StringBuffer m=new StringBuffer(year);
+        StringBuffer m=new StringBuffer();
         /*String x=String.valueOf(year)+String.valueOf(month)+String.valueOf(day)+String.valueOf(hour)+
         String.valueOf(minute)+String.valueOf(numset.getNum());*/
-        StringBuffer n=m.append(month).append(day).append(hour).append(minute).append(numset.getNum());
+        StringBuffer n=m.append(year).append(month).append(day).append(hour).append(minute).append(numset.getNum());
         System.out.println(n);
         return n;
     }

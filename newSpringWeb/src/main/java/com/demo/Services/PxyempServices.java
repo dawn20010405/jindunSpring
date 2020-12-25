@@ -32,12 +32,45 @@ public class PxyempServices {
      * @Param []
      * @return java.util.List<com.demo.pojo.Emp>
      **/
-    public PageInfo<Emp> listselectemp(Integer pageNo, Integer pageSize, Integer eid,String ename,String eiphone){
+    public PageInfo<Emp> listselectemppage(Integer pageNo, Integer pageSize, Integer eid,String ename,String eiphone){
         PageHelper.startPage(pageNo,pageSize);
         //查询方法
-        List<Emp> list = mapper.listselectemp(eid,ename,eiphone);
+        List<Emp> list = mapper.listselectemppage(eid,ename,eiphone);
         //将结果封装到pageInfo中。这个对象中包含了很多分页的信息（如总页数、总页码、当前第几页、是否有前一页等等）
         PageInfo<Emp> info= new PageInfo<>(list);
         return info;
+    }
+    public List<Emp> listempselect(){
+        return mapper.listempselect();
+    }
+    public List<Emp> listempselect2(){
+        return mapper.listempselect2();
+    }
+
+    public Emp listempselectByeid(Integer eid){
+        return mapper.listempselectByeid(eid);
+    }
+    /*
+     * @Author Administrator
+     * @Description //TODO  转正申请后 改变员工状态为转正审核中
+     * @Date 16:10 2020-12-23
+     * @Param [eid]
+     * @return java.lang.Integer
+     **/
+    public Integer updateempbyeid(Integer eid){
+        return mapper.updateempbyeid(eid);
+    }
+    public Integer updateempPidbyeid(Integer pid,Integer eid){
+        return mapper.updateempPidbyeid(pid,eid);
+    }
+    public Integer updateempeqianyuebyeid(Integer eid){
+        return mapper.updateempeqianyuebyeid(eid);
+    }
+
+
+
+    /*左增源 修改员工状态*/
+    public Integer updateezt(String ezt, Integer eid){
+        return mapper.updateempzet(ezt,eid);
     }
 }

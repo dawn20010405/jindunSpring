@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- namespace 命名空间—— mapper -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.model.Mapper.IPxyContractsMapper">
+    <resultMap id="resultContracts" type="com.demo.pojo.Contracts">
+        <!--合同表-->
+        <id property="cids" column="cids"/>
+        <result property="ckaitime" column="ckaitime"/>
+        <result property="cjietime" column="cjietime"/>
+        <result property="cqixian" column="cqixian"/>
+        <result property="cleixing" column="cleixing"/>
+        <!--员工表-->
+        <association property="myemp" javaType="com.demo.pojo.Emp">
+        <id property="eid" column="eid"/>
+        <result property="ename" column="ename"/>
+        <result property="erutime" column="erutime"/>
+        <result property="eiphone" column="eiphone"/>
+        <result property="epass" column="epass"/>
+        <result property="ezt" column="ezt"/>
+        <result property="esex" column="esex"/>
+            <!--岗位表-->
+            <association property="myposition" javaType="com.demo.pojo.Position">
+                <id property="pid" column="pid"/>
+                <result property="poname" column="poname"/>
+                <association property="dept" javaType="com.demo.pojo.Dept">
+                    <id property="did" column="did"/>
+                    <result property="dname" column="dname"/>
+                </association>
+            </association>
+        </association>
+
+    </resultMap>
+    <insert id="InsertContracts" parameterType="com.demo.pojo.Contracts">
+        insert into contracts(ckaitime, cjietime, cqixian, eid, cleixing)
+        values (#{ckaitime},#{cjietime},#{cqixian},#{eid},#{cleixing})
+    </insert>
+    <select id="listselectcontracts" resultMap="resultContracts">
+        select * from  contracts c
+        inner join emp e on c.eid=e.eid
+        inner join position p on p.pid=e.pid
+        inner join dept d on d.did=p.did
+    </select>
+</mapper>

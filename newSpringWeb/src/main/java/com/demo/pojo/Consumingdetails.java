@@ -14,12 +14,14 @@ public class Consumingdetails {
     private String codetype;
     private String codestatus;
     private Timestamp codestart;
+    private Integer codesquantity;
     private Assets assets;
     private Exchangeassets exassets;
     private Emp emp;
 
     @Id
     @Column(name = "consumingdetailsid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getConsumingdetailsid() {
         return consumingdetailsid;
     }
@@ -38,7 +40,15 @@ public class Consumingdetails {
         this.codename = codename;
     }
 
+    @Basic
+    @Column(name = "codesquantity", nullable = true)
+    public Integer getCodesquantity() {
+        return codesquantity;
+    }
 
+    public void setCodesquantity(Integer codesquantity) {
+        this.codesquantity = codesquantity;
+    }
 
     @Basic
     @Column(name = "codedept", nullable = true, length = 60)
@@ -88,6 +98,7 @@ public class Consumingdetails {
         if (consumingdetailsid != null ? !consumingdetailsid.equals(that.consumingdetailsid) : that.consumingdetailsid != null)
             return false;
         if (codename != null ? !codename.equals(that.codename) : that.codename != null) return false;
+        if (codesquantity != null ? !codesquantity.equals(that.codesquantity) : that.codesquantity != null) return false;
         if (codedept != null ? !codedept.equals(that.codedept) : that.codedept != null) return false;
         if (codetype != null ? !codetype.equals(that.codetype) : that.codetype != null) return false;
         if (codestatus != null ? !codestatus.equals(that.codestatus) : that.codestatus != null) return false;
@@ -101,6 +112,7 @@ public class Consumingdetails {
         result = 31 * result + (codename != null ? codename.hashCode() : 0);
         result = 31 * result + (codedept != null ? codedept.hashCode() : 0);
         result = 31 * result + (codetype != null ? codetype.hashCode() : 0);
+        result = 31 * result + (codesquantity != null ? codesquantity.hashCode() : 0);
         result = 31 * result + (codestatus != null ? codestatus.hashCode() : 0);
         result = 31 * result + (codestart != null ? codestart.hashCode() : 0);
         return result;

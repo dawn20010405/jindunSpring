@@ -39,6 +39,7 @@ public class Assets {
 
     @Id
     @Column(name = "assetsid", nullable = false)
+
     public Integer getAssetsid() {
         return assetsid;
     }

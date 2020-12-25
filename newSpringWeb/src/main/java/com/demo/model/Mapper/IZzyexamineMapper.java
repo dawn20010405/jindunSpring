@@ -25,4 +25,13 @@ public interface IZzyexamineMapper {
     List<Examine> selectwtgAll();
     /*跟据ID进行审批*/
     Integer updategonggao(Date exdate,String exyijian,Integer extype,String exstate,Integer wxwid);
+    /*查询待审批数量*/
+    Integer Countdsselect();
+    /*查询已审批数量*/
+    Integer Countysselect();
+    /*新增审批表*/
+    Integer insertExamine(String exstate,Integer wxwid);
+
+    /*查询已审批数量*/
+    Integer Countwtgselect();
 }
