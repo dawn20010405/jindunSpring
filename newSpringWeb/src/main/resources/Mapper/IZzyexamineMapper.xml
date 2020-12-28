@@ -26,7 +26,8 @@
 
 <!--    查询所有通过 List<Examine> selectysAll();-->
     <select id="selectysAll" resultMap="shenpiResilt">
-        SELECT e.exstate,e.wxwid,e.extype from examine e WHERE e.extype = 1
+        SELECT a.exid,a.exstate,a.exdate,a.exyijian,a.wxwid,a.extype,e.ename
+        from examine a LEFT JOIN emp e ON e.eid = a.exuser where a.extype = 1
     </select>
 
     <!--    查询所有未通过 List<Examine> selectwtgAll();-->
@@ -39,5 +40,23 @@
         UPDATE examine e set e.exdate=#{exdate},e.exyijian=#{exyijian},e.extype=#{extype} where e.exstate=#{exstate} and e.wxwid=#{wxwid}
     </select>
 
+    <!--    查询待审批数量 Integer Countdsselect();-->
+    <select id="Countdsselect" resultType="java.lang.Integer">
+        SELECT 	count(*) FROM examine e WHERE e.extype = '0'
+    </select>
+    <!--    查询已审批数量 Integer Countysselect();-->
+    <select id="Countysselect" resultType="java.lang.Integer">
+        SELECT 	count(*) FROM examine e WHERE e.extype = '1'
+    </select>
+    <!--新增审批表-->
+    <insert id="insertExamine" parameterType="com.demo.pojo.Examine">
+        insert into examine(exstate ,wxwid)
+        values (#{exstate},#{wxwid})
+    </insert>
+
+    <!--    查询已审批数量 Integer Countwtgselect();-->
+    <select id="Countwtgselect" resultType="java.lang.Integer">
+        SELECT 	count(*) FROM examine e WHERE e.extype = '2'
+    </select>
 
 </mapper>

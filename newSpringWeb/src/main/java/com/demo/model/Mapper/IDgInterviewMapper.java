@@ -2,6 +2,7 @@ package com.demo.model.Mapper;
 
 import com.demo.pojo.Interview;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
@@ -15,6 +16,7 @@ import java.util.List;
  * @author: diga
  */
 @Mapper
+@Repository
 public interface IDgInterviewMapper {
     /*
     * @Author diga

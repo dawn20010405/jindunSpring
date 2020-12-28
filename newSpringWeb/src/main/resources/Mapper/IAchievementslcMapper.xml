@@ -42,14 +42,14 @@
             </association>
             <collection property="atllist" ofType="com.demo.pojo.AssessmentTeamLc">
                 <id column="atid" property="atid"/>
-                <result column="" property="scoreeid"/>
-                <result column="" property="acopinion"/>
-                <result column="" property="actotal"/>
+                <result column="scoreeid" property="scoreeid"/>
+                <result column="acopinion" property="acopinion"/>
+                <result column="actotal" property="actotal"/>
             </collection>
         </resultMap>
 <!--    绩效和参与人，发布人-->
     <select id="selectAc" resultMap="sss">
-      select * from achievementslc ac join emp  e on ac.eid = e.eid where ac.fachievement=0 order by ac.acend desc
+     select * from achievementslc ac join emp  e on ac.eid = e.eid  where ac.fachievement=0 order by ac.acend desc
     </select>
 <!--    like查询-->
     <select id="likeAc" resultMap="sss">

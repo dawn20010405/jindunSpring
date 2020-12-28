@@ -2,6 +2,7 @@ package com.demo.model.Mapper;
 
 import com.demo.pojo.Examine;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -30,5 +31,7 @@ public interface IZzyexamineMapper {
     /*查询已审批数量*/
     Integer Countysselect();
     /*新增审批表*/
-    Integer insertExamine(String exstate,Integer wxwid);
+    Integer insertExamine(@Param("exstate") String exstate, @Param("wxwid") Integer wxwid);
+    /*查询已审批数量*/
+    Integer Countwtgselect();
 }

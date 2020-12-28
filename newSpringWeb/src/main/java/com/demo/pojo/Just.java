@@ -87,4 +87,15 @@ public class Just {
     public void setJsehngpi(Integer jsehngpi) {
         this.jsehngpi = jsehngpi;
     }
+
+    @Override
+    public String toString() {
+        return "Just{" +
+                "jid=" + jid +
+                ", justtime=" + justtime +
+                ", myemp=" + myemp +
+                ", jzong='" + jzong + '\'' +
+                ", jsehngpi=" + jsehngpi +
+                '}';
+    }
 }

@@ -2,6 +2,7 @@ package com.demo.model.Mapper;
 
 import com.demo.pojo.Intrecord;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * Description: 面试记录dao层
@@ -10,6 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @author: diga
  */
 @Mapper
+@Repository
 public interface IDgIntrecordMapper {
     /*
     * @Author diga

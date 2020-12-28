@@ -1,5 +1,7 @@
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -18,6 +20,7 @@ public class Myrisk {
     private String btype;
     private String content;
     private String cuoshi;
+    @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss")
     private Timestamp cdate;
     private Integer level;
     private String influence;

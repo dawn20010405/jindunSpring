@@ -2,6 +2,7 @@ package com.demo.model.Mapper;
 
 import com.demo.pojo.Resume;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  * @author: diga
  */
 @Mapper
+@Repository
 public interface IDgResumeMapper {
     /*
     * @Author diga

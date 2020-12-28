@@ -1,5 +1,7 @@
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -16,6 +18,7 @@ public class Mydynamic {
     private Integer bid;
     private String btype;
     private String content;
+    @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss")
     private Timestamp cdate;
     private Myproject myprojects;
     private Emp bemp;

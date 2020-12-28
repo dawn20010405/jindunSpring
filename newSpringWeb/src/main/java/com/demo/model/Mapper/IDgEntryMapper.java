@@ -2,6 +2,7 @@ package com.demo.model.Mapper;
 
 import com.demo.pojo.Entry;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -14,6 +15,7 @@ import java.util.List;
  * @author: diga
  */
 @Mapper
+@Repository
 public interface IDgEntryMapper {
     /*
     * @Author diga

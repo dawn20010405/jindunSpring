@@ -3,7 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.model.Mapper.IZzlxiangmuMapper">
-
     <resultMap id="all" type="com.demo.pojo.Myproject">
         <id property="xid" column="xid"/>
         <result property="xname" column="xname"/>
@@ -24,7 +23,7 @@
             <result property="tname" column="tname"/>
         </association>
     </resultMap>
-<!--    and m.empno=1 and m.tid=1 and m.state=1 and m.evel=1-->
+    <!--    and m.empno=1 and m.tid=1 and m.state=1 and m.evel=1-->
     <select id="listxiangmu" resultMap="all">
         select m.xid,t.tname,m.xname,e.ename,m.startime,m.state,m.endtime,m.evel,m.cdate,m.jindu,m.ziping from myproject m,projectype t,emp e where m.tid=t.tid and e.eid=m.empno
         <if test="empno!=null and empno>0">
@@ -43,6 +42,24 @@
 
     </select>
 
+
+    <select id="listxiangmu3" resultMap="all">
+        select m.xid,t.tname,m.xname,e.ename,m.startime,m.state,m.endtime,m.evel,m.cdate,m.jindu,m.ziping from myproject m,projectype t,emp e where m.tid=t.tid and e.eid=m.empno and m.state=3
+        <if test="empno!=null and empno>0">
+            and m.empno=#{empno}
+        </if>
+        <if test="tid!=null and tid>0">
+            and m.tid=#{tid}
+        </if>
+        <if test="state!=null and state>0">
+            and m.state=#{state}
+        </if>
+        <if test="evel!=null and evel>0">
+            and m.evel=#{evel}
+        </if>
+        order by m.xid
+    </select>
+
     <select id="listxiangmuBystate" resultMap="all">
         select m.xid,t.tname,m.xname,e.ename,m.startime,m.state,m.endtime,m.evel,m.cdate,m.jindu,m.ziping from myproject m,projectype t,emp e where m.tid=t.tid and e.eid=m.empno and m.state=1
         <if test="empno!=null and empno>0">
@@ -58,7 +75,6 @@
             and m.evel=#{evel}
         </if>
         order by m.xid
-
     </select>
 
     <select id="getByxid" resultMap="all">
@@ -92,7 +108,7 @@
         <result property="xid" column="tid"/>
         <result property="xname" column="cname"/>
     </resultMap>
-<!--根据类型统计-->
+    <!--根据类型统计-->
     <select id="countype" resultMap="type">
         select count(m.tid) as tid,t.tname as cname from myproject m,projectype t where m.tid=t.tid GROUP BY m.tid
     </select>
@@ -163,7 +179,7 @@
 
     </resultMap>
 
-   <select id="listjilu" resultMap="jilu">
+    <select id="listjilu" resultMap="jilu">
        select j.bid,e.ename,j.btype,j.content,j.cdate,x.ziping,x.jindu from myproject x,mydynamic j,emp e where x.xid=j.xid and e.eid=j.empno and j.xid=#{xid} ORDER BY j.cdate desc
    </select>
 
@@ -193,7 +209,7 @@
     </update>
 
     <insert id="addrisk">
-        insert into myrisk(fname,empno,btype,content,xid,cdate,level) values(#{fname},#{empno},#{btype},#{content},#{xid},#{cdate},#{level},)
+        insert into myrisk(fname,empno,btype,content,xid,cdate,level) values(#{fname},#{empno},#{btype},#{content},#{xid},#{cdate},#{level})
     </insert>
 
     <delete id="delectcanyu">
@@ -203,6 +219,11 @@
     <update id="wancheng">
         update myproject set state=3 where xid=#{xid}
     </update>
+
+    <insert id="addempandxm">
+        insert into mycanyu(xid,empno) values(#{xid},#{empno})
+    </insert>
+
 
 
     <!--    左增源  查询项目待审批 List<Myproject> listxmall();-->

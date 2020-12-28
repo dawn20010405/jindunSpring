@@ -2,6 +2,7 @@ package com.demo.model.Mapper;
 
 import com.demo.pojo.Recruitment;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
@@ -14,6 +15,7 @@ import java.util.List;
  * date: 2020/12/22 16:57
  */
 @Mapper
+@Repository
 public interface IDgRecruitmentMapper {
     /*
     * @Author diga
